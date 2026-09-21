@@ -211,8 +211,9 @@ catch {apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
   -config [list Slave "/processing_system7_0/S_AXI_HP0" Clk "Auto"] \
   [get_bd_intf_pins axi_vdma_0/M_AXI_MM2S]}
 
-# axi_smc must have exactly 4 MI (CSI, VDMA, demosaic, VTC).
-# A dangling M05/M04 with arready=0 hangs GP0 MMIO to every slave except M00.
+# axi_smc must have exactly as many MI as connected slaves.
+# A dangling MI with arready=0 hangs GP0 MMIO to every slave except M00.
+# add_raw_isp.tcl raises this to 7 after bayer_phase_gpio is attached.
 set smc [get_bd_cells -quiet axi_smc]
 if {[llength $smc]} {
   set_property CONFIG.NUM_MI {6} $smc

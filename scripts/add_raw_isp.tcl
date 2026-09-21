@@ -19,6 +19,15 @@ if {![llength [get_bd_cells -quiet axis_isp_0]]} {
 if {![llength [get_bd_cells -quiet axis_raw_to_gbr_0]]} {
   create_bd_cell -type module -reference axis_raw_to_gbr axis_raw_to_gbr_0
 }
+set ips [get_ips -quiet *axis_raw_to_gbr*]
+puts "RAW2GBR IPS=$ips"
+if {[llength $ips]} {
+  update_module_reference $ips
+}
+puts "RAW2GBR PINS=[get_bd_pins -of_objects [get_bd_cells axis_raw_to_gbr_0]]"
+if {![llength [get_bd_pins -quiet axis_raw_to_gbr_0/bayer_phase]]} {
+  error "axis_raw_to_gbr_0/bayer_phase missing after update_module_reference"
+}
 if {![llength [get_bd_cells -quiet raw_switch]]} {
   create_bd_cell -type ip -vlnv xilinx.com:ip:axis_switch:1.1 raw_switch
 }
@@ -45,6 +54,23 @@ connect_bd_intf_net [get_bd_intf_pins axis_raw_to_gbr_0/M_AXIS] \
                     [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM]
 reconnect_pin processing_system7_0/FCLK_CLK1 axis_raw_to_gbr_0/aclk
 reconnect_pin proc_sys_reset_0/peripheral_aresetn axis_raw_to_gbr_0/aresetn
+# Software picks 0=RGGB 1=GRBG 2=GBRG 3=BGGR via DEMOSAIC_BAYER_PHASE.
+if {![llength [get_bd_cells -quiet bayer_phase_gpio]]} {
+  create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 bayer_phase_gpio
+}
+set_property -dict [list CONFIG.C_GPIO_WIDTH {2} CONFIG.C_ALL_OUTPUTS {1} CONFIG.C_DOUT_DEFAULT {0x00000002}] [get_bd_cells bayer_phase_gpio]
+set gp [get_bd_pins bayer_phase_gpio/gpio_io_o]
+set bp [get_bd_pins axis_raw_to_gbr_0/bayer_phase]
+set oldbp [get_bd_nets -quiet -of_objects $bp]
+if {[llength $oldbp]} {disconnect_bd_net $oldbp $bp}
+connect_bd_net $gp $bp
+if {![llength [get_bd_intf_nets -quiet -of_objects [get_bd_intf_pins bayer_phase_gpio/S_AXI]]]} {
+  apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config [list Master /processing_system7_0/M_AXI_GP0 Clk Auto] [get_bd_intf_pins bayer_phase_gpio/S_AXI]
+}
+set smc [get_bd_cells -quiet axi_smc]
+if {[llength $smc]} {
+  set_property CONFIG.NUM_MI {7} $smc
+}
 foreach p {axis_isp_0/aclk raw_switch/aclk raw_switch/s_axi_ctrl_aclk raw_vdma/s_axi_lite_aclk raw_vdma/m_axi_mm2s_aclk raw_vdma/m_axis_mm2s_aclk} {
   reconnect_pin processing_system7_0/FCLK_CLK1 $p
 }
@@ -63,3 +89,6 @@ assign_bd_address
 # Fixed control addresses are part of the software/hardware contract.
 set_property offset 0x43010000 [get_bd_addr_segs processing_system7_0/Data/SEG_raw_vdma_Reg]
 set_property offset 0x43C30000 [get_bd_addr_segs processing_system7_0/Data/SEG_raw_switch_Reg]
+foreach seg [get_bd_addr_segs -quiet processing_system7_0/Data/SEG_bayer_phase_gpio*] {
+  set_property offset 0x43C40000 $seg
+}

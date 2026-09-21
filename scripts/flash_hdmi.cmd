@@ -23,6 +23,11 @@ if errorlevel 1 (
   echo VIVADO FAILED ? see scripts\vivado_hdmi.log
   exit /b 1
 )
+findstr /C:"XSA written" V:\scripts\vivado_hdmi.log >nul 2>&1
+if errorlevel 1 (
+  echo VIVADO FAILED - XSA not written, see scripts\vivado_hdmi.log
+  exit /b 1
+)
 
 echo === 2/3 Update BSP from the new XSA ===
 del /q scripts\.bsp_status 2>nul
@@ -34,7 +39,8 @@ if errorlevel 1 (
 )
 
 echo === 3/3 JTAG program Zybo ===
-call flash.cmd
+cd /d V:\
+call V:\flash.cmd
 if errorlevel 1 (
   echo PROGRAM FAILED ? check USB JTAG, jumper JP5=JTAG
   exit /b 1

@@ -9,8 +9,8 @@ int Imx219_ReadReg(u16 reg, u8 *val);
 int Imx219_ReadChipId(u16 *id);
 int Imx219_Config1080pRaw10(void);
 int Imx219_Stream(int on);
-int Imx219_SetAe(u16 coarse, u8 ana_gain);
-void Imx219_GetAe(u16 *coarse, u8 *ana);
+int Imx219_SetAe(u16 coarse, u8 ana_gain, u16 dig_gain);
+void Imx219_GetAe(u16 *coarse, u8 *ana, u16 *dig);
 int Imx219_CfgChecklist(void);
 
 #endif

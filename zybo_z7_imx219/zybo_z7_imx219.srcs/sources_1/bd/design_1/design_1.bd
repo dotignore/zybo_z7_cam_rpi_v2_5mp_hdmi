@@ -37,7 +37,8 @@
       "axis_isp_0": "",
       "raw_switch": "",
       "raw_vdma": "",
-      "axis_raw_to_gbr_0": ""
+      "axis_raw_to_gbr_0": "",
+      "bayer_phase_gpio": ""
     },
     "interface_ports": {
       "DDR": {
@@ -1573,7 +1574,7 @@
         "has_run_ip_tcl": "true",
         "parameters": {
           "NUM_MI": {
-            "value": "6"
+            "value": "7"
           },
           "NUM_SI": {
             "value": "1"
@@ -1598,9 +1599,14 @@
               "M02_AXI",
               "M03_AXI",
               "M04_AXI",
-              "M05_AXI"
+              "M05_AXI",
+              "M06_AXI"
             ],
             "bd_attributes": {
+              "BRIDGES": {
+                "value": "M00_AXI:M01_AXI:M02_AXI:M03_AXI:M04_AXI:M05_AXI:M06_AXI",
+                "value_src": "auto"
+              },
               "TYPE": {
                 "value": "interior",
                 "value_src": "default"
@@ -1763,6 +1769,37 @@
             }
           },
           "M05_AXI": {
+            "mode": "Master",
+            "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "parameters": {
+              "NUM_READ_OUTSTANDING": {
+                "value": "8"
+              },
+              "NUM_READ_THREADS": {
+                "value": "1"
+              },
+              "NUM_WRITE_OUTSTANDING": {
+                "value": "8"
+              },
+              "NUM_WRITE_THREADS": {
+                "value": "1"
+              },
+              "RUSER_BITS_PER_BYTE": {
+                "value": "0"
+              },
+              "WUSER_BITS_PER_BYTE": {
+                "value": "0"
+              }
+            },
+            "bd_attributes": {
+              "TYPE": {
+                "value": "interior",
+                "value_src": "default"
+              }
+            }
+          },
+          "M06_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
@@ -3212,6 +3249,31 @@
                 "value_src": "constant"
               }
             }
+          },
+          "bayer_phase": {
+            "type": "data",
+            "direction": "I",
+            "left": "1",
+            "right": "0"
+          }
+        }
+      },
+      "bayer_phase_gpio": {
+        "vlnv": "xilinx.com:ip:axi_gpio:2.0",
+        "ip_revision": "37",
+        "xci_name": "design_1_bayer_phase_gpio_0",
+        "xci_path": "ip\\design_1_bayer_phase_gpio_0\\design_1_bayer_phase_gpio_0.xci",
+        "inst_hier_path": "bayer_phase_gpio",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "C_ALL_OUTPUTS": {
+            "value": "1"
+          },
+          "C_DOUT_DEFAULT": {
+            "value": "0x00000002"
+          },
+          "C_GPIO_WIDTH": {
+            "value": "2"
           }
         }
       }
@@ -3259,6 +3321,12 @@
           "raw_vdma/S_AXI_LITE"
         ]
       },
+      "axi_smc_M06_AXI": {
+        "interface_ports": [
+          "axi_smc/M06_AXI",
+          "bayer_phase_gpio/S_AXI"
+        ]
+      },
       "axi_vdma_0_M_AXIS_MM2S": {
         "interface_ports": [
           "axi_vdma_0/M_AXIS_MM2S",
@@ -3285,8 +3353,8 @@
       },
       "mipi_csi2_rx_subsyst_0_video_out1": {
         "interface_ports": [
-          "mipi_csi2_rx_subsyst_0/video_out",
-          "axis_raw_to_gbr_0/S_AXIS"
+          "axis_raw_to_gbr_0/S_AXIS",
+          "mipi_csi2_rx_subsyst_0/video_out"
         ]
       },
       "mipi_phy_if_0_1": {
@@ -3337,7 +3405,7 @@
           "axi_mem_intercon/S02_AXI"
         ]
       },
-      "v_demosaic_0_m_axis_video1": {
+      "v_demosaic_0_m_axis_video": {
         "interface_ports": [
           "v_demosaic_0/m_axis_video",
           "axis_isp_0/S_AXIS"
@@ -3351,6 +3419,12 @@
       }
     },
     "nets": {
+      "bayer_phase_gpio_gpio_io_o": {
+        "ports": [
+          "bayer_phase_gpio/gpio_io_o",
+          "axis_raw_to_gbr_0/bayer_phase"
+        ]
+      },
       "clk_wiz_0_clk_out1": {
         "ports": [
           "clk_wiz_0/clk_out1",
@@ -3388,6 +3462,7 @@
           "axi_mem_intercon/S02_ARESETN",
           "v_tc_0/resetn",
           "axis_raw_to_gbr_0/aresetn",
+          "bayer_phase_gpio/s_axi_aresetn",
           "axis_isp_0/aresetn",
           "raw_switch/aresetn",
           "raw_switch/s_axi_ctrl_aresetn",
@@ -3426,6 +3501,7 @@
           "axi_mem_intercon/S01_ACLK",
           "axi_mem_intercon/S02_ACLK",
           "axis_raw_to_gbr_0/aclk",
+          "bayer_phase_gpio/s_axi_aclk",
           "axis_isp_0/aclk",
           "raw_switch/aclk",
           "raw_switch/s_axi_ctrl_aclk",
@@ -3533,6 +3609,11 @@
               "SEG_axi_vdma_0_Reg": {
                 "address_block": "/axi_vdma_0/S_AXI_LITE/Reg",
                 "offset": "0x43000000",
+                "range": "64K"
+              },
+              "SEG_bayer_phase_gpio_Reg": {
+                "address_block": "/bayer_phase_gpio/S_AXI/Reg",
+                "offset": "0x43C40000",
                 "range": "64K"
               },
               "SEG_mipi_csi2_rx_subsyst_0_Reg": {

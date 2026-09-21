@@ -234,17 +234,21 @@ int Imx219_Stream(int on)
  * Software AE (sensor has no AEC). Datasheet:
  *   coarse 0x015A/0x015B: 1 .. frame_length_lines−4  (p.56–57)
  *   ANA_GAIN_GLOBAL 0x0157: 0..232, Gain = 256/(256−X)  (p.58)
+ *   DIG_GAIN_GLOBAL 0x0158/0x0159: 8.8, 1.00 .. 15.00  (p.60)
  * Frame-bank latch on V-sync; gain/shutter-only updates have no extra blanking.
  */
 #define IMX219_FRM_LENGTH     1520U
 #define IMX219_COARSE_MIN     1U
 #define IMX219_COARSE_MAX     (IMX219_FRM_LENGTH - 4U)
 #define IMX219_ANA_GAIN_MAX   232U
+#define IMX219_DIG_GAIN_MIN   0x0100U
+#define IMX219_DIG_GAIN_MAX   0x0F00U
 
 static u16 AeCoarse = 0x0190U; /* matches Imx219CfgExposure */
 static u8  AeAna    = 0x50U;
+static u16 AeDig    = 0x0100U;
 
-int Imx219_SetAe(u16 coarse, u8 ana_gain)
+int Imx219_SetAe(u16 coarse, u8 ana_gain, u16 dig_gain)
 {
 	if (coarse < IMX219_COARSE_MIN) {
 		coarse = IMX219_COARSE_MIN;
@@ -255,7 +259,13 @@ int Imx219_SetAe(u16 coarse, u8 ana_gain)
 	if (ana_gain > IMX219_ANA_GAIN_MAX) {
 		ana_gain = IMX219_ANA_GAIN_MAX;
 	}
-	if (coarse == AeCoarse && ana_gain == AeAna) {
+	if (dig_gain < IMX219_DIG_GAIN_MIN) {
+		dig_gain = IMX219_DIG_GAIN_MIN;
+	}
+	if (dig_gain > IMX219_DIG_GAIN_MAX) {
+		dig_gain = IMX219_DIG_GAIN_MAX;
+	}
+	if (coarse == AeCoarse && ana_gain == AeAna && dig_gain == AeDig) {
 		return XST_SUCCESS;
 	}
 
@@ -268,14 +278,23 @@ int Imx219_SetAe(u16 coarse, u8 ana_gain)
 	if (Imx219_WriteReg(0x0157, ana_gain) != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
+	if (Imx219_WriteReg(0x0158, (u8)((dig_gain >> 8) & 0x0FU)) != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	if (Imx219_WriteReg(0x0159, (u8)(dig_gain & 0xFFU)) != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
 	/* Confirm programmed registers; the frame-bank takes effect on the next
-	 * or following V-sync, so the controller still waits three fresh frames. */
+	 * or following V-sync, so the controller still waits two fresh frames. */
 	{
-		u8 hi, lo, gain;
+		u8 hi, lo, gain, dhi, dlo;
 		if (Imx219_ReadReg(0x015A, &hi) != XST_SUCCESS ||
 		    Imx219_ReadReg(0x015B, &lo) != XST_SUCCESS ||
 		    Imx219_ReadReg(0x0157, &gain) != XST_SUCCESS ||
-		    (((u16)hi << 8) | lo) != coarse || gain != ana_gain) {
+		    Imx219_ReadReg(0x0158, &dhi) != XST_SUCCESS ||
+		    Imx219_ReadReg(0x0159, &dlo) != XST_SUCCESS ||
+		    (((u16)hi << 8) | lo) != coarse || gain != ana_gain ||
+		    ((((u16)dhi & 0x0FU) << 8) | dlo) != dig_gain) {
 			xil_printf("[AE] sensor register readback failed\r\n");
 			return XST_FAILURE;
 		}
@@ -283,16 +302,20 @@ int Imx219_SetAe(u16 coarse, u8 ana_gain)
 
 	AeCoarse = coarse;
 	AeAna = ana_gain;
+	AeDig = dig_gain;
 	return XST_SUCCESS;
 }
 
-void Imx219_GetAe(u16 *coarse, u8 *ana)
+void Imx219_GetAe(u16 *coarse, u8 *ana, u16 *dig)
 {
 	if (coarse != NULL) {
 		*coarse = AeCoarse;
 	}
 	if (ana != NULL) {
 		*ana = AeAna;
+	}
+	if (dig != NULL) {
+		*dig = AeDig;
 	}
 }
 
@@ -379,7 +402,7 @@ int Imx219_Config1080pRaw10(void)
 				return XST_FAILURE;
 			}
 		}
-		AeCoarse=0x0190U; AeAna=0x50U;
+		AeCoarse=0x0190U; AeAna=0x50U; AeDig=0x0100U;
 		xil_printf("[IMX219] verified 1920x1080 RAW -> 1920x1080 RGB, BINNING_MODE=0\r\n");
 		xil_printf("[IMX219] 5-2 2x2 binning = 1/4 pixels (same-color avg); not 4x capture\r\n");
 		xil_printf("[IMX219] GBRG two-G average is v_demosaic, CAL_MODE=average\r\n");

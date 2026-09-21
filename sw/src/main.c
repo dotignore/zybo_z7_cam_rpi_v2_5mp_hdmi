@@ -14,7 +14,7 @@
 #include "parameters.h"
 
 /* Build stamp for UART — bump when flashing a new image. */
-#define BUILD_STAMP 0x20260928U
+#define BUILD_STAMP 0x20260921U
 
 #define SLCR_UNLOCK     0xF8000008U
 #define SLCR_LOCK       0xF8000004U
@@ -67,7 +67,8 @@ int main(void)
 		   BUILD_STAMP, VIDEO_STRIDE, VIDEO_ROWS);
 	xil_printf("======================================\r\n");
 	xil_printf(" IMX219 Camera -> HDMI Out (Zybo Z7)\r\n");
-	xil_printf(" 1920 x 1080  RAW10  Bayer GBRG  2 lane CSI-2\r\n");
+	xil_printf(" 1920 x 1080  RAW10  Bayer phase %u  2 lane CSI-2\r\n",
+		   DEMOSAIC_BAYER_PHASE);
 	xil_printf(" frame 30.00 Hz  (RPi 1080p30; datasheet max 60 @1080p)\r\n");
 	xil_printf(" HDMI 1080p30\r\n");
 	xil_printf("======================================\r\n");
@@ -132,7 +133,8 @@ int main(void)
 		goto hang;
 	}
 	xil_printf("[IMX219] Streaming started\r\n");
-	xil_printf("[IMX219] 1920 x 1080  RAW10  Bayer GBRG  2 lane CSI-2\r\n");
+	xil_printf("[IMX219] 1920 x 1080  RAW10  Bayer phase %u  2 lane CSI-2\r\n",
+		   DEMOSAIC_BAYER_PHASE);
 	xil_printf("[IMX219] frame 30.00 Hz\r\n");
 	xil_printf("[MAIN] Capture loop starting...\r\n");
 	cam_ok = 1;

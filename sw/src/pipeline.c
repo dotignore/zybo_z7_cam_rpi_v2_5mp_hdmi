@@ -9,7 +9,6 @@
 #include "parameters.h"
 #include "imx219.h"
 #include "auto_exposure.h"
-#include "ae_linear_lut.h"
 #include "xtime_l.h"
 #include "sleep.h"
 #include "stddef.h"
@@ -35,7 +34,6 @@ static XVtc        Vtc;
 static UINTPTR FrameAddr[VIDEO_NUM_FRAMES];
 static UINTPTR TestAddr[VIDEO_NUM_FRAMES];
 static int LiveDisplay = 0;
-static XTime LastAeTime;
 static u32 LastAeFrame = 0xFFFFFFFFU;
 static u32 LastWriteStore = 0xFFFFFFFFU;
 static u32 LastComplete = 0U;
@@ -365,8 +363,8 @@ static void DrainCsiShortPackets(void)
 	}
 }
 
-/* Hardware ISP has already removed black and encoded sRGB.
- * Invert OETF for metering; never subtract sensor black from this buffer. */
+/* Live path is linear GBR888 from axis_raw_to_gbr, not sRGB. Meter Rec.601
+ * 8-bit luma. IMX219 has no on-chip AEC: program coarse/analogue/digital. */
 static void AutoBright(const u8 *base)
 {
     u32 x, y, sum=0, n=0, sat=0, mean, wr;
@@ -377,20 +375,16 @@ static void AutoBright(const u8 *base)
     if (!LiveDisplay) {
         return;
     }
-    /* IMX219 frame-bank applies coarse/gain on the next or following V-sync.
-     * Two completed live frames is enough; 100 ms + 3 frames was too slow. */
+    /* Frame-bank applies on the next or following V-sync (datasheet p.29). */
     if (LastAeFrame != 0xFFFFFFFFU && (FrameCount - LastAeFrame) < 2U) {
         return;
     }
     XTime_GetTime(&now);
-    if (LastAeTime != 0 && now - LastAeTime < COUNTS_PER_SECOND / 2U) {
-        return;
-    }
     for (y=VIDEO_ROWS/3; y<VIDEO_ROWS*2/3; y+=8) {
         for (x=VIDEO_COLUMNS/3; x<VIDEO_COLUMNS*2/3; x+=8) {
             const u8 *p=base+y*VIDEO_STRIDE+x*3;
             u32 g=p[PIXEL_G_OFF], b=p[PIXEL_B_OFF], r=p[PIXEL_R_OFF];
-            sum += (54U*AeLinear[r]+183U*AeLinear[g]+19U*AeLinear[b]+128U)>>8;
+            sum += ((54U*r+183U*g+19U*b+128U)>>8) * 16U;
             if (r>=250 || g>=250 || b>=250) sat++;
             n++;
         }
@@ -401,23 +395,18 @@ static void AutoBright(const u8 *base)
      * Reject a slow sample or a store that is being overwritten. */
     if (end-now > COUNTS_PER_SECOND/20U || (UINTPTR)base==FrameAddr[wr%VIDEO_NUM_FRAMES]) return;
     mean=sum/n;
-    Imx219_GetAe(&old.lines,&old.gain);
+    Imx219_GetAe(&old.lines,&old.gain,&old.dgain);
     next=Ae_Next(old,mean,sat,n);
-    /* Prevent alternating bright/dark frames when highlights enter or leave
-     * the metering window.  IMX219 gain code is nonlinear, so a small code
-     * step is deliberately used instead of jumping directly to next.gain. */
-    if (next.gain > old.gain + 8U) next.gain = old.gain + 8U;
-    if (old.gain > next.gain + 8U) next.gain = old.gain - 8U;
-    LastAeTime=end;
     LastAeFrame=FrameCount;
-    changed = (next.lines!=old.lines || next.gain!=old.gain);
+    changed = (next.lines!=old.lines || next.gain!=old.gain || next.dgain!=old.dgain);
     if (changed) {
-        if (Imx219_SetAe(next.lines,next.gain)!=XST_SUCCESS) return;
+        if (Imx219_SetAe(next.lines,next.gain,next.dgain)!=XST_SUCCESS) return;
     }
     if (changed || (FrameCount % 30U) == 0U) {
-        xil_printf("[AE] t_ms=%u linear=%u/4095 clip=%u/%u coarse=%u ana=%u limit=%u\r\n",
-            (u32)(end/(COUNTS_PER_SECOND/1000U)),mean,sat,n,next.lines,next.gain,
-            next.lines==AE_MAX_LINES && next.gain==AE_MAX_GAIN_CODE);
+        xil_printf("[AE] t_ms=%u linear=%u/4095 clip=%u/%u coarse=%u ana=%u dig=0x%04x limit=%u\r\n",
+            (u32)(end/(COUNTS_PER_SECOND/1000U)),mean,sat,n,next.lines,next.gain,next.dgain,
+            next.lines==AE_MAX_LINES && next.gain==AE_MAX_GAIN_CODE &&
+            next.dgain==AE_MAX_DGAIN);
     }
 }
 
@@ -554,6 +543,10 @@ static int SelectRawSource(u32 source)
 
 int Pipeline_Start(void)
 {
+	xil_printf("[DEMOSAIC] Bayer phase=%u (0=RGGB 1=GRBG 2=GBRG 3=BGGR)\r\n",
+		   DEMOSAIC_BAYER_PHASE);
+	Xil_Out32(BAYER_PHASE_GPIO_BASE, DEMOSAIC_BAYER_PHASE);
+
 	FillTestFrame();
 	xil_printf("[P02] MMU off (main); PL AXI probes\r\n");
 
@@ -585,7 +578,8 @@ int Pipeline_Start(void)
 		xil_printf("CSI failed - keep HDMI bars\r\n");
 		return XST_FAILURE;
 	}
-	xil_printf("[P09] RAW10 streaming GBRG color (HLS demosaic bypassed)\r\n");
+	xil_printf("[P09] RAW10 streaming Bayer phase=%u (HLS demosaic bypassed)\r\n",
+		   DEMOSAIC_BAYER_PHASE);
 	xil_printf("[TEST] HDMI parked on JTAG GBR888 @ 0x%08x then camera\r\n",
 		   (u32)TEST_FRAME_ADDR);
 	xil_printf("[P40] Pipeline_Start done\r\n");

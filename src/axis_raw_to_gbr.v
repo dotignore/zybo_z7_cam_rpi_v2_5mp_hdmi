@@ -1,5 +1,6 @@
-// One-pixel-per-clock GBRG RAW10 to GBR888.  The previous row and the
-// previous pixel supply nearest-neighbour R, G, B without frame buffering.
+// One-pixel-per-clock RAW10 to GBR888.  Previous row / pixel supply
+// nearest-neighbour R,G,B.  bayer_phase matches PG286:
+//   0=RGGB  1=GRBG  2=GBRG  3=BGGR
 module axis_raw_to_gbr(
  (* X_INTERFACE_PARAMETER = "ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET aresetn" *)
  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 aclk CLK" *) input aclk,
@@ -14,7 +15,8 @@ module axis_raw_to_gbr(
  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *) output reg m_axis_tvalid,
  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TREADY" *) input m_axis_tready,
  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TUSER" *) output reg m_axis_tuser,
- (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *) output reg m_axis_tlast
+ (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *) output reg m_axis_tlast,
+ (* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 bayer_phase DATA" *) input [1:0] bayer_phase
 );
  reg [9:0] prev_row [0:1919];
  reg [10:0] x;
@@ -30,12 +32,39 @@ module axis_raw_to_gbr(
  wire [9:0] up_left = (col == 0) ? up : up_left_pixel;
  wire [9:0] old_up = have_prev_row && !s_axis_tuser ? up : raw;
  wire [9:0] old_up_left = have_prev_row && !s_axis_tuser ? up_left : raw;
- wire [9:0] red = odd_row ? (col[0] ? left : raw)
-                              : (col[0] ? old_up_left : old_up);
- wire [9:0] blue = odd_row ? (col[0] ? old_up : old_up_left)
-                               : (col[0] ? raw : left);
- wire [9:0] green = (odd_row == col[0]) ? raw
-                         : (col[0] ? left : old_up);
+ /* 0=R 1=G 2=B at this CFA site (PG286). */
+ function [1:0] site_color;
+   input row_odd;
+   input col_odd;
+   input [1:0] phase;
+   begin
+     case (phase)
+       2'd0: site_color = (!row_odd && !col_odd) ? 2'd0 :
+                          (row_odd && col_odd) ? 2'd2 : 2'd1;
+       2'd1: site_color = (!row_odd && col_odd) ? 2'd0 :
+                          (row_odd && !col_odd) ? 2'd2 : 2'd1;
+       2'd2: site_color = (row_odd && !col_odd) ? 2'd0 :
+                          (!row_odd && col_odd) ? 2'd2 : 2'd1;
+       default: site_color = (row_odd && col_odd) ? 2'd0 :
+                             (!row_odd && !col_odd) ? 2'd2 : 2'd1;
+     endcase
+   end
+ endfunction
+ wire [1:0] here = site_color(odd_row, col[0], bayer_phase);
+ wire [1:0] left_c = site_color(odd_row, ~col[0], bayer_phase);
+ wire [1:0] up_c = site_color(~odd_row, col[0], bayer_phase);
+ function [9:0] pick;
+   input [1:0] ch;
+   begin
+     if (here == ch) pick = raw;
+     else if (left_c == ch) pick = left;
+     else if (up_c == ch) pick = old_up;
+     else pick = old_up_left;
+   end
+ endfunction
+ wire [9:0] red = pick(2'd0);
+ wire [9:0] green = pick(2'd1);
+ wire [9:0] blue = pick(2'd2);
  assign s_axis_tready = !m_axis_tvalid || m_axis_tready;
  always @(posedge aclk) begin
    if (!aresetn) begin

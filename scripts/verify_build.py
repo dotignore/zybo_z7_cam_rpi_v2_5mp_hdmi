@@ -14,7 +14,7 @@ def main():
     xsa=hw/'design_1_wrapper.xsa'
     with zipfile.ZipFile(xsa) as z:
         hwh='\n'.join(z.read(n).decode() for n in z.namelist() if n.endswith('.hwh'))
-        for name in ('raw_vdma','raw_switch','axis_isp_0'):
+        for name in ('raw_vdma','raw_switch','axis_isp_0','bayer_phase_gpio'):
             if name not in hwh: raise RuntimeError(f'XSA lacks {name}: rebuild FPGA and BSP first')
         bits=[n for n in z.namelist() if n.endswith('.bit')]
         if len(bits)!=1 or sha(z.read(bits[0]))!=sha(bit.read_bytes()):
