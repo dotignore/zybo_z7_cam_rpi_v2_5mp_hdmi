@@ -1,0 +1,38 @@
+{
+  "source_png": "HDMI_test.png",
+  "width": 1920,
+  "height": 1080,
+  "cfa": "GBRG",
+  "ddr_pixel_order": "G,B,R",
+  "axis_tdata_23_0": "{R[7:0], B[7:0], G[7:0]}",
+  "packed_raw10_bytes": 2592000,
+  "packed_line_bytes": 2400,
+  "u16le_bytes": 4147200,
+  "gbr888_bytes": 6220800,
+  "stride_gbr888": 5760,
+  "black_level_raw10": 64,
+  "white_level_raw10": 1023,
+  "raw10_model": "round(64 + (1023-64)*sRGB_inverse(component))",
+  "transfer": "PNG sRGB; RAW is linear 10-bit after inverse sRGB",
+  "vc": 0,
+  "csi_dt": "0x2B",
+  "word_count": 2400,
+  "fps": 30,
+  "lanes": 2,
+  "note": "packed file is active-pixel payload only, not a CSI-2 stream",
+  "sha256": {
+    "HDMI_test_1920x1080_gbrg_raw10.bin": "a09b8e25bbed0f75ee0c42a7423f2c37a338cf4141086ece4fa71545807e3e03",
+    "HDMI_test_1920x1080_gbrg_raw10_u16le.bin": "b68e7d1c3c19c1e27fc085bcf7a3af4338234ceb604b985c079b0b9156838ec5",
+    "HDMI_test_1920x1080_gbr888.bin": "028ecbb5fad5016601100994e54fe9baeba17b7bc04d580600457cc8b23dc064"
+  },
+  "ddr_after_jtag": {
+    "live_ring_base": "0x01000000",
+    "live_stride": "0x00600000",
+    "test_gbr_store": 4,
+    "test_gbr_addr": "0x03000000",
+    "test_raw_addr": "0x04000000",
+    "raw_magic_addr": "0x04400000",
+    "test_magic_addr": "0x02E00000",
+    "test_magic": "0x47425231"
+  }
+}

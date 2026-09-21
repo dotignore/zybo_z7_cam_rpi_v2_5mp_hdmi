@@ -1,0 +1,294 @@
+#!/usr/bin/env python3
+"""Build HDMI_test RAW10 / GBR888 assets next to pic/HDMI_test.png.
+
+Does not modify the PNG. Pack/unpack must match all 1920*1080 samples.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import struct
+import sys
+import zlib
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PIC = ROOT / "pic"
+PNG = PIC / "HDMI_test.png"
+SW = ROOT / "sw" / "src"
+
+W = 1920
+H = 1080
+BLACK = 64
+WHITE = 1023
+PACKED_LINE = W * 10 // 8  # 2400
+PACKED_SIZE = PACKED_LINE * H  # 2592000
+U16_SIZE = W * H * 2  # 4147200
+GBR_SIZE = W * H * 3  # 6220800
+
+
+def paeth(a: int, b: int, c: int) -> int:
+    p = a + b - c
+    pa, pb, pc = abs(p - a), abs(p - b), abs(p - c)
+    if pa <= pb and pa <= pc:
+        return a
+    if pb <= pc:
+        return b
+    return c
+
+
+def read_png_rgb(path: Path) -> bytes:
+    data = path.read_bytes()
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise SystemExit(f"not a PNG: {path}")
+    pos = 8
+    width = height = bit_depth = color_type = None
+    idat = bytearray()
+    while pos + 12 <= len(data):
+        (length,) = struct.unpack(">I", data[pos : pos + 4])
+        ctype = data[pos + 4 : pos + 8]
+        chunk = data[pos + 8 : pos + 8 + length]
+        pos += 12 + length
+        if ctype == b"IHDR":
+            width, height, bit_depth, color_type, comp, filt, inter = struct.unpack(
+                ">IIBBBBB", chunk
+            )
+            if (width, height) != (W, H):
+                raise SystemExit(f"PNG size {width}x{height}, want {W}x{H}")
+            if bit_depth != 8 or color_type not in (2, 6) or comp or filt or inter:
+                raise SystemExit(
+                    f"need 8-bit RGB/RGBA non-interlaced, got depth={bit_depth} "
+                    f"type={color_type} inter={inter}"
+                )
+        elif ctype == b"IDAT":
+            idat.extend(chunk)
+        elif ctype == b"IEND":
+            break
+    if width is None:
+        raise SystemExit("PNG missing IHDR")
+    bpp = 3 if color_type == 2 else 4
+    raw = zlib.decompress(bytes(idat))
+    stride = W * bpp
+    expected = H * (1 + stride)
+    if len(raw) != expected:
+        raise SystemExit(f"IDAT length {len(raw)} != {expected}")
+    rgb = bytearray(W * H * 3)
+    prev = bytearray(stride)
+    src = 0
+    dst = 0
+    for _y in range(H):
+        f = raw[src]
+        src += 1
+        row = bytearray(raw[src : src + stride])
+        src += stride
+        for i, v in enumerate(row):
+            a = row[i - bpp] if i >= bpp else 0
+            b = prev[i]
+            c = prev[i - bpp] if i >= bpp else 0
+            if f == 1:
+                v = (v + a) & 255
+            elif f == 2:
+                v = (v + b) & 255
+            elif f == 3:
+                v = (v + ((a + b) // 2)) & 255
+            elif f == 4:
+                v = (v + paeth(a, b, c)) & 255
+            elif f != 0:
+                raise SystemExit(f"unsupported PNG filter {f}")
+            row[i] = v
+        prev = row
+        if bpp == 3:
+            rgb[dst : dst + stride] = row
+            dst += stride
+        else:
+            for x in range(W):
+                i = x * 4
+                rgb[dst : dst + 3] = row[i : i + 3]
+                dst += 3
+    return bytes(rgb)
+
+
+def srgb8_to_linear(c: int) -> float:
+    u = c / 255.0
+    if u <= 0.04045:
+        return u / 12.92
+    return ((u + 0.055) / 1.055) ** 2.4
+
+
+def linear_to_srgb8(u: float) -> int:
+    u = min(1.0, max(0.0, u))
+    if u <= 0.0031308:
+        v = 12.92 * u
+    else:
+        v = 1.055 * (u ** (1.0 / 2.4)) - 0.055
+    return int(round(v * 255.0))
+
+
+def to_raw10(lin: float) -> int:
+    v = int(round(BLACK + (WHITE - BLACK) * min(1.0, max(0.0, lin))))
+    return min(WHITE, max(0, v))
+
+
+def mosaic_gbrg(x: int, y: int, r10: int, g10: int, b10: int) -> int:
+    if (y & 1) == 0:
+        return g10 if (x & 1) == 0 else b10
+    return r10 if (x & 1) == 0 else g10
+
+
+def pack_raw10(samples: list[int]) -> bytes:
+    out = bytearray()
+    for i in range(0, len(samples), 4):
+        p0, p1, p2, p3 = samples[i : i + 4]
+        out.append(p0 >> 2)
+        out.append(p1 >> 2)
+        out.append(p2 >> 2)
+        out.append(p3 >> 2)
+        out.append(
+            (p0 & 3) | ((p1 & 3) << 2) | ((p2 & 3) << 4) | ((p3 & 3) << 6)
+        )
+    return bytes(out)
+
+
+def unpack_raw10(packed: bytes, n: int) -> list[int]:
+    samples: list[int] = []
+    i = 0
+    while len(samples) < n:
+        b0, b1, b2, b3, b4 = packed[i : i + 5]
+        i += 5
+        samples.append((b0 << 2) | (b4 & 3))
+        samples.append((b1 << 2) | ((b4 >> 2) & 3))
+        samples.append((b2 << 2) | ((b4 >> 4) & 3))
+        samples.append((b3 << 2) | ((b4 >> 6) & 3))
+    return samples[:n]
+
+
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    h.update(path.read_bytes())
+    return h.hexdigest()
+
+
+def write_srgb_lut(path: Path) -> None:
+    lines = [
+        "/* Auto-generated by scripts/gen_hdmi_test_assets.py — do not edit. */",
+        "#ifndef SRGB_LUT_H",
+        "#define SRGB_LUT_H",
+        "",
+        "#include \"xil_types.h\"",
+        "",
+        "/* 8-bit after CSI tdata[9:2]: subtract pedestal 16, stretch, sRGB OETF. */",
+        "static const u8 IspLut8[256] = {",
+    ]
+    vals = []
+    for x in range(256):
+        s = 0 if x <= 16 else x - 16
+        lin = (s * 255.0) / 239.0 if s else 0.0
+        vals.append(linear_to_srgb8(lin / 255.0))
+    for i in range(0, 256, 16):
+        chunk = ", ".join(f"{v:3d}" for v in vals[i : i + 16])
+        lines.append(f"\t{chunk},")
+	lines += ["};", "", "#endif"]
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def main() -> int:
+    if not PNG.is_file():
+        print(f"missing {PNG}", file=sys.stderr)
+        return 1
+
+    rgb = read_png_rgb(PNG)
+    if len(rgb) != W * H * 3:
+        print("PNG RGB size mismatch", file=sys.stderr)
+        return 1
+
+    gbr = bytearray(GBR_SIZE)
+    samples: list[int] = []
+    for y in range(H):
+        for x in range(W):
+            o = (y * W + x) * 3
+            r, g, b = rgb[o], rgb[o + 1], rgb[o + 2]
+            gbr[o] = g
+            gbr[o + 1] = b
+            gbr[o + 2] = r
+            r10 = to_raw10(srgb8_to_linear(r))
+            g10 = to_raw10(srgb8_to_linear(g))
+            b10 = to_raw10(srgb8_to_linear(b))
+            samples.append(mosaic_gbrg(x, y, r10, g10, b10))
+
+    packed = pack_raw10(samples)
+    if len(packed) != PACKED_SIZE:
+        print(f"packed size {len(packed)} != {PACKED_SIZE}", file=sys.stderr)
+        return 1
+    unpacked = unpack_raw10(packed, W * H)
+    if unpacked != samples:
+        print("FAIL pack/unpack mismatch", file=sys.stderr)
+        return 1
+    print(f"PASS pack/unpack {W * H} samples, packed line={PACKED_LINE}")
+
+    u16le = bytearray(U16_SIZE)
+    for i, s in enumerate(samples):
+        struct.pack_into("<H", u16le, i * 2, s & 0x3FF)
+
+    packed_path = PIC / "HDMI_test_1920x1080_gbrg_raw10.bin"
+    u16_path = PIC / "HDMI_test_1920x1080_gbrg_raw10_u16le.bin"
+    gbr_path = PIC / "HDMI_test_1920x1080_gbr888.bin"
+    packed_path.write_bytes(packed)
+    u16_path.write_bytes(bytes(u16le))
+    gbr_path.write_bytes(bytes(gbr))
+
+    # Red at (2,2) of GBR file must be 00 00 FF if that pixel is pure red in PNG.
+    print(
+        f"GBR pixel (0,0) = {gbr[0]:02X} {gbr[1]:02X} {gbr[2]:02X} "
+        f"(G,B,R from PNG R,G,B {rgb[0]:02X} {rgb[1]:02X} {rgb[2]:02X})"
+    )
+
+    write_srgb_lut(SW / "srgb_lut.h")
+
+    meta = {
+        "source_png": "HDMI_test.png",
+        "width": W,
+        "height": H,
+        "cfa": "GBRG",
+        "ddr_pixel_order": "G,B,R",
+        "axis_tdata_23_0": "{R[7:0], B[7:0], G[7:0]}",
+        "packed_raw10_bytes": PACKED_SIZE,
+        "packed_line_bytes": PACKED_LINE,
+        "u16le_bytes": U16_SIZE,
+        "gbr888_bytes": GBR_SIZE,
+        "stride_gbr888": W * 3,
+        "black_level_raw10": BLACK,
+        "white_level_raw10": WHITE,
+        "raw10_model": "round(64 + (1023-64)*sRGB_inverse(component))",
+        "transfer": "PNG sRGB; RAW is linear 10-bit after inverse sRGB",
+        "vc": 0,
+        "csi_dt": "0x2B",
+        "word_count": 2400,
+        "fps": 30,
+        "lanes": 2,
+        "note": "packed file is active-pixel payload only, not a CSI-2 stream",
+        "sha256": {
+            "HDMI_test_1920x1080_gbrg_raw10.bin": sha256(packed_path),
+            "HDMI_test_1920x1080_gbrg_raw10_u16le.bin": sha256(u16_path),
+            "HDMI_test_1920x1080_gbr888.bin": sha256(gbr_path),
+        },
+        "ddr_after_jtag": {
+            "live_ring_base": "0x01000000",
+            "live_stride": "0x00600000",
+            "test_gbr_store": 4,
+            "test_gbr_addr": "0x02800000",
+            "test_magic_addr": "0x02E00000",
+            "test_magic": "0x47425231",
+        },
+    }
+    (PIC / "HDMI_test_format.json").write_text(
+        json.dumps(meta, indent=2) + "\n", encoding="utf-8"
+    )
+    print(f"wrote {packed_path.name} {PACKED_SIZE}")
+    print(f"wrote {u16_path.name} {U16_SIZE}")
+    print(f"wrote {gbr_path.name} {GBR_SIZE}")
+    print("wrote HDMI_test_format.json and sw/src/srgb_lut.h")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

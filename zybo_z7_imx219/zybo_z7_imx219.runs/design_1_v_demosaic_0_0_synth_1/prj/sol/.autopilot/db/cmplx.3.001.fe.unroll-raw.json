@@ -1,0 +1,162 @@
+{
+  "0": {
+    "basicblocks": 1,
+    "calls": "3 7 4 5",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "v_demosaic.cpp",
+    "fileloc": 89,
+    "instructions": 25,
+    "memory_accesses": 0,
+    "name": "v_demosaic",
+    "stores": {
+      "L": 3
+    },
+    "total_instructions": 4716
+  },
+  "1": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 0,
+    "file": "x_hls_utils.h",
+    "fileloc": 222,
+    "instructions": 1,
+    "memory_accesses": 0,
+    "name": "reg<unsigned short>",
+    "total_instructions": 1
+  },
+  "2": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 2,
+    "file": "std_abs.h",
+    "fileloc": 61,
+    "instructions": 4,
+    "memory_accesses": 0,
+    "name": "abs",
+    "total_instructions": 4
+  },
+  "3": {
+    "basicblocks": 26,
+    "calls": "1 1",
+    "control_depth": 5,
+    "def_use_depth": 4,
+    "file": "v_demosaic.cpp",
+    "fileloc": 133,
+    "instructions": 347,
+    "loads": {
+      "L": 32
+    },
+    "memory_accesses": 37,
+    "name": "AXIvideo2MultiBayer",
+    "stores": {
+      "L": 15
+    },
+    "total_instructions": 377
+  },
+  "4": {
+    "basicblocks": 44,
+    "calls": "",
+    "control_depth": 6,
+    "def_use_depth": 7,
+    "file": "v_demosaic.cpp",
+    "fileloc": 1077,
+    "instructions": 301,
+    "loads": {
+      "L": 41
+    },
+    "memory_accesses": 62,
+    "name": "ZipperRemoval",
+    "stores": {
+      "L": 29
+    },
+    "total_instructions": 301
+  },
+  "5": {
+    "basicblocks": 19,
+    "calls": "",
+    "control_depth": 3,
+    "def_use_depth": 4,
+    "file": "v_demosaic.cpp",
+    "fileloc": 208,
+    "instructions": 164,
+    "loads": {
+      "L": 12
+    },
+    "memory_accesses": 16,
+    "name": "MultiPixStream2AXIvideo",
+    "stores": {
+      "L": 14
+    },
+    "total_instructions": 171
+  },
+  "6": {
+    "basicblocks": 114,
+    "calls": "2 2 2 2 2 2",
+    "control_depth": 6,
+    "def_use_depth": 9,
+    "file": "v_demosaic.cpp",
+    "fileloc": 841,
+    "instructions": 1092,
+    "loads": {
+      "L": 167
+    },
+    "memory_accesses": 309,
+    "name": "DebayerRandBatG",
+    "stores": {
+      "L": 132
+    },
+    "total_instructions": 1116
+  },
+  "7": {
+    "basicblocks": 1,
+    "calls": "8 9 6",
+    "control_depth": 0,
+    "def_use_depth": 1,
+    "file": "v_demosaic.cpp",
+    "fileloc": 1060,
+    "instructions": 8,
+    "memory_accesses": 0,
+    "name": "Debayer",
+    "total_instructions": 3842
+  },
+  "8": {
+    "basicblocks": 199,
+    "calls": "2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2",
+    "control_depth": 6,
+    "def_use_depth": 11,
+    "file": "v_demosaic.cpp",
+    "fileloc": 264,
+    "instructions": 1552,
+    "loads": {
+      "G": 5,
+      "L": 191
+    },
+    "memory_accesses": 345,
+    "name": "DebayerG",
+    "stores": {
+      "L": 117
+    },
+    "total_instructions": 1632
+  },
+  "9": {
+    "basicblocks": 137,
+    "calls": "2 2 2 2",
+    "control_depth": 6,
+    "def_use_depth": 12,
+    "file": "v_demosaic.cpp",
+    "fileloc": 593,
+    "instructions": 1070,
+    "loads": {
+      "L": 155
+    },
+    "memory_accesses": 299,
+    "name": "DebayerRatBorBatR",
+    "stores": {
+      "L": 134
+    },
+    "total_instructions": 1086
+  }
+}

@@ -1,0 +1,424 @@
+
+PS C:\Users\dotignore>
+PS C:\Users\dotignore> $port = New-Object System.IO.Ports.SerialPort COM4,115200,None,8,One
+PS C:\Users\dotignore> $port.Open()
+PS C:\Users\dotignore> while($true) { if($port.BytesToRead -gt 0) { Write-Host $port.ReadExisting() -NoNewline } }
+
+JTAG UART1 OK
+
+*
+
+*** imx219_cam alive ***
+*** BUILD 0x20260928  pool5  HSIZE=5760 VSIZE=1080 ***
+======================================
+ IMX219 Camera -> HDMI Out (Zybo Z7)
+ 1920 x 1080  RAW10  Bayer GBRG  2 lane CSI-2
+ frame 30.00 Hz  (RPi 1080p30; datasheet max 60 @1080p)
+ HDMI 1080p30
+======================================
+[MAIN] FPGA0_CLK=0x00100500 FPGA1_CLK=0x00200500
+[MAIN] forced FCLK0=200M FCLK1=100M
+[MAIN] MMU+ICache off (flat map)
+[MAIN] early VDMA=0x00010002
+[MAIN] DDR smoke 0x01000000...
+[MAIN]   =0x22222222
+[MAIN] GPIO...
+[GPIO] pin 54 configured
+[MAIN] I2C...
+[I2C] Initialised (100 kHz)
+[HINT] Pcam FFC: metal contacts toward the HDMI edge
+       (away from board centre, contacts visible from above).
+[GPIO] pin54 = 0  (camera in reset ??? baseline scan)
+[I2C] Scan 0x08..0x77:
+  found 0x64
+[GPIO] pin54 = 1  (camera enabled ??? waiting 1 s for XCLR t5+t6)
+[I2C] Controller re-init...
+[I2C] Initialised (100 kHz)
+[IMX219] Probe 0x10
+  ID@0x0000 = 0x0219 rc=0
+[IMX219] Detected IMX219 at 0x10
+[IMX219] Initialising sensor...
+---------------------------------------------------------------
+| Config: Standby/Stream -> STANDBY
+| 01 00 00
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: Soft reset
+| 01 03 01
+---------------------------------------------------------------
+[IMX219] Chip ID after reset = 0x0219 (expect 0x0219)
+---------------------------------------------------------------
+| Config: Standby/Stream -> STANDBY
+| 01 00 00
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: Access unlock
+| 30 EB 05
+| 30 EB 0C
+| 30 0A FF
+| 30 0B FF
+| 30 EB 05
+| 30 EB 09
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: MIPI / clock / DT RAW10
+| 01 14 01
+| 01 28 00
+| 01 2A 18
+| 01 2B 00
+| 01 8C 0A
+| 01 8D 0A
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: Exposure / gain
+| 01 5A 01
+| 01 5B 90
+| 01 57 50
+| 01 58 01
+| 01 59 00
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: PLL (1920x1080 / 2-lane @30fps)
+| 03 01 05
+| 03 03 01
+| 03 04 03
+| 03 05 03
+| 03 06 00
+| 03 07 39
+| 03 09 0A
+| 03 0B 01
+| 03 0C 00
+| 03 0D 72
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: Frame timing -> FL=1520 LL=4000 (30 fps)
+| 01 60 05
+| 01 61 F0
+| 01 62 0F
+| 01 63 A0
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: Resolution -> 1920x1080 crop
+| 01 64 02
+| 01 65 A8
+| 01 66 0A
+| 01 67 27
+| 01 68 02
+| 01 69 B4
+| 01 6A 06
+| 01 6B EB
+| 01 6C 07
+| 01 6D 80
+| 01 6E 04
+| 01 6F 38
+| 06 24 07
+| 06 25 80
+| 06 26 04
+| 06 27 38
+| 01 70 01
+| 01 71 01
+| 01 72 00
+| 01 74 00
+| 01 75 00
+| 01 76 00
+| 01 77 00
+---------------------------------------------------------------
+---------------------------------------------------------------
+| Config: Magic registers (RPi)
+| 45 5E 00
+| 47 1E 4B
+| 47 67 0F
+| 47 50 14
+| 45 40 00
+| 47 B4 14
+| 47 13 30
+| 47 8B 10
+| 47 8F 10
+| 47 93 10
+| 47 97 0E
+| 47 9B 0E
+---------------------------------------------------------------
+[IMX219] verified 1920x1080 RAW -> 1920x1080 RGB, BINNING_MODE=0
+[IMX219] 5-2 2x2 binning = 1/4 pixels (same-color avg); not 4x capture
+[IMX219] GBRG two-G average is v_demosaic, CAL_MODE=average
+[IMX219] Initialised: 1920x1080 RAW10, 2-lane MIPI
+[IMX219] crop X 680..2599  Y 692..1771  (1920 x 1080 window)
+[IMX219] X_OUT=1920 Y_OUT=1080  CSI RAW10 WC=2400 bytes/line
+[IMX219] frame_len=1520 line_len=4000  lanes=2  CSI_FMT=0x0A0A
+[MAIN] Pipeline_Start
+[BUF] 5 DDR buffers ??? num/buf=N/0xADDR:
+[BUF]   num/buf=1/0x01000000
+[BUF]   num/buf=2/0x01600000
+[BUF]   num/buf=3/0x01C00000
+[BUF]   num/buf=4/0x02200000
+[BUF]   num/buf=5/0x02800000
+[HDMI] DDR probe test store @ 0x03000000...
+[HDMI] JTAG GBR888 present (magic GBR1)
+[HDMI] pixel0 GBR 00 00 00
+[P02] MMU off (main); PL AXI probes
+[P05] PL AXI probe VDMA@0x43000000...
+[P05] VDMA word0=0x00010002
+[P05] PL AXI probe CSI@0x43C00000...
+[P05] CSI word0=0x00000001
+[P05] PL AXI probe VTC@0x43C20000...
+[P05] VTC word0=0x00000000
+[MUX] SI=0 ctrl=0x00000000 mi0=0x00000000
+[VTC] LookupConfig id=0
+[VTC] CfgInitialize base=0x43C20000
+[VTC] set 1080p30 timing (aligned MMIO)
+[VTC] 1080p30 generator OK ctl=0x03FDEF07 (want ~0x03FDEF07)
+[VTC] GHSIZE=2200 GASIZE=0x04380780 GPOL=0x0000007F
+[P07] StartVdma
+[MAIN] VDMA...
+[BUF] 5 DDR buffers ??? num/buf=N/0xADDR:
+[BUF]   num/buf=1/0x01000000
+[BUF]   num/buf=2/0x01600000
+[BUF]   num/buf=3/0x01C00000
+[BUF]   num/buf=4/0x02200000
+[BUF]   num/buf=5/0x02800000
+[VDMA] LookupConfig...
+[VDMA] base=0x43000000 fstores=5 HasMm2S=1
+[VDMA] MMIO probe @0x43000000 (hang=AXI/clock dead)...
+[VDMA] VERSION=0x62000050
+[VDMA] CfgInitialize...
+[VDMA] CfgInitialize OK
+[VDMA] ring5 park+aim size=6220800
+[VDMA] hsize 5760 stride 5760 vsize 1080
+[VDMA] S2MM CR=0x00010063  FSYNC_SRC=3
+[VDMA] S2MM+MM2S GBR888 pool5 @ 0x01000000  test_store=5
+[VDMA] MM2S CR=0x00010001 SR=0x00010000 PARKPTR=0x00000004
+[P08] StartCsi
+[MAIN] MIPI...
+[MIPI] CCR=0x00000001 PCR=0x00000009 CSR=0x00000000
+[MIPI] CSI-2 RX core enabled (2 lanes)
+[P09] RAW10 streaming GBRG color (HLS demosaic bypassed)
+[TEST] HDMI parked on JTAG GBR888 @ 0x03000000 then camera
+[P40] Pipeline_Start done
+[PIPE] updates=0 CSI_ISR=00000000 S2MM_SR=00010000 MM2S_SR=00011000 PARKPTR=00040004
+[MAIN] HDMI 1080p30 RAW10 test (2.000 s Global Timer), then camera
+[MAIN] test hold start (VTC+MM2S running)
+[MAIN] test hold end 2.000 s ??? start camera, keep test until first FE
+[MAIN] Starting IMX219 stream (S2MM already waiting TUSER)...
+---------------------------------------------------------------
+| Config: Standby/Stream -> STREAMING
+| 01 00 01
+---------------------------------------------------------------
+[IMX219] Streaming started
+[IMX219] 1920 x 1080  RAW10  Bayer GBRG  2 lane CSI-2
+[IMX219] frame 30.00 Hz
+[MAIN] Capture loop starting...
+[HDMI] first complete camera frame -> live
+[AE] t_ms=4581 linear=20/4095 clip=0/3600 coarse=1516 ana=88 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=5114 linear=22/4095 clip=0/3600 coarse=1516 ana=96 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=5647 linear=22/4095 clip=0/3600 coarse=1516 ana=104 limit=0
+[AE] t_ms=6180 linear=22/4095 clip=0/3600 coarse=1516 ana=112 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 1] still running
+[PIPE] updates=61 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=01040000
+[ROI] observed=61 buf=0 x=958 y=540 GBR888 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10
+[AE] t_ms=6714 linear=22/4095 clip=0/3600 coarse=1516 ana=120 limit=0
+[AE] t_ms=7247 linear=23/4095 clip=0/3600 coarse=1516 ana=128 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=7781 linear=22/4095 clip=0/3600 coarse=1516 ana=136 limit=0
+[AE] t_ms=8314 linear=22/4095 clip=0/3600 coarse=1516 ana=144 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 2] still running
+[PIPE] updates=122 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=02010001
+[AE] t_ms=8847 linear=23/4095 clip=0/3600 coarse=1516 ana=152 limit=0
+[AE] t_ms=9380 linear=23/4095 clip=0/3600 coarse=1516 ana=160 limit=0
+[ROI] observed=150 buf=4 x=958 y=540 GBR888 10 10 10 10 10 10 0F 10 10 0F 10 10 10 10 10 10 10 10
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=9914 linear=23/4095 clip=0/3600 coarse=1516 ana=168 limit=0
+[AE] t_ms=10447 linear=26/4095 clip=0/3600 coarse=1516 ana=176 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 3] still running
+[PIPE] updates=183 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=03020002
+[AE] t_ms=10980 linear=23/4095 clip=0/3600 coarse=1516 ana=184 limit=0
+[AE] t_ms=11514 linear=70/4095 clip=0/3600 coarse=1516 ana=192 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=12047 linear=371/4095 clip=0/3600 coarse=1516 ana=200 limit=0
+[AE] t_ms=12580 linear=32/4095 clip=0/3600 coarse=1516 ana=208 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 4] still running
+[PIPE] updates=245 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=00030004
+[AE] t_ms=13114 linear=29/4095 clip=0/3600 coarse=1516 ana=216 limit=0
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=13647 linear=34/4095 clip=0/3600 coarse=1516 ana=224 limit=0
+[AE] t_ms=14180 linear=38/4095 clip=0/3600 coarse=1516 ana=232 limit=1
+[ROI] observed=300 buf=4 x=958 y=540 GBR888 11 12 11 11 11 11 13 11 14 13 15 14 12 15 12 12 13 12
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 5] still running
+[PIPE] updates=306 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 6] still running
+[PIPE] updates=367 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=02000001
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 7] still running
+[PIPE] updates=427 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=02010001
+[ROI] observed=450 buf=4 x=958 y=540 GBR888 3B 35 36 3B 3A 36 3B 3A 3E 3B 41 3E 37 41 41 37 40 41
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=20581 linear=33/4095 clip=0/3600 coarse=1516 ana=232 limit=1
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 8] still running
+[PIPE] updates=488 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=03020002
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 9] still running
+[PIPE] updates=549 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=04020003
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[ROI] observed=600 buf=4 x=958 y=540 GBR888 15 13 14 15 12 14 16 12 15 16 16 15 18 16 15 18 16 15
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 10] still running
+[PIPE] updates=610 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=00030004
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 11] still running
+[PIPE] updates=670 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=00040004
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=28581 linear=33/4095 clip=0/3600 coarse=1516 ana=232 limit=1
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 12] still running
+[PIPE] updates=731 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=01000000
+[ROI] observed=750 buf=4 x=958 y=540 GBR888 14 15 17 14 18 17 18 18 15 18 18 15 18 18 19 18 14 19
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 13] still running
+[PIPE] updates=792 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=02000001
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 14] still running
+[PIPE] updates=853 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=03010002
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[ROI] observed=900 buf=4 x=958 y=540 GBR888 17 17 14 17 17 14 14 17 19 14 17 19 18 17 14 18 15 14
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 15] still running
+[PIPE] updates=913 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=03020002
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[AE] t_ms=36581 linear=33/4095 clip=0/3600 coarse=1516 ana=232 limit=1
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 16] still running
+[PIPE] updates=974 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=04030003
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[FE] observed store change buf=1 addr=0x01000000 PARKPTR=0x01040000
+[HB 17] still running
+[PIPE] updates=1035 CSI_ISR=80020000 S2MM_SR=00011000 MM2S_SR=00011000 PARKPTR=00030004
+[ROI] observed=1050 buf=4 x=958 y=5
+
+
+
+
+
+PS C:\github\zybo_z7_cam_rpi_v2_5mp_hdmi>
+PS C:\github\zybo_z7_cam_rpi_v2_5mp_hdmi> .\flash.cmd
+=== compile software ===
+CC auto_exposure.c
+CC imx219.c
+CC initfini.c
+CC main.c
+CC pipeline.c
+LD cam_hdmi.elf
+ELF V:\\vitis_hdmi_ws\cam_hdmi\Debug\cam_hdmi.elf
+BUILD 0x20260928: matching bitstream/XSA, new BSP, asset hashes verified
+=== JTAG program FPGA bitstream into PL, then CPU image ===
+Open COM4 115200 FIRST. JP5 must be JTAG, not QSPI.
+If UART says "Zybo Z7-20 Rev. B Demo Image" that is factory flash, not cam_hdmi.
+BIT=V:/zybo_z7_imx219/zybo_z7_imx219.runs/impl_1/design_1_wrapper.bit
+attempting to launch hw_server
+
+****** Xilinx hw_server v2025.2
+  **** Build date : Oct 28 2025 at 10:03:13
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: hw_server application started
+INFO: Use Ctrl-C to exit hw_server application
+
+
+
+****** Xilinx hw_server v2025.2
+
+  **** Build date : Oct 28 2025 at 10:03:13
+
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+
+
+INFO: hw_server application started
+
+INFO: Use Ctrl-C to exit hw_server application
+
+
+
+
+INFO: To connect to this hw_server instance use url: TCP:127.0.0.1:3121
+
+
+
+  1  APU
+     2  ARM Cortex-A9 MPCore #0 (Running)
+     3  ARM Cortex-A9 MPCore #1 (Running)
+  4  xc7z020
+INFO: [Hsi 55-2053] elapsed time for repository (C:/AMDDesignTools/2025.2/Vitis/data/embeddedsw) loading 1 seconds
+Halt CPU0 (before FPGA)
+CPU0 ready state=Stopped: (Suspended)
+Programming bitstream into PL (xc7z020)...
+PL bitstream loaded
+Reconnect JTAG...
+Halt CPU0 (after FPGA)
+CPU0 ready state=Stopped: (Suspended)
+PS post_config (no ps7_init)...
+FPGA0_CLK F8000170:   00100500
+
+FPGA1_CLK F8000180:   00200500
+
+LVL_SHFTR F8000900:   0000000F
+
+FPGA_RST  F8000240:   00000000
+
+VDMA probe 43000000:   00010002
+
+VTC probe  43C20000:   00000000
+
+CSI probe  43C00000:   00000001
+
+BOOT_MODE F800025C:   00000001
+
+WARNING: BOOT_MODE=QSPI - factory demo returns on PS reset. Set JP5 to JTAG.
+SCTLR before: sctlr: 08c5187d
+       TE (Bits [30]): 0     AFE (Bits [29]): 0     TRE (Bits [28]): 0
+     NMFI (Bits [27]): 1  EE bit (Bits [25]): 0      RR (Bits [14]): 0
+        V (Bits [13]): 0   I bit (Bits [12]): 1   Z bit (Bits [11]): 1
+   SW bit (Bits [10]): 0    C bit (Bits [2]): 1    A bit (Bits [1]): 0
+     M bit (Bits [0]): 1
+
+SCTLR after:  sctlr: 08c50078
+       TE (Bits [30]): 0     AFE (Bits [29]): 0     TRE (Bits [28]): 0
+     NMFI (Bits [27]): 1  EE bit (Bits [25]): 0      RR (Bits [14]): 0
+        V (Bits [13]): 0   I bit (Bits [12]): 0   Z bit (Bits [11]): 0
+   SW bit (Bits [10]): 0    C bit (Bits [2]): 0    A bit (Bits [1]): 0
+     M bit (Bits [0]): 0
+
+DDR probe:
+  100000:   A5A5A5A5
+
+Wrote 81928 bytes from V:/vitis_hdmi_ws/cam_hdmi/Debug/cam_hdmi.bin
+Loading RAW10 u16le -> 0x04000000 ...
+Loading HDMI_test GBR888 -> 0x03000000 ...
+dow -data HDMI_test GBR888 OK
+TEST magic  2E00000:   47425231
+
+TEST pix0   3000000:   02000000
+
+CPU1 parked in WFI @ 0xFFFF0000
+CPU0 running _boot @ 0x0010012c (leave it running, do not halt)
+COM4 should show: JTAG UART1 OK  then cam_hdmi [M01] main() entered
+PROGRAM OK
+DONE. Expect UART: GBR test 2s then camera stream
+If you see Demo Image: move JP5 to JTAG, power-cycle, flash again.
+PS C:\github\zybo_z7_cam_rpi_v2_5mp_hdmi>

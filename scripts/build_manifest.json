@@ -1,0 +1,27 @@
+{
+  "build": "0x20260928",
+  "files": {
+    "zybo_z7_imx219\\zybo_z7_imx219.runs\\impl_1\\design_1_wrapper.bit": "ee2ae3448d3fcda14b949c44c74fc9c9f88bae9fc3ec9c6fcb7a88f15c14ef6f",
+    "zybo_z7_imx219\\design_1_wrapper.xsa": "32dae891a48dfeb59a764d74ccc3d3492fb6f55b9d7b5696d3053446adc7032d",
+    "vitis_hdmi_ws\\zybo_hdmi_plat\\ps7_cortexa9_0\\standalone_domain\\bsp\\ps7_cortexa9_0\\include\\xparameters.h": "9a84f728b843b3e01a1e9da900f529058eebc3458e2dcc5780ab1ba0cbaa944c",
+    "sw\\src\\auto_exposure.c": "a0c1954463071047d22202a60b0d065c7a0d4b71f45a95fb34d4c7be85c15090",
+    "sw\\src\\imx219.c": "447c2b9ca8f4a301707bb891438a01db002ed4f7f046226a94585ae409db6af7",
+    "sw\\src\\initfini.c": "f3ffe4ea383876d01d77d56f55257bd444e893216055877f041afde130bf60b0",
+    "sw\\src\\main.c": "6ab44c7f1b27311f975b11246755ec3a6d8bfc6c3c58e7602f9eb6c3dd6d428e",
+    "sw\\src\\pipeline.c": "b66a7a635cd43792b849007a98e760cf1271d2b5a9e43e1b532182e21a75b467",
+    "sw\\src\\ae_linear_lut.h": "efa0dfdd9aa02e2aab750f79d8c070c765b973b338ed14e7020df89d4d8022ac",
+    "sw\\src\\auto_exposure.h": "ae69efa198fef1dae295c07cdb3c9e348f8caca0ba86250b4f900a3e508c0fd9",
+    "sw\\src\\imx219.h": "57cd6bfab2aebba9de1971455a2e33d92d8f4b4d42dc815383cbbb30319db67e",
+    "sw\\src\\imx219_regs.h": "6a98787ef9090be5dea7db31f20950f628ee88a64c78930b2bddf1df63974248",
+    "sw\\src\\parameters.h": "2757fe075fb2aa2df800d8a044a6109e41de8825a8355b508e6685e4676c1826",
+    "sw\\src\\pipeline.h": "db2ec7f6839937d05c9259746dae02319a533288dd603e5a8b6b3263fc198edf",
+    "src\\axis_isp.v": "a4fb578b754ae19540a20756fd51ea3b7ee77b684557f1308853e4683a971621",
+    "src\\axis_raw_to_gbr.v": "109e7490aec6000ada7ab8244d67bda7364c03f569d799df7ae804dad0731eff",
+    "src\\isp_srgb.mem": "48b0eaf213d15b14fbd07030ea9ca2cd1b566bd0519df9a78be8ab2981eb4e70",
+    "vitis_hdmi_ws\\cam_hdmi\\Debug\\cam_hdmi.elf": "daef21636eb295ab31f2fd6abbe8400c89e403f6b13e26c1682eb952e1b43c78",
+    "vitis_hdmi_ws\\cam_hdmi\\Debug\\cam_hdmi.bin": "a061d8f707dda591243d300d6b745271682ea0b1623371a952efef81ffedda9e",
+    "pic\\HDMI_test_1920x1080_gbrg_raw10.bin": "a09b8e25bbed0f75ee0c42a7423f2c37a338cf4141086ece4fa71545807e3e03",
+    "pic\\HDMI_test_1920x1080_gbrg_raw10_u16le.bin": "b68e7d1c3c19c1e27fc085bcf7a3af4338234ceb604b985c079b0b9156838ec5",
+    "pic\\HDMI_test_1920x1080_gbr888.bin": "028ecbb5fad5016601100994e54fe9baeba17b7bc04d580600457cc8b23dc064"
+  }
+}

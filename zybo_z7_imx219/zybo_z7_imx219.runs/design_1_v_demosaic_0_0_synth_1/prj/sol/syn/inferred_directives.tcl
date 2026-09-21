@@ -1,0 +1,5 @@
+# Inferred from syn.compile.pipeline_loops=64
+set_directive_pipeline zipperremoval/anonymous
+set_directive_pipeline zipperremoval/anonymous
+set_directive_pipeline zipperremoval/anonymous
+set_directive_pipeline zipperremoval/anonymous

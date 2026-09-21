@@ -1,0 +1,74 @@
+<design_size title="Design Size Report">
+    <item name="Total Instructions per Compilation Phase">
+        <table>
+            <keys size="4">Phase, Step, Instructions, Description</keys>
+            <column name="Compile/Link">, 25179, After all functions are compiled and linked into a single design</column>
+            <column name="">, , </column>
+            <column name="Unroll/Inline">, , After user unroll and inline pragmas are applied</column>
+            <column name="">(1) unroll,  4716, user unroll pragmas are applied</column>
+            <column name="">(2) simplification,  2732, simplification of applied user unroll pragmas</column>
+            <column name="">(3) inline,  2321, user inline pragmas are applied</column>
+            <column name="">(4) simplification,  2171, simplification of applied user inline pragmas</column>
+            <column name="">, , </column>
+            <column name="Array/Struct">, , After user array partition and struct aggregate/disaggregate pragmas are applied</column>
+            <column name="">(1) array partition,  2055, user array partition pragmas are applied</column>
+            <column name="">(2) simplification,  1863, simplification of applied user array partition &amp; struct aggregate/disaggregate pragmas</column>
+            <column name="">(3) aggregate/disaggregate,  1873, user struct aggregate/disaggregate pragmas are applied</column>
+            <column name="">(4) array reshape,  2035, apply array reshape pragmas</column>
+            <column name="">(5) access patterns,  2199, array access pattern optmizations</column>
+            <column name="">, , </column>
+            <column name="Performance">, , After transformations are applied to meet performance pragma targets</column>
+            <column name="">(1) loop simplification,  2170, loop and instruction simplification</column>
+            <column name="">(2) parallelization,  2063, loops are unrolled or pipelined to meet performance targets</column>
+            <column name="">(3) array partition,  1985, arrays are partitioned to meet performance targets</column>
+            <column name="">(4) simplification,  1976, simplification of design after performance transformations</column>
+            <column name="">, , </column>
+            <column name="HW Transforms">, , After hardware transfomations</column>
+            <column name="">(1) lowering,  1895, initial conversion to HW specific instructions</column>
+            <column name="">(2) optimizations,  1848, high level synthesis optimizations</column>
+        </table>
+    </item>
+    <item name="Instructions per Function for each Compilation Phase">
+        <hiertable>
+            <header size="7" col0="Function" col1="Location" col2="Compile/Link" col3="Unroll/Inline" col4="Array/Struct" col5="Performance" col6="HW Transforms"/>
+            <rows>
+                <row id="0" col0="v_demosaic" col1="v_demosaic.cpp:89" col2="25179" col3="2171" col4="2199" col5="1976" col6="1848">
+                    <row id="8" col0="AXIvideo2MultiBayer" col1="v_demosaic.cpp:133" col2="1069" col3="209" col4="254" col5="187" col6="103">
+                        <row id="4" col0="Scalar" col1="hls_video_core.h:196" col2="5" col3="" col4="" col5="" col6=""/>
+                        <row id="6" col0="reg&lt;unsigned short&gt;" col1="x_hls_utils.h:222" col2="2" col2_disp="    2 (2 calls)" col3="2" col3_disp="   2 (2 calls)" col4="2" col4_disp="   2 (2 calls)" col5="2" col5_disp="   2 (2 calls)" col6="8" col6_disp="   8 (2 calls)"/>
+                        <row id="11" col0="AXIGetBitFields&lt;10, ap_uint&lt;10&gt; &gt;" col1="hls_axi_io.h:83" col2="75" col3="" col4="" col5="" col6="">
+                            <row id="9" col0="AXIGetBitFields&lt;10, ap_uint&lt;10&gt; &gt;" col1="hls_axi_io.h:60" col2="69" col3="" col4="" col5="" col6=""/>
+                        </row>
+                    </row>
+                    <row id="7" col0="Debayer" col1="v_demosaic.cpp:1060" col2="20963" col3="1615" col4="1518" col5="1444" col6="1420">
+                        <row id="2" col0="DebayerG" col1="v_demosaic.cpp:264" col2="12719" col3="679" col4="711" col5="680" col6="667">
+                            <row id="4" col0="Scalar" col1="hls_video_core.h:196" col2="20" col2_disp="   20 (4 calls)" col3="" col4="" col5="" col6=""/>
+                            <row id="12" col0="abs" col1="std_abs.h:61" col2="80" col2_disp="   80 (20 calls)" col3="" col4="" col5="" col6=""/>
+                        </row>
+                        <row id="3" col0="DebayerRatBorBatR" col1="v_demosaic.cpp:593" col2="4151" col3="498" col4="396" col5="373" col6="365">
+                            <row id="4" col0="Scalar" col1="hls_video_core.h:196" col2="40" col2_disp="   40 (8 calls)" col3="" col4="" col5="" col6=""/>
+                            <row id="12" col0="abs" col1="std_abs.h:61" col2="16" col2_disp="   16 (4 calls)" col3="" col4="" col5="" col6=""/>
+                        </row>
+                        <row id="5" col0="DebayerRandBatG" col1="v_demosaic.cpp:841" col2="4075" col3="430" col4="403" col5="383" col6="376">
+                            <row id="4" col0="Scalar" col1="hls_video_core.h:196" col2="40" col2_disp="   40 (8 calls)" col3="" col4="" col5="" col6=""/>
+                            <row id="12" col0="abs" col1="std_abs.h:61" col2="24" col2_disp="   24 (6 calls)" col3="" col4="" col5="" col6=""/>
+                        </row>
+                    </row>
+                    <row id="10" col0="ZipperRemoval" col1="v_demosaic.cpp:1077" col2="2006" col3="217" col4="209" col5="196" col6="208">
+                        <row id="4" col0="Scalar" col1="hls_video_core.h:196" col2="10" col2_disp="   10 (2 calls)" col3="" col4="" col5="" col6=""/>
+                    </row>
+                    <row id="1" col0="MultiPixStream2AXIvideo" col1="v_demosaic.cpp:208" col2="1099" col3="105" col4="179" col5="116" col6="72">
+                        <row id="4" col0="Scalar" col1="hls_video_core.h:196" col2="5" col3="" col4="" col5="" col6=""/>
+                    </row>
+                </row>
+            </rows>
+            <notes/>
+        </hiertable>
+    </item>
+    <item name="Design Size Message Settings">
+        <table>
+            <keys size="3">Message Setting, Value, Description</keys>
+            <column name="config_compile -design_size_maximum_warning">100000, Show a warning when total design instructions exceeds this value</column>
+        </table>
+    </item>
+</design_size>

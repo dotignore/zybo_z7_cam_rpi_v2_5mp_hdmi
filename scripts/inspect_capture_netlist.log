@@ -1,0 +1,88 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sun Sep 20 22:01:55 2026
+# Process ID         : 8936
+# Current directory  : C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi
+# Command line       : vivado.exe -mode batch -source scripts/inspect_capture_netlist.tcl -log scripts/inspect_capture_netlist.log -nojournal
+# Log file           : C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/scripts/inspect_capture_netlist.log
+# Journal file       : 
+# Running On         : DESKTOP-6M954OF
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz
+# CPU Frequency      : 1498 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 33916 MB
+# Swap memory        : 5100 MB
+# Total Virtual      : 39017 MB
+# Available Virtual  : 17818 MB
+#-----------------------------------------------------------
+source scripts/inspect_capture_netlist.tcl
+# set root [file normalize [file join [file dirname [info script]] ..]]
+# open_checkpoint [file join $root zybo_z7_imx219 zybo_z7_imx219.runs impl_1 design_1_wrapper_routed.dcp]
+Command: open_checkpoint C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/impl_1/design_1_wrapper_routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.067 . Memory (MB): peak = 323.738 ; gain = 6.602
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 856.922 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1284 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2025.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+WARNING: [Constraints 18-550] Could not create 'IBUF_LOW_PWR' constraint because net 'design_1_i/clk_wiz_hdmi/clk_in1' is not directly connected to top level port. 'IBUF_LOW_PWR' is ignored for synthesis but preserved for implementation.
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.141 . Memory (MB): peak = 999.348 ; gain = 10.039
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.050 . Memory (MB): peak = 1636.453 ; gain = 0.000
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1636.453 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1636.453 ; gain = 0.000
+Read placeStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1639.172 ; gain = 2.719
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1639.172 ; gain = 0.000
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.413 . Memory (MB): peak = 1661.852 ; gain = 22.680
+Read Physdb Files: Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1661.852 ; gain = 25.398
+Restored from archive | CPU: 2.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1661.852 ; gain = 25.398
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1682.746 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 18 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 3 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 12 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 3 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2025.2 (64-bit) build 6299465
+WARNING: [Vivado 12-23575] Critical violations of the methodology design rules detected. Critical violations may contribute to timing failures or cause functional issues in hardware. Run report_methodology for more information.
+open_checkpoint: Time (s): cpu = 00:00:35 ; elapsed = 00:00:57 . Memory (MB): peak = 1690.797 ; gain = 1381.594
+# foreach pattern {*raw_switch*/m_axis_tready *raw_switch*/s_axis_tready* *axis_isp_0*/m_axis_tready *axis_isp_0*/s_axis_tready *v_demosaic_0*/s_axis_video_TREADY *v_demosaic_0*/m_axis_video_TREADY} {
+#     foreach p [get_pins -hier -quiet $pattern] {
+#         puts "CAPTURE_PIN $p NET [get_nets -of_objects $p]"
+#         puts "CAPTURE_DRIVER [get_pins -leaf -of_objects [get_nets -segments -of_objects $p] -filter {DIRECTION == OUT}]"
+#     }
+# }
+CAPTURE_PIN design_1_i/raw_switch/m_axis_tready[0] NET design_1_i/raw_switch_M00_AXIS_TREADY
+CAPTURE_DRIVER design_1_i/v_demosaic_0/inst/AXIvideo2MultiBayer_U0/regslice_both_s_axis_video_V_data_V_U/ack_in_t_reg/Q
+CAPTURE_PIN design_1_i/raw_switch/s_axis_tready[1] NET design_1_i/raw_vdma_M_AXIS_MM2S_TREADY[1]
+CAPTURE_DRIVER design_1_i/raw_switch/inst/s_axis_tready[1]_INST_0/O
+CAPTURE_PIN design_1_i/raw_switch/s_axis_tready[0] NET design_1_i/mipi_csi2_rx_subsyst_0_video_out1_TREADY[0]
+CAPTURE_DRIVER design_1_i/raw_switch/inst/s_axis_tready[0]_INST_0/O
+CAPTURE_PIN design_1_i/axis_isp_0/m_axis_tready NET design_1_i/axis_isp_0_M_AXIS_TREADY
+CAPTURE_DRIVER design_1_i/axi_vdma_0/U0/GEN_SPRT_FOR_S2MM.GEN_S2MM_DRE_ON_SKID.I_S2MM_SKID_FLUSH_SOF/sig_s_ready_out_reg/Q
+CAPTURE_PIN design_1_i/axis_isp_0/s_axis_tready NET design_1_i/v_demosaic_0_m_axis_video1_TREADY
+CAPTURE_DRIVER design_1_i/axis_isp_0/inst/s_axis_tready_INST_0/O
+CAPTURE_PIN design_1_i/v_demosaic_0/s_axis_video_TREADY NET design_1_i/raw_switch_M00_AXIS_TREADY
+CAPTURE_DRIVER design_1_i/v_demosaic_0/inst/AXIvideo2MultiBayer_U0/regslice_both_s_axis_video_V_data_V_U/ack_in_t_reg/Q
+CAPTURE_PIN design_1_i/v_demosaic_0/m_axis_video_TREADY NET design_1_i/v_demosaic_0_m_axis_video1_TREADY
+CAPTURE_DRIVER design_1_i/axis_isp_0/inst/s_axis_tready_INST_0/O
+# exit
+INFO: [Common 17-206] Exiting Vivado at Sun Sep 20 22:03:06 2026...

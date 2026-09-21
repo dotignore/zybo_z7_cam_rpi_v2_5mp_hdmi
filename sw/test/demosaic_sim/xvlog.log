@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/src/axis_isp.v" into library work
+INFO: [VRFC 10-311] analyzing module axis_isp
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/sw/test/tb_capture_startup.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_capture_startup

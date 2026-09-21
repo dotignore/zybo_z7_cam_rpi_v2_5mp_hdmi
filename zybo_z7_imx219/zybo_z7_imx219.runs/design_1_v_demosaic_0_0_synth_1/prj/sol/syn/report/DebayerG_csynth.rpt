@@ -1,0 +1,241 @@
+
+
+================================================================
+== Vitis HLS Report for 'DebayerG'
+================================================================
+* Date:           Mon Sep 21 19:19:15 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 14 2025)
+* Project:        prj
+* Solution:       sol (Vivado IP Flow Target)
+* Product family: zynq
+* Target device:  xc7z020-clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.282 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+------------+----------+------------+-----+------------+---------+
+    |   Latency (cycles)   |   Latency (absolute)  |     Interval     | Pipeline|
+    |   min   |     max    |    min   |     max    | min |     max    |   Type  |
+    +---------+------------+----------+------------+-----+------------+---------+
+    |       41|  4296278036|  0.410 us|  42.963 sec|   41|  4296278036|       no|
+    +---------+------------+----------+------------+-----+------------+---------+
+
+    + Detail: 
+        * Instance: 
+        +-----------------------------------------------+------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+        |                                               |                                    |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+        |                    Instance                   |               Module               |   min   |   max   |    min   |    max   | min | max |        Type       |
+        +-----------------------------------------------+------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+        |grp_DebayerG_Pipeline_VITIS_LOOP_318_4_fu_200  |DebayerG_Pipeline_VITIS_LOOP_318_4  |       17|    65552|  0.170 us|  0.656 ms|    0|    0|  loop pipeline stp|
+        +-----------------------------------------------+------------------------------------+---------+---------+----------+----------+-----+-----+-------------------+
+
+        * Loop: 
+        +--------------------+---------+------------+------------+-----------+-----------+-----------+----------+
+        |                    |   Latency (cycles)   |  Iteration |  Initiation Interval  |    Trip   |          |
+        |      Loop Name     |   min   |     max    |   Latency  |  achieved |   target  |   Count   | Pipelined|
+        +--------------------+---------+------------+------------+-----------+-----------+-----------+----------+
+        |- VITIS_LOOP_315_3  |       40|  4296278035|  20 ~ 65555|          -|          -|  2 ~ 65537|        no|
+        +--------------------+---------+------------+------------+-----------+-----------+-----------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       0|    137|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |       14|    8|    3529|   4050|    0|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       0|     88|    -|
+|Register         |        -|    -|     556|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |       14|    8|    4085|   4275|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      280|  220|  106400|  53200|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        5|    3|       3|      8|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    +-----------------------------------------------+------------------------------------+---------+----+------+------+-----+
+    |                    Instance                   |               Module               | BRAM_18K| DSP|  FF  |  LUT | URAM|
+    +-----------------------------------------------+------------------------------------+---------+----+------+------+-----+
+    |grp_DebayerG_Pipeline_VITIS_LOOP_318_4_fu_200  |DebayerG_Pipeline_VITIS_LOOP_318_4  |       14|   8|  3529|  4050|    0|
+    +-----------------------------------------------+------------------------------------+---------+----+------+------+-----+
+    |Total                                          |                                    |       14|   8|  3529|  4050|    0|
+    +-----------------------------------------------+------------------------------------+---------+----+------+------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln325_fu_389_p2   |         +|   0|  0|  24|          17|           3|
+    |loopHeight_fu_279_p2  |         +|   0|  0|  24|          17|           2|
+    |loopWidth_fu_289_p2   |         +|   0|  0|  24|          17|           2|
+    |y_8_fu_318_p2         |         +|   0|  0|  24|          17|           1|
+    |icmp_ln315_fu_313_p2  |      icmp|   0|  0|  24|          17|          17|
+    |ap_block_state1       |        or|   0|  0|   2|           1|           1|
+    |xor_ln439_fu_404_p2   |       xor|   0|  0|  15|          15|          15|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0| 137|         101|          41|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------+----+-----------+-----+-----------+
+    |            Name           | LUT| Input Size| Bits| Total Bits|
+    +---------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                  |  25|          5|    1|          5|
+    |ap_done                    |   9|          2|    1|          2|
+    |bayerPhase_val11_c5_blk_n  |   9|          2|    1|          2|
+    |bayerPhase_val_blk_n       |   9|          2|    1|          2|
+    |height_val4_c3_blk_n       |   9|          2|    1|          2|
+    |real_start                 |   9|          2|    1|          2|
+    |width_val8_c4_blk_n        |   9|          2|    1|          2|
+    |y_fu_76                    |   9|          2|   17|         34|
+    +---------------------------+----+-----------+-----+-----------+
+    |Total                      |  88|         19|   24|         51|
+    +---------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +------------------------------------------------------------+----+----+-----+-----------+
+    |                            Name                            | FF | LUT| Bits| Const Bits|
+    +------------------------------------------------------------+----+----+-----+-----------+
+    |add_ln325_reg_677                                           |  17|   0|   17|          0|
+    |ap_CS_fsm                                                   |   4|   0|    4|          0|
+    |ap_done_reg                                                 |   1|   0|    1|          0|
+    |grp_DebayerG_Pipeline_VITIS_LOOP_318_4_fu_200_ap_start_reg  |   1|   0|    1|          0|
+    |height_val_read_reg_542                                     |  16|   0|   16|          0|
+    |loopHeight_reg_552                                          |  17|   0|   17|          0|
+    |loopWidth_reg_557                                           |  17|   0|   17|          0|
+    |p_lcssa50495082_fu_80                                       |  10|   0|   10|          0|
+    |p_lcssa50495082_load_reg_577                                |  10|   0|   10|          0|
+    |p_lcssa50515084_fu_84                                       |  10|   0|   10|          0|
+    |p_lcssa50515084_load_reg_582                                |  10|   0|   10|          0|
+    |p_lcssa50525086_fu_88                                       |  10|   0|   10|          0|
+    |p_lcssa50525086_load_reg_587                                |  10|   0|   10|          0|
+    |p_lcssa50535088_fu_92                                       |  10|   0|   10|          0|
+    |p_lcssa50535088_load_reg_592                                |  10|   0|   10|          0|
+    |p_lcssa50555090_fu_96                                       |  10|   0|   10|          0|
+    |p_lcssa50555090_load_reg_597                                |  10|   0|   10|          0|
+    |p_lcssa50565092_fu_100                                      |  10|   0|   10|          0|
+    |p_lcssa50565092_load_reg_602                                |  10|   0|   10|          0|
+    |p_lcssa50575094_fu_104                                      |  10|   0|   10|          0|
+    |p_lcssa50575094_load_reg_607                                |  10|   0|   10|          0|
+    |p_lcssa50595096_fu_108                                      |  10|   0|   10|          0|
+    |p_lcssa50595096_load_reg_612                                |  10|   0|   10|          0|
+    |p_lcssa50605098_fu_112                                      |  10|   0|   10|          0|
+    |p_lcssa50605098_load_reg_617                                |  10|   0|   10|          0|
+    |p_lcssa50615100_fu_116                                      |  10|   0|   10|          0|
+    |p_lcssa50615100_load_reg_622                                |  10|   0|   10|          0|
+    |p_lcssa50635102_fu_120                                      |  10|   0|   10|          0|
+    |p_lcssa50635102_load_reg_627                                |  10|   0|   10|          0|
+    |p_lcssa50645104_fu_124                                      |  10|   0|   10|          0|
+    |p_lcssa50645104_load_reg_632                                |  10|   0|   10|          0|
+    |p_lcssa50655106_fu_128                                      |  10|   0|   10|          0|
+    |p_lcssa50655106_load_reg_637                                |  10|   0|   10|          0|
+    |p_lcssa50675108_fu_132                                      |  10|   0|   10|          0|
+    |p_lcssa50675108_load_reg_642                                |  10|   0|   10|          0|
+    |p_lcssa50685110_fu_136                                      |  10|   0|   10|          0|
+    |p_lcssa50685110_load_reg_647                                |  10|   0|   10|          0|
+    |p_lcssa52275233_fu_140                                      |  10|   0|   10|          0|
+    |p_lcssa52275233_load_reg_652                                |  10|   0|   10|          0|
+    |p_lcssa52285235_fu_144                                      |  10|   0|   10|          0|
+    |p_lcssa52285235_load_reg_657                                |  10|   0|   10|          0|
+    |p_lcssa52295237_fu_148                                      |  10|   0|   10|          0|
+    |p_lcssa52295237_load_reg_662                                |  10|   0|   10|          0|
+    |p_lcssa52305239_fu_152                                      |  10|   0|   10|          0|
+    |p_lcssa52305239_load_reg_667                                |  10|   0|   10|          0|
+    |p_lcssa52315241_fu_156                                      |  10|   0|   10|          0|
+    |p_lcssa52315241_load_reg_672                                |  10|   0|   10|          0|
+    |start_once_reg                                              |   1|   0|    1|          0|
+    |trunc_ln439_reg_682                                         |   1|   0|    1|          0|
+    |trunc_ln_reg_562                                            |  15|   0|   15|          0|
+    |width_val_read_reg_537                                      |  16|   0|   16|          0|
+    |x_phase_reg_547                                             |   1|   0|    1|          0|
+    |xor_ln439_reg_687                                           |  15|   0|   15|          0|
+    |y_7_reg_568                                                 |  17|   0|   17|          0|
+    |y_fu_76                                                     |  17|   0|   17|          0|
+    +------------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                       | 556|   0|  556|          0|
+    +------------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------------------------+-----+-----+------------+---------------------+--------------+
+|              RTL Ports             | Dir | Bits|  Protocol  |    Source Object    |    C Type    |
++------------------------------------+-----+-----+------------+---------------------+--------------+
+|ap_clk                              |   in|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|ap_rst                              |   in|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|ap_start                            |   in|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|start_full_n                        |   in|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|ap_done                             |  out|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|ap_continue                         |   in|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|ap_idle                             |  out|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|ap_ready                            |  out|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|start_out                           |  out|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|start_write                         |  out|    1|  ap_ctrl_hs|             DebayerG|  return value|
+|imgBayer_dout                       |   in|   10|     ap_fifo|             imgBayer|       pointer|
+|imgBayer_empty_n                    |   in|    1|     ap_fifo|             imgBayer|       pointer|
+|imgBayer_read                       |  out|    1|     ap_fifo|             imgBayer|       pointer|
+|imgBayer_num_data_valid             |   in|    3|     ap_fifo|             imgBayer|       pointer|
+|imgBayer_fifo_cap                   |   in|    3|     ap_fifo|             imgBayer|       pointer|
+|imgG_din                            |  out|   30|     ap_fifo|                 imgG|       pointer|
+|imgG_full_n                         |   in|    1|     ap_fifo|                 imgG|       pointer|
+|imgG_write                          |  out|    1|     ap_fifo|                 imgG|       pointer|
+|imgG_num_data_valid                 |   in|   32|     ap_fifo|                 imgG|       pointer|
+|imgG_fifo_cap                       |   in|   32|     ap_fifo|                 imgG|       pointer|
+|height_val                          |   in|   16|   ap_stable|           height_val|        scalar|
+|width_val                           |   in|   16|   ap_stable|            width_val|        scalar|
+|bayerPhase_val_dout                 |   in|   16|     ap_fifo|       bayerPhase_val|       pointer|
+|bayerPhase_val_empty_n              |   in|    1|     ap_fifo|       bayerPhase_val|       pointer|
+|bayerPhase_val_read                 |  out|    1|     ap_fifo|       bayerPhase_val|       pointer|
+|bayerPhase_val_num_data_valid       |   in|    3|     ap_fifo|       bayerPhase_val|       pointer|
+|bayerPhase_val_fifo_cap             |   in|    3|     ap_fifo|       bayerPhase_val|       pointer|
+|height_val4_c3_din                  |  out|   11|     ap_fifo|       height_val4_c3|       pointer|
+|height_val4_c3_full_n               |   in|    1|     ap_fifo|       height_val4_c3|       pointer|
+|height_val4_c3_write                |  out|    1|     ap_fifo|       height_val4_c3|       pointer|
+|height_val4_c3_num_data_valid       |   in|    3|     ap_fifo|       height_val4_c3|       pointer|
+|height_val4_c3_fifo_cap             |   in|    3|     ap_fifo|       height_val4_c3|       pointer|
+|width_val8_c4_din                   |  out|   11|     ap_fifo|        width_val8_c4|       pointer|
+|width_val8_c4_full_n                |   in|    1|     ap_fifo|        width_val8_c4|       pointer|
+|width_val8_c4_write                 |  out|    1|     ap_fifo|        width_val8_c4|       pointer|
+|width_val8_c4_num_data_valid        |   in|    3|     ap_fifo|        width_val8_c4|       pointer|
+|width_val8_c4_fifo_cap              |   in|    3|     ap_fifo|        width_val8_c4|       pointer|
+|bayerPhase_val11_c5_din             |  out|   16|     ap_fifo|  bayerPhase_val11_c5|       pointer|
+|bayerPhase_val11_c5_full_n          |   in|    1|     ap_fifo|  bayerPhase_val11_c5|       pointer|
+|bayerPhase_val11_c5_write           |  out|    1|     ap_fifo|  bayerPhase_val11_c5|       pointer|
+|bayerPhase_val11_c5_num_data_valid  |   in|    3|     ap_fifo|  bayerPhase_val11_c5|       pointer|
+|bayerPhase_val11_c5_fifo_cap        |   in|    3|     ap_fifo|  bayerPhase_val11_c5|       pointer|
++------------------------------------+-----+-----+------------+---------------------+--------------+
+

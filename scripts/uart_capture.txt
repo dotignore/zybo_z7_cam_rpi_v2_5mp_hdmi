@@ -1,0 +1,1 @@
+﻿COM4_BUSY: Exception calling "Open" with "0" argument(s): "Access to the port 'COM4' is denied."

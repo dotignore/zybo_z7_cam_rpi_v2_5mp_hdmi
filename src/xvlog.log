@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "V:/src/axis_isp.v" into library work
+INFO: [VRFC 10-311] analyzing module axis_isp
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "V:/sw/test/tb_axis_isp.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_axis_isp
