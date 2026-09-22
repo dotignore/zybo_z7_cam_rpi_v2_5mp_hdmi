@@ -97,15 +97,24 @@
 #define TEST_MAGIC_ADDR         0x02E00000U
 #define TEST_MAGIC_GBR1         0x47425231U
 
-/* v_demosaic PG286 BAYER_PHASE: 0=RGGB 1=GRBG 2=GBRG 3=BGGR. Даташит p.89 = GBRG.
- * Change DEMOSAIC_BAYER_PHASE and run flash.cmd (no FPGA rebuild after the first). */
+/* The 2-bit hardware phase selector supports the four Bayer mosaics (0..3).
+ * The other 2x2 arrangements are named below but require wider hardware
+ * selection and a matching demosaic implementation before they can be used. */
 #define DEMOSAIC_BAYER_RGGB     0U
 #define DEMOSAIC_BAYER_GRBG     1U
 #define DEMOSAIC_BAYER_GBRG     2U
 #define DEMOSAIC_BAYER_BGGR     3U
+#define DEMOSAIC_BAYER_RGBG     4U
+#define DEMOSAIC_BAYER_RBGG     5U
+#define DEMOSAIC_BAYER_GRGB     6U
+#define DEMOSAIC_BAYER_GGRB     7U
+#define DEMOSAIC_BAYER_GGBR     8U
+#define DEMOSAIC_BAYER_GBGR     9U
+#define DEMOSAIC_BAYER_BRGG    10U
+#define DEMOSAIC_BAYER_BGRG    11U
 #define DEMOSAIC_BAYER_PHASE    DEMOSAIC_BAYER_RGGB
 #if DEMOSAIC_BAYER_PHASE > 3U
-#error DEMOSAIC_BAYER_PHASE must be 0..3
+#error Selected mosaic is not supported by the 2-bit hardware phase selector
 #endif
 
 /* CSI tdata[9:2] 8-bit path: datasheet RAW10 black=64 → 16 after >>2. */
