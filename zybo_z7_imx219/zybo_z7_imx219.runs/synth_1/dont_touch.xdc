@@ -3,7 +3,7 @@
 
 # XDC: new/pcam.xdc
 
-# XDC: C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/constrs/hdmi_out.xdc
+# XDC: V:/constrs/hdmi_out.xdc
 
 # Block Designs: bd/design_1/design_1.bd
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1 || ORIG_REF_NAME==design_1} -quiet] -quiet
@@ -68,7 +68,13 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_ra
 # IP: bd/design_1/ip/design_1_axis_raw_to_gbr_0_0/design_1_axis_raw_to_gbr_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axis_raw_to_gbr_0_0 || ORIG_REF_NAME==design_1_axis_raw_to_gbr_0_0} -quiet] -quiet
 
+# IP: bd/design_1/ip/design_1_bayer_phase_gpio_0/design_1_bayer_phase_gpio_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_bayer_phase_gpio_0 || ORIG_REF_NAME==design_1_bayer_phase_gpio_0} -quiet] -quiet
+
+# IP: bd/design_1/ip/design_1_capture_fifo_0_1/design_1_capture_fifo_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_capture_fifo_0 || ORIG_REF_NAME==design_1_capture_fifo_0} -quiet] -quiet
+
 # IP: bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_pc_0/design_1_axi_mem_intercon_imp_auto_pc_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_pc_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_pc_0} -quiet] -quiet
 
-# XDC: c:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/design_1_ooc.xdc
+# XDC: v:/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/design_1_ooc.xdc

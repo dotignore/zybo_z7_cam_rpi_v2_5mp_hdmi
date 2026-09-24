@@ -1,7 +1,7 @@
 {
   "0": {
     "basicblocks": 1,
-    "calls": "2 6 3 4",
+    "calls": "7 1 8 3",
     "control_depth": 0,
     "def_use_depth": 1,
     "file": "v_demosaic.cpp",
@@ -16,91 +16,7 @@
   },
   "1": {
     "basicblocks": 1,
-    "calls": "",
-    "control_depth": 0,
-    "def_use_depth": 0,
-    "file": "x_hls_utils.h",
-    "fileloc": 222,
-    "instructions": 1,
-    "memory_accesses": 0,
-    "name": "reg<unsigned short>",
-    "total_instructions": 1
-  },
-  "2": {
-    "basicblocks": 17,
-    "calls": "1 1",
-    "control_depth": 2,
-    "def_use_depth": 4,
-    "file": "v_demosaic.cpp",
-    "fileloc": 133,
-    "instructions": 278,
-    "loads": {
-      "L": 29
-    },
-    "memory_accesses": 50,
-    "name": "AXIvideo2MultiBayer",
-    "stores": {
-      "L": 39
-    },
-    "total_instructions": 280
-  },
-  "3": {
-    "basicblocks": 22,
-    "calls": "",
-    "control_depth": 4,
-    "def_use_depth": 10,
-    "file": "v_demosaic.cpp",
-    "fileloc": 1077,
-    "instructions": 217,
-    "loads": {
-      "L": 6
-    },
-    "memory_accesses": 6,
-    "name": "ZipperRemoval",
-    "stores": {
-      "L": 26
-    },
-    "total_instructions": 217
-  },
-  "4": {
-    "basicblocks": 9,
-    "calls": "",
-    "control_depth": 0,
-    "def_use_depth": 3,
-    "file": "v_demosaic.cpp",
-    "fileloc": 208,
-    "instructions": 136,
-    "loads": {
-      "L": 8
-    },
-    "memory_accesses": 9,
-    "name": "MultiPixStream2AXIvideo",
-    "stores": {
-      "L": 20
-    },
-    "total_instructions": 136
-  },
-  "5": {
-    "basicblocks": 24,
-    "calls": "",
-    "control_depth": 5,
-    "def_use_depth": 14,
-    "file": "v_demosaic.cpp",
-    "fileloc": 841,
-    "instructions": 447,
-    "loads": {
-      "L": 35
-    },
-    "memory_accesses": 68,
-    "name": "DebayerRandBatG",
-    "stores": {
-      "L": 33
-    },
-    "total_instructions": 447
-  },
-  "6": {
-    "basicblocks": 1,
-    "calls": "7 8 5",
+    "calls": "2 5 6",
     "control_depth": 0,
     "def_use_depth": 1,
     "file": "v_demosaic.cpp",
@@ -110,7 +26,7 @@
     "name": "Debayer",
     "total_instructions": 1663
   },
-  "7": {
+  "2": {
     "basicblocks": 22,
     "calls": "",
     "control_depth": 5,
@@ -129,7 +45,37 @@
     },
     "total_instructions": 692
   },
-  "8": {
+  "3": {
+    "basicblocks": 9,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 3,
+    "file": "v_demosaic.cpp",
+    "fileloc": 208,
+    "instructions": 136,
+    "loads": {
+      "L": 8
+    },
+    "memory_accesses": 9,
+    "name": "MultiPixStream2AXIvideo",
+    "stores": {
+      "L": 20
+    },
+    "total_instructions": 136
+  },
+  "4": {
+    "basicblocks": 1,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 0,
+    "file": "x_hls_utils.h",
+    "fileloc": 222,
+    "instructions": 1,
+    "memory_accesses": 0,
+    "name": "reg<unsigned short>",
+    "total_instructions": 1
+  },
+  "5": {
     "basicblocks": 28,
     "calls": "",
     "control_depth": 5,
@@ -146,5 +92,59 @@
       "L": 50
     },
     "total_instructions": 516
+  },
+  "6": {
+    "basicblocks": 24,
+    "calls": "",
+    "control_depth": 5,
+    "def_use_depth": 14,
+    "file": "v_demosaic.cpp",
+    "fileloc": 841,
+    "instructions": 447,
+    "loads": {
+      "L": 35
+    },
+    "memory_accesses": 68,
+    "name": "DebayerRandBatG",
+    "stores": {
+      "L": 33
+    },
+    "total_instructions": 447
+  },
+  "7": {
+    "basicblocks": 17,
+    "calls": "4 4",
+    "control_depth": 2,
+    "def_use_depth": 4,
+    "file": "v_demosaic.cpp",
+    "fileloc": 133,
+    "instructions": 278,
+    "loads": {
+      "L": 29
+    },
+    "memory_accesses": 50,
+    "name": "AXIvideo2MultiBayer",
+    "stores": {
+      "L": 39
+    },
+    "total_instructions": 280
+  },
+  "8": {
+    "basicblocks": 22,
+    "calls": "",
+    "control_depth": 4,
+    "def_use_depth": 10,
+    "file": "v_demosaic.cpp",
+    "fileloc": 1077,
+    "instructions": 217,
+    "loads": {
+      "L": 6
+    },
+    "memory_accesses": 6,
+    "name": "ZipperRemoval",
+    "stores": {
+      "L": 26
+    },
+    "total_instructions": 217
   }
 }

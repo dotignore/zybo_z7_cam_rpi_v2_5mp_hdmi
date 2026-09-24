@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Mon Sep 21 19:21:20 2026
+| Date         : Wed Sep 23 22:12:04 2026
 | Host         : DESKTOP-6M954OF running 64-bit major release  (build 9200)
 | Command      : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
 | Design       : design_1_wrapper
@@ -176,6 +176,8 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | design_1_mipi_csi2_rx_subsyst_0_0       |    1 |
 | design_1_clk_wiz_hdmi_0                 |    1 |
 | design_1_clk_wiz_0_0                    |    1 |
+| design_1_capture_fifo_0                 |    1 |
+| design_1_bayer_phase_gpio_0             |    1 |
 | design_1_axis_raw_to_gbr_0_0            |    1 |
 | design_1_axis_isp_0_0                   |    1 |
 | design_1_axi_vdma_0_0                   |    1 |

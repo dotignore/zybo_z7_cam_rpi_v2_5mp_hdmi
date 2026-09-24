@@ -6,8 +6,8 @@
 # 
 # ==============================================================
 source -notrace "C:/AMDDesignTools/2025.2/Vitis/common/scripts/ipxhls.tcl"
-set ip_out_dir "C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip"
-set data_file "C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/sol_data.json"
+set ip_out_dir "V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip"
+set data_file "V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/sol_data.json"
 set src_dir [file dir $data_file]
 set ip_types {vitis sysgen}
 set ippack_opts_dict {subcore_use_xci_files false}

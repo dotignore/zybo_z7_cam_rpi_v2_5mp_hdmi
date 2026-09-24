@@ -1,58 +1,49 @@
 {
     "1": {
-        "name": "AXIvideo2MultiBayer_Pipeline_loop_wait_for_start",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "141",
-        "instructions": "23",
-        "total_instructions": "23",
+        "name": "ZipperRemoval_Pipeline_VITIS_LOOP_1101_2",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "1078",
+        "instructions": "117",
+        "total_instructions": "117",
         "calls": "",
-        "basicblocks": "4",
-        "memory_accesses": "2",
-        "control_depth": "1",
-        "def_use_depth": "0",
+        "basicblocks": "8",
+        "memory_accesses": "25",
+        "control_depth": "2",
+        "def_use_depth": "2",
+        "loads": {
+            "L": "13"
+        },
         "stores": {
-            "L": "2"
+            "L": "19"
         },
         "loops": {
             "L": "1"
         }
     },
     "2": {
-        "name": "DebayerRatBorBatR",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "1072",
-        "instructions": "65",
-        "total_instructions": "381",
-        "calls": "16",
+        "name": "ZipperRemoval",
+        "file": "v_demosaic.cpp",
+        "fileloc": "1077",
+        "instructions": "39",
+        "total_instructions": "156",
+        "calls": "1",
         "basicblocks": "4",
         "memory_accesses": "0",
         "control_depth": "0",
         "def_use_depth": "1",
         "loads": {
-            "L": "16"
+            "L": "5"
         },
         "stores": {
-            "L": "2"
+            "L": "10"
         },
         "loops": {
             "L": "1"
         }
     },
     "3": {
-        "name": "entry_proc",
-        "file": "v_demosaic.cpp",
-        "fileloc": "0",
-        "instructions": "4",
-        "total_instructions": "4",
-        "calls": "",
-        "basicblocks": "1",
-        "memory_accesses": "0",
-        "control_depth": "0",
-        "def_use_depth": "1"
-    },
-    "4": {
         "name": "DebayerG",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
         "fileloc": "265",
         "instructions": "77",
         "total_instructions": "707",
@@ -71,40 +62,19 @@
             "L": "1"
         }
     },
-    "5": {
-        "name": "ZipperRemoval",
+    "4": {
+        "name": "AXIvideo2MultiBayer",
         "file": "v_demosaic.cpp",
-        "fileloc": "1077",
-        "instructions": "39",
-        "total_instructions": "156",
-        "calls": "12",
+        "fileloc": "133",
+        "instructions": "43",
+        "total_instructions": "146",
+        "calls": "5 5 15 7 8",
         "basicblocks": "4",
         "memory_accesses": "0",
         "control_depth": "0",
-        "def_use_depth": "1",
+        "def_use_depth": "3",
         "loads": {
-            "L": "5"
-        },
-        "stores": {
-            "L": "10"
-        },
-        "loops": {
-            "L": "1"
-        }
-    },
-    "6": {
-        "name": "DebayerRandBatG",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "1073",
-        "instructions": "53",
-        "total_instructions": "348",
-        "calls": "9",
-        "basicblocks": "4",
-        "memory_accesses": "0",
-        "control_depth": "0",
-        "def_use_depth": "1",
-        "loads": {
-            "L": "13"
+            "L": "6"
         },
         "stores": {
             "L": "2"
@@ -113,31 +83,7 @@
             "L": "1"
         }
     },
-    "7": {
-        "name": "Debayer",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "1061",
-        "instructions": "34",
-        "total_instructions": "1470",
-        "calls": "4 2 6",
-        "basicblocks": "1",
-        "memory_accesses": "0",
-        "control_depth": "0",
-        "def_use_depth": "1"
-    },
-    "0": {
-        "name": "v_demosaic",
-        "file": "v_demosaic.cpp",
-        "fileloc": "89",
-        "instructions": "51",
-        "total_instructions": "1876",
-        "calls": "3 13 7 5 15",
-        "basicblocks": "1",
-        "memory_accesses": "0",
-        "control_depth": "0",
-        "def_use_depth": "1"
-    },
-    "8": {
+    "5": {
         "name": "reg<unsigned short>",
         "file": "x_hls_utils.h",
         "fileloc": "222",
@@ -149,9 +95,81 @@
         "control_depth": "0",
         "def_use_depth": "1"
     },
+    "0": {
+        "name": "v_demosaic",
+        "file": "v_demosaic.cpp",
+        "fileloc": "89",
+        "instructions": "51",
+        "total_instructions": "1876",
+        "calls": "10 4 11 2 6",
+        "basicblocks": "1",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "1"
+    },
+    "6": {
+        "name": "MultiPixStream2AXIvideo",
+        "file": "v_demosaic.cpp",
+        "fileloc": "208",
+        "instructions": "25",
+        "total_instructions": "49",
+        "calls": "16",
+        "basicblocks": "4",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "1",
+        "loads": {
+            "L": "1"
+        },
+        "stores": {
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "7": {
+        "name": "AXIvideo2MultiBayer_Pipeline_loop_width",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "153",
+        "instructions": "47",
+        "total_instructions": "47",
+        "calls": "",
+        "basicblocks": "6",
+        "memory_accesses": "8",
+        "control_depth": "2",
+        "def_use_depth": "1",
+        "loads": {
+            "L": "5"
+        },
+        "stores": {
+            "L": "6"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "8": {
+        "name": "AXIvideo2MultiBayer_Pipeline_loop_wait_for_eol",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "164",
+        "instructions": "25",
+        "total_instructions": "25",
+        "calls": "",
+        "basicblocks": "4",
+        "memory_accesses": "2",
+        "control_depth": "1",
+        "def_use_depth": "1",
+        "stores": {
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
     "9": {
         "name": "DebayerRandBatG_Pipeline_VITIS_LOOP_881_2",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
         "fileloc": "1073",
         "instructions": "295",
         "total_instructions": "295",
@@ -171,78 +189,63 @@
         }
     },
     "10": {
-        "name": "MultiPixStream2AXIvideo_Pipeline_VITIS_LOOP_230_2",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "227",
-        "instructions": "24",
-        "total_instructions": "24",
+        "name": "entry_proc",
+        "file": "v_demosaic.cpp",
+        "fileloc": "0",
+        "instructions": "4",
+        "total_instructions": "4",
         "calls": "",
-        "basicblocks": "4",
-        "memory_accesses": "4",
-        "control_depth": "1",
-        "def_use_depth": "1",
-        "loads": {
-            "L": "1"
-        },
-        "stores": {
-            "L": "2"
-        },
-        "loops": {
-            "L": "1"
-        }
+        "basicblocks": "1",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "1"
     },
     "11": {
-        "name": "AXIvideo2MultiBayer_Pipeline_loop_wait_for_eol",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "164",
-        "instructions": "25",
-        "total_instructions": "25",
-        "calls": "",
-        "basicblocks": "4",
-        "memory_accesses": "2",
-        "control_depth": "1",
-        "def_use_depth": "1",
-        "stores": {
-            "L": "2"
-        },
-        "loops": {
-            "L": "1"
-        }
+        "name": "Debayer",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "1061",
+        "instructions": "34",
+        "total_instructions": "1470",
+        "calls": "3 17 13",
+        "basicblocks": "1",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "1"
     },
     "12": {
-        "name": "ZipperRemoval_Pipeline_VITIS_LOOP_1101_2",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "1078",
-        "instructions": "117",
-        "total_instructions": "117",
+        "name": "DebayerRatBorBatR_Pipeline_VITIS_LOOP_633_2",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "1072",
+        "instructions": "316",
+        "total_instructions": "316",
         "calls": "",
-        "basicblocks": "8",
-        "memory_accesses": "25",
-        "control_depth": "2",
-        "def_use_depth": "2",
+        "basicblocks": "19",
+        "memory_accesses": "44",
+        "control_depth": "3",
+        "def_use_depth": "3",
         "loads": {
-            "L": "13"
+            "L": "24"
         },
         "stores": {
-            "L": "19"
+            "L": "49"
         },
         "loops": {
             "L": "1"
         }
     },
     "13": {
-        "name": "AXIvideo2MultiBayer",
-        "file": "v_demosaic.cpp",
-        "fileloc": "133",
-        "instructions": "43",
-        "total_instructions": "146",
-        "calls": "8 8 1 17 11",
+        "name": "DebayerRandBatG",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "1073",
+        "instructions": "53",
+        "total_instructions": "348",
+        "calls": "9",
         "basicblocks": "4",
         "memory_accesses": "0",
         "control_depth": "0",
-        "def_use_depth": "3",
+        "def_use_depth": "1",
         "loads": {
-            "L": "6"
+            "L": "13"
         },
         "stores": {
             "L": "2"
@@ -253,7 +256,7 @@
     },
     "14": {
         "name": "DebayerG_Pipeline_VITIS_LOOP_318_4",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
         "fileloc": "271",
         "instructions": "630",
         "total_instructions": "630",
@@ -274,15 +277,33 @@
         }
     },
     "15": {
-        "name": "MultiPixStream2AXIvideo",
-        "file": "v_demosaic.cpp",
-        "fileloc": "208",
-        "instructions": "25",
-        "total_instructions": "49",
-        "calls": "10",
+        "name": "AXIvideo2MultiBayer_Pipeline_loop_wait_for_start",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "141",
+        "instructions": "23",
+        "total_instructions": "23",
+        "calls": "",
         "basicblocks": "4",
-        "memory_accesses": "0",
-        "control_depth": "0",
+        "memory_accesses": "2",
+        "control_depth": "1",
+        "def_use_depth": "0",
+        "stores": {
+            "L": "2"
+        },
+        "loops": {
+            "L": "1"
+        }
+    },
+    "16": {
+        "name": "MultiPixStream2AXIvideo_Pipeline_VITIS_LOOP_230_2",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "227",
+        "instructions": "24",
+        "total_instructions": "24",
+        "calls": "",
+        "basicblocks": "4",
+        "memory_accesses": "4",
+        "control_depth": "1",
         "def_use_depth": "1",
         "loads": {
             "L": "1"
@@ -294,43 +315,22 @@
             "L": "1"
         }
     },
-    "16": {
-        "name": "DebayerRatBorBatR_Pipeline_VITIS_LOOP_633_2",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "1072",
-        "instructions": "316",
-        "total_instructions": "316",
-        "calls": "",
-        "basicblocks": "19",
-        "memory_accesses": "44",
-        "control_depth": "3",
-        "def_use_depth": "3",
-        "loads": {
-            "L": "24"
-        },
-        "stores": {
-            "L": "49"
-        },
-        "loops": {
-            "L": "1"
-        }
-    },
     "17": {
-        "name": "AXIvideo2MultiBayer_Pipeline_loop_width",
-        "file": "C:\/github\/zybo_z7_cam_rpi_v2_5mp_hdmi\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
-        "fileloc": "153",
-        "instructions": "47",
-        "total_instructions": "47",
-        "calls": "",
-        "basicblocks": "6",
-        "memory_accesses": "8",
-        "control_depth": "2",
+        "name": "DebayerRatBorBatR",
+        "file": "V:\/zybo_z7_imx219\/zybo_z7_imx219.runs\/design_1_v_demosaic_0_0_synth_1\/prj\/sol\/.autopilot\/db\/v_demosaic.cpp",
+        "fileloc": "1072",
+        "instructions": "65",
+        "total_instructions": "381",
+        "calls": "12",
+        "basicblocks": "4",
+        "memory_accesses": "0",
+        "control_depth": "0",
         "def_use_depth": "1",
         "loads": {
-            "L": "5"
+            "L": "16"
         },
         "stores": {
-            "L": "6"
+            "L": "2"
         },
         "loops": {
             "L": "1"

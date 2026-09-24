@@ -17,7 +17,7 @@
       ]
     },
     "slx": false,
-    "sourceFile": "C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/runhls.tcl",
+    "sourceFile": "V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/runhls.tcl",
     "sourceLine": 35,
     "success": true
   }

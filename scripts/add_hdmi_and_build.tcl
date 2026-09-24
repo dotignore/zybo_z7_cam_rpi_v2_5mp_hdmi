@@ -267,6 +267,7 @@ set_property top design_1_wrapper [current_fileset]
 if {[llength [get_runs -quiet design_1_axis_raw_to_gbr_0_0_synth_1]]} {
   reset_run design_1_axis_raw_to_gbr_0_0_synth_1
 }
+reset_run impl_1
 reset_run synth_1
 launch_runs impl_1 -to_step write_bitstream -jobs 6
 wait_on_run impl_1

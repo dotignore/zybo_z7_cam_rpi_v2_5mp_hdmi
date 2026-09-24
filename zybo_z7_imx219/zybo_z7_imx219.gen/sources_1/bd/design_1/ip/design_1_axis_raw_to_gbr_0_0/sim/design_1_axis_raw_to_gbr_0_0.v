@@ -66,7 +66,8 @@ module design_1_axis_raw_to_gbr_0_0 (
   m_axis_tvalid,
   m_axis_tready,
   m_axis_tuser,
-  m_axis_tlast
+  m_axis_tlast,
+  bayer_phase
 );
 
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 aclk CLK" *)
@@ -101,6 +102,10 @@ input wire m_axis_tready;
 output wire m_axis_tuser;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *)
 output wire m_axis_tlast;
+(* X_INTERFACE_INFO = "xilinx.com:signal:data:1.0 bayer_phase DATA" *)
+(* X_INTERFACE_MODE = "slave" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME bayer_phase, LAYERED_METADATA undef" *)
+input wire [1 : 0] bayer_phase;
 
   axis_raw_to_gbr inst (
     .aclk(aclk),
@@ -114,6 +119,7 @@ output wire m_axis_tlast;
     .m_axis_tvalid(m_axis_tvalid),
     .m_axis_tready(m_axis_tready),
     .m_axis_tuser(m_axis_tuser),
-    .m_axis_tlast(m_axis_tlast)
+    .m_axis_tlast(m_axis_tlast),
+    .bayer_phase(bayer_phase)
   );
 endmodule

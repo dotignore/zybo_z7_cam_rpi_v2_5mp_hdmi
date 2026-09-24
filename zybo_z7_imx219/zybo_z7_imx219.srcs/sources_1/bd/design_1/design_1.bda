@@ -373,24 +373,6 @@
                 "SV": "xilinx.com:ip:axis_switch:1.1",
                 "TM": "both",
                 "TU": "register"
-            },
-            "V13": {
-                "VT": "AC",
-                "BA": "0x43C40000",
-                "HA": "0x43C4FFFF",
-                "BP": "C_BASEADDR",
-                "HP": "C_HIGHADDR",
-                "MA": "Data",
-                "MX": "/processing_system7_0",
-                "MI": "M_AXI_GP0",
-                "MS": "SEG_bayer_phase_gpio_Reg",
-                "MV": "xilinx.com:ip:processing_system7:5.5",
-                "SX": "/bayer_phase_gpio",
-                "SI": "S_AXI",
-                "SS": "Reg",
-                "SV": "xilinx.com:ip:axi_gpio:2.0",
-                "TM": "both",
-                "TU": "register"
             }
         },
         "edges": [
@@ -449,11 +431,6 @@
             },
             {
                 "src": "V12",
-                "trg": "V2",
-                "EH": "2"
-            },
-            {
-                "src": "V13",
                 "trg": "V2",
                 "EH": "2"
             }

@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
--- Date        : Mon Sep 21 19:17:56 2026
+-- Date        : Wed Sep 23 22:08:09 2026
 -- Host        : DESKTOP-6M954OF running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
---               c:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/ip/design_1_axis_raw_to_gbr_0_0/design_1_axis_raw_to_gbr_0_0_stub.vhdl
+--               v:/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/ip/design_1_axis_raw_to_gbr_0_0/design_1_axis_raw_to_gbr_0_0_stub.vhdl
 -- Design      : design_1_axis_raw_to_gbr_0_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1
@@ -26,7 +26,8 @@ entity design_1_axis_raw_to_gbr_0_0 is
     m_axis_tvalid : out STD_LOGIC;
     m_axis_tready : in STD_LOGIC;
     m_axis_tuser : out STD_LOGIC;
-    m_axis_tlast : out STD_LOGIC
+    m_axis_tlast : out STD_LOGIC;
+    bayer_phase : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
 
   attribute CHECK_LICENSE_TYPE : string;
@@ -43,7 +44,7 @@ architecture stub of design_1_axis_raw_to_gbr_0_0 is
   attribute syn_black_box : boolean;
   attribute black_box_pad_pin : string;
   attribute syn_black_box of stub : architecture is true;
-  attribute black_box_pad_pin of stub : architecture is "aclk,aresetn,s_axis_tdata[15:0],s_axis_tvalid,s_axis_tready,s_axis_tuser,s_axis_tlast,m_axis_tdata[23:0],m_axis_tvalid,m_axis_tready,m_axis_tuser,m_axis_tlast";
+  attribute black_box_pad_pin of stub : architecture is "aclk,aresetn,s_axis_tdata[15:0],s_axis_tvalid,s_axis_tready,s_axis_tuser,s_axis_tlast,m_axis_tdata[23:0],m_axis_tvalid,m_axis_tready,m_axis_tuser,m_axis_tlast,bayer_phase[1:0]";
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of aclk : signal is "xilinx.com:signal:clock:1.0 aclk CLK";
   attribute X_INTERFACE_MODE : string;
@@ -67,6 +68,9 @@ architecture stub of design_1_axis_raw_to_gbr_0_0 is
   attribute X_INTERFACE_INFO of m_axis_tready : signal is "xilinx.com:interface:axis:1.0 M_AXIS TREADY";
   attribute X_INTERFACE_INFO of m_axis_tuser : signal is "xilinx.com:interface:axis:1.0 M_AXIS TUSER";
   attribute X_INTERFACE_INFO of m_axis_tlast : signal is "xilinx.com:interface:axis:1.0 M_AXIS TLAST";
+  attribute X_INTERFACE_INFO of bayer_phase : signal is "xilinx.com:signal:data:1.0 bayer_phase DATA";
+  attribute X_INTERFACE_MODE of bayer_phase : signal is "slave";
+  attribute X_INTERFACE_PARAMETER of bayer_phase : signal is "XIL_INTERFACENAME bayer_phase, LAYERED_METADATA undef";
   attribute X_CORE_INFO : string;
   attribute X_CORE_INFO of stub : architecture is "axis_raw_to_gbr,Vivado 2025.2";
 begin

@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-//Date        : Mon Sep 21 19:16:03 2026
+//Date        : Wed Sep 23 22:05:52 2026
 //Host        : DESKTOP-6M954OF running 64-bit major release  (build 9200)
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -10,7 +10,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=25,numReposBlks=20,numNonXlnxBlks=1,numHierBlks=5,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=6,da_board_cnt=1,da_clkrst_cnt=2,da_ps7_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
+(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=27,numReposBlks=22,numNonXlnxBlks=1,numHierBlks=5,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=2,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=6,da_board_cnt=1,da_clkrst_cnt=2,da_ps7_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
 module design_1
    (DDR_addr,
     DDR_ba,
@@ -309,6 +309,7 @@ module design_1
   wire axis_raw_to_gbr_0_M_AXIS_TREADY;
   wire axis_raw_to_gbr_0_M_AXIS_TUSER;
   wire axis_raw_to_gbr_0_M_AXIS_TVALID;
+  wire [1:0]bayer_phase_gpio_gpio_io_o;
   wire clk_out1_0;
   wire clk_wiz_hdmi_clk_out1;
   wire clk_wiz_hdmi_locked;
@@ -317,6 +318,12 @@ module design_1
   wire mipi_csi2_rx_subsyst_0_video_out1_TREADY;
   wire [0:0]mipi_csi2_rx_subsyst_0_video_out1_TUSER;
   wire mipi_csi2_rx_subsyst_0_video_out1_TVALID;
+  wire [15:0]mipi_csi2_rx_subsyst_0_video_out_TDATA;
+  wire [9:0]mipi_csi2_rx_subsyst_0_video_out_TDEST;
+  wire mipi_csi2_rx_subsyst_0_video_out_TLAST;
+  wire mipi_csi2_rx_subsyst_0_video_out_TREADY;
+  wire [0:0]mipi_csi2_rx_subsyst_0_video_out_TUSER;
+  wire mipi_csi2_rx_subsyst_0_video_out_TVALID;
   wire mipi_phy_if_0_clk_hs_n;
   wire mipi_phy_if_0_clk_hs_p;
   wire mipi_phy_if_0_clk_lp_n;
@@ -394,11 +401,11 @@ module design_1
   wire v_axi4s_vid_out_0_vid_hsync;
   wire v_axi4s_vid_out_0_vid_vsync;
   wire v_axi4s_vid_out_0_vtg_ce;
-  wire [31:0]v_demosaic_0_m_axis_video1_TDATA;
-  wire [0:0]v_demosaic_0_m_axis_video1_TLAST;
-  wire v_demosaic_0_m_axis_video1_TREADY;
-  wire [0:0]v_demosaic_0_m_axis_video1_TUSER;
-  wire v_demosaic_0_m_axis_video1_TVALID;
+  wire [31:0]v_demosaic_0_m_axis_video_TDATA;
+  wire [0:0]v_demosaic_0_m_axis_video_TLAST;
+  wire v_demosaic_0_m_axis_video_TREADY;
+  wire [0:0]v_demosaic_0_m_axis_video_TUSER;
+  wire v_demosaic_0_m_axis_video_TVALID;
   wire v_tc_0_vtiming_out_ACTIVE_VIDEO;
   wire v_tc_0_vtiming_out_HBLANK;
   wire v_tc_0_vtiming_out_HSYNC;
@@ -706,14 +713,15 @@ module design_1
        (.aclk(processing_system7_0_FCLK_CLK1),
         .aresetn(proc_sys_reset_0_peripheral_aresetn),
         .m_axis_tready(1'b1),
-        .s_axis_tdata(v_demosaic_0_m_axis_video1_TDATA),
-        .s_axis_tlast(v_demosaic_0_m_axis_video1_TLAST),
-        .s_axis_tready(v_demosaic_0_m_axis_video1_TREADY),
-        .s_axis_tuser(v_demosaic_0_m_axis_video1_TUSER),
-        .s_axis_tvalid(v_demosaic_0_m_axis_video1_TVALID));
+        .s_axis_tdata(v_demosaic_0_m_axis_video_TDATA),
+        .s_axis_tlast(v_demosaic_0_m_axis_video_TLAST),
+        .s_axis_tready(v_demosaic_0_m_axis_video_TREADY),
+        .s_axis_tuser(v_demosaic_0_m_axis_video_TUSER),
+        .s_axis_tvalid(v_demosaic_0_m_axis_video_TVALID));
   design_1_axis_raw_to_gbr_0_0 axis_raw_to_gbr_0
        (.aclk(processing_system7_0_FCLK_CLK1),
         .aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .bayer_phase(bayer_phase_gpio_gpio_io_o),
         .m_axis_tdata(axis_raw_to_gbr_0_M_AXIS_TDATA),
         .m_axis_tlast(axis_raw_to_gbr_0_M_AXIS_TLAST),
         .m_axis_tready(axis_raw_to_gbr_0_M_AXIS_TREADY),
@@ -724,6 +732,34 @@ module design_1
         .s_axis_tready(mipi_csi2_rx_subsyst_0_video_out1_TREADY),
         .s_axis_tuser(mipi_csi2_rx_subsyst_0_video_out1_TUSER),
         .s_axis_tvalid(mipi_csi2_rx_subsyst_0_video_out1_TVALID));
+  design_1_bayer_phase_gpio_0 bayer_phase_gpio
+       (.gpio_io_o(bayer_phase_gpio_gpio_io_o),
+        .s_axi_aclk(processing_system7_0_FCLK_CLK1),
+        .s_axi_araddr({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .s_axi_arvalid(1'b0),
+        .s_axi_awaddr({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .s_axi_awvalid(1'b0),
+        .s_axi_bready(1'b0),
+        .s_axi_rready(1'b0),
+        .s_axi_wdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .s_axi_wstrb({1'b1,1'b1,1'b1,1'b1}),
+        .s_axi_wvalid(1'b0));
+  design_1_capture_fifo_0 capture_fifo
+       (.m_axis_aclk(processing_system7_0_FCLK_CLK1),
+        .m_axis_tdata(mipi_csi2_rx_subsyst_0_video_out1_TDATA),
+        .m_axis_tlast(mipi_csi2_rx_subsyst_0_video_out1_TLAST),
+        .m_axis_tready(mipi_csi2_rx_subsyst_0_video_out1_TREADY),
+        .m_axis_tuser(mipi_csi2_rx_subsyst_0_video_out1_TUSER),
+        .m_axis_tvalid(mipi_csi2_rx_subsyst_0_video_out1_TVALID),
+        .s_axis_aclk(processing_system7_0_FCLK_CLK1),
+        .s_axis_aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .s_axis_tdata(mipi_csi2_rx_subsyst_0_video_out_TDATA),
+        .s_axis_tdest(mipi_csi2_rx_subsyst_0_video_out_TDEST),
+        .s_axis_tlast(mipi_csi2_rx_subsyst_0_video_out_TLAST),
+        .s_axis_tready(mipi_csi2_rx_subsyst_0_video_out_TREADY),
+        .s_axis_tuser(mipi_csi2_rx_subsyst_0_video_out_TUSER),
+        .s_axis_tvalid(mipi_csi2_rx_subsyst_0_video_out_TVALID));
   design_1_clk_wiz_0_0 clk_wiz_0
        (.clk_in1(processing_system7_0_FCLK_CLK1),
         .clk_out1(clk_out1_0));
@@ -762,11 +798,12 @@ module design_1
         .mipi_phy_if_data_lp_p(mipi_phy_if_0_data_lp_p),
         .video_aclk(processing_system7_0_FCLK_CLK1),
         .video_aresetn(proc_sys_reset_0_peripheral_aresetn),
-        .video_out_tdata(mipi_csi2_rx_subsyst_0_video_out1_TDATA),
-        .video_out_tlast(mipi_csi2_rx_subsyst_0_video_out1_TLAST),
-        .video_out_tready(mipi_csi2_rx_subsyst_0_video_out1_TREADY),
-        .video_out_tuser(mipi_csi2_rx_subsyst_0_video_out1_TUSER),
-        .video_out_tvalid(mipi_csi2_rx_subsyst_0_video_out1_TVALID));
+        .video_out_tdata(mipi_csi2_rx_subsyst_0_video_out_TDATA),
+        .video_out_tdest(mipi_csi2_rx_subsyst_0_video_out_TDEST),
+        .video_out_tlast(mipi_csi2_rx_subsyst_0_video_out_TLAST),
+        .video_out_tready(mipi_csi2_rx_subsyst_0_video_out_TREADY),
+        .video_out_tuser(mipi_csi2_rx_subsyst_0_video_out_TUSER),
+        .video_out_tvalid(mipi_csi2_rx_subsyst_0_video_out_TVALID));
   design_1_proc_sys_reset_0_0 proc_sys_reset_0
        (.aux_reset_in(1'b1),
         .dcm_locked(1'b1),
@@ -1012,11 +1049,11 @@ module design_1
   design_1_v_demosaic_0_0 v_demosaic_0
        (.ap_clk(processing_system7_0_FCLK_CLK1),
         .ap_rst_n(proc_sys_reset_0_peripheral_aresetn),
-        .m_axis_video_TDATA(v_demosaic_0_m_axis_video1_TDATA),
-        .m_axis_video_TLAST(v_demosaic_0_m_axis_video1_TLAST),
-        .m_axis_video_TREADY(v_demosaic_0_m_axis_video1_TREADY),
-        .m_axis_video_TUSER(v_demosaic_0_m_axis_video1_TUSER),
-        .m_axis_video_TVALID(v_demosaic_0_m_axis_video1_TVALID),
+        .m_axis_video_TDATA(v_demosaic_0_m_axis_video_TDATA),
+        .m_axis_video_TLAST(v_demosaic_0_m_axis_video_TLAST),
+        .m_axis_video_TREADY(v_demosaic_0_m_axis_video_TREADY),
+        .m_axis_video_TUSER(v_demosaic_0_m_axis_video_TUSER),
+        .m_axis_video_TVALID(v_demosaic_0_m_axis_video_TVALID),
         .s_axi_CTRL_ARADDR(axi_smc_M02_AXI_ARADDR),
         .s_axi_CTRL_ARREADY(axi_smc_M02_AXI_ARREADY),
         .s_axi_CTRL_ARVALID(axi_smc_M02_AXI_ARVALID),

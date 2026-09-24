@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/dotignore/Desktop/Xilinx/projects/zybo_z7_cam_rpi_v2_5mp/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_mipi_csi2_rx_subsyst_0_0_synth_1'
+HD_PWD='V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_mipi_csi2_rx_subsyst_0_0_synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

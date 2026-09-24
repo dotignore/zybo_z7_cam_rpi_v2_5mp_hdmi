@@ -188,9 +188,9 @@ if {[catch {
     if {$bm == 0} {
       puts "BOOT_MODE=JTAG OK"
     } elseif {$bm == 1} {
-      puts "WARNING: BOOT_MODE=QSPI - factory demo returns on PS reset. Set JP5 to JTAG."
+      puts "WARNING: BOOT_MODE=QSPI; continuing with explicit JTAG CPU start."
     } else {
-      puts "WARNING: BOOT_MODE=$bm (want 0=JTAG). Set JP5 to JTAG."
+      puts "WARNING: BOOT_MODE=$bm; continuing with explicit JTAG CPU start."
     }
   }
 

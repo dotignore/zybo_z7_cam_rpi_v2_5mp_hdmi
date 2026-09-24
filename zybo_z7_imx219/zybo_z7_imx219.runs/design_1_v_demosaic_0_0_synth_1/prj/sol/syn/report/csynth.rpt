@@ -4,7 +4,7 @@
 == Synthesis Summary Report of 'v_demosaic'
 ================================================================
 + General Information: 
-    * Date:           Mon Sep 21 19:19:20 2026
+    * Date:           Wed Sep 23 22:09:41 2026
     * Version:        2025.2 (Build 6295257 on Nov 14 2025)
     * Project:        prj
     * Solution:       sol (Vivado IP Flow Target)
@@ -626,14 +626,14 @@
 +-----------+-----------------------+----------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 * Inferred Pragmas
-+----------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------+
-| Type     | Options | Location                                                                                                                                                                                                                            | Inferred From                 |
-+----------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------+
-| PIPELINE |         | loop anonymous (C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1089:33) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1089) | syn.compile.pipeline_loops=64 |
-| PIPELINE |         | loop anonymous (C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1090:30) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1090) | syn.compile.pipeline_loops=64 |
-| PIPELINE |         | loop anonymous (C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1091:30) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1091) | syn.compile.pipeline_loops=64 |
-| PIPELINE |         | loop anonymous (C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1092:30) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1092) | syn.compile.pipeline_loops=64 |
-+----------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------+
++----------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------+
+| Type     | Options | Location                                                                                                                                                                                         | Inferred From                 |
++----------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------+
+| PIPELINE |         | loop anonymous (V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1089:33) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1089) | syn.compile.pipeline_loops=64 |
+| PIPELINE |         | loop anonymous (V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1090:30) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1090) | syn.compile.pipeline_loops=64 |
+| PIPELINE |         | loop anonymous (V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1091:30) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1091) | syn.compile.pipeline_loops=64 |
+| PIPELINE |         | loop anonymous (V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/.autopilot/db/v_demosaic.cpp:1092:30) in zipperremoval (prj/sol/.autopilot/db/v_demosaic.cpp:1092) | syn.compile.pipeline_loops=64 |
++----------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 
 * Valid Pragma Syntax
 +----------------------+------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+

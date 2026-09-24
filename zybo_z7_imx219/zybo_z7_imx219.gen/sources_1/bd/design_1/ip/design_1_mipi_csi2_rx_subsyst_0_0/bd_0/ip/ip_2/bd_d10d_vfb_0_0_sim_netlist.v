@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-// Date        : Thu Sep  3 17:11:24 2026
+// Date        : Tue Sep 22 21:13:47 2026
 // Host        : DESKTOP-6M954OF running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/dotignore/Desktop/Xilinx/projects/zybo_z7_cam_rpi_v2_5mp/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/ip/design_1_mipi_csi2_rx_subsyst_0_0/bd_0/ip/ip_2/bd_d10d_vfb_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top bd_d10d_vfb_0_0 -prefix
+//               bd_d10d_vfb_0_0_ bd_d10d_vfb_0_0_sim_netlist.v
 // Design      : bd_d10d_vfb_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -13,501 +13,6 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* AXIS_TDATA_WIDTH = "64" *) (* AXIS_TDEST_WIDTH = "4" *) (* AXIS_TUSER_WIDTH = "96" *) 
-(* C_HS_LINE_RATE = "912" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* VFB_4PXL_W = "40" *) 
-(* VFB_BYPASS_WC = "0" *) (* VFB_DATA_TYPE = "43" *) (* VFB_DCONV_OWIDTH = "16" *) 
-(* VFB_EN_VCX = "0" *) (* VFB_FIFO_DEPTH = "2048" *) (* VFB_FIFO_WIDTH = "64" *) 
-(* VFB_FILTER_VC = "0" *) (* VFB_OP_DWIDTH = "16" *) (* VFB_OP_PIXELS = "1" *) 
-(* VFB_PXL_W = "10" *) (* VFB_PXL_W_BB = "16" *) (* VFB_REQ_BUFFER = "1" *) 
-(* VFB_REQ_REORDER = "1" *) (* VFB_TU_WIDTH = "1" *) (* VFB_VC = "0" *) 
-(* NotValidForBitStream *)
-module bd_d10d_vfb_0_0
-   (s_axis_aclk,
-    s_axis_aresetn,
-    s_axis_tready,
-    s_axis_tvalid,
-    s_axis_tlast,
-    s_axis_tdata,
-    s_axis_tkeep,
-    s_axis_tuser,
-    s_axis_tdest,
-    mdt_tv,
-    mdt_tr,
-    sdt_tv,
-    sdt_tr,
-    vfb_tv,
-    vfb_tr,
-    vfb_arstn,
-    vfb_clk,
-    vfb_ready,
-    core_men_vfb,
-    vfb_full,
-    vfb_wc_full,
-    core_men_ack_vfb,
-    vfb_valid,
-    vfb_eol,
-    vfb_sof,
-    vfb_vcdt,
-    vfb_data);
-  input s_axis_aclk;
-  input s_axis_aresetn;
-  output s_axis_tready;
-  input s_axis_tvalid;
-  input s_axis_tlast;
-  input [63:0]s_axis_tdata;
-  input [7:0]s_axis_tkeep;
-  input [95:0]s_axis_tuser;
-  input [3:0]s_axis_tdest;
-  output mdt_tv;
-  output mdt_tr;
-  output sdt_tv;
-  output sdt_tr;
-  output vfb_tv;
-  output vfb_tr;
-  input vfb_arstn;
-  input vfb_clk;
-  input vfb_ready;
-  input core_men_vfb;
-  output vfb_full;
-  output vfb_wc_full;
-  output core_men_ack_vfb;
-  output vfb_valid;
-  output vfb_eol;
-  output [0:0]vfb_sof;
-  output [9:0]vfb_vcdt;
-  output [15:0]vfb_data;
-
-  wire \<const0> ;
-  wire \<const1> ;
-  wire mdt_tr;
-  wire mdt_tv;
-  wire s_axis_aclk;
-  wire s_axis_aresetn;
-  wire [63:0]s_axis_tdata;
-  wire [3:0]s_axis_tdest;
-  wire [7:0]s_axis_tkeep;
-  wire s_axis_tlast;
-  wire s_axis_tready;
-  wire [95:0]s_axis_tuser;
-  wire s_axis_tvalid;
-  wire sdt_tr;
-  wire sdt_tv;
-  wire vfb_arstn;
-  wire vfb_clk;
-  wire [9:0]\^vfb_data ;
-  wire vfb_eol;
-  wire vfb_ready;
-  wire [0:0]vfb_sof;
-  wire vfb_tr;
-  wire vfb_tv;
-  wire vfb_valid;
-  wire [9:0]vfb_vcdt;
-  wire NLW_inst_core_men_ack_vfb_UNCONNECTED;
-  wire NLW_inst_vfb_full_UNCONNECTED;
-  wire NLW_inst_vfb_wc_full_UNCONNECTED;
-  wire [15:10]NLW_inst_vfb_data_UNCONNECTED;
-
-  assign core_men_ack_vfb = \<const1> ;
-  assign vfb_data[15] = \<const0> ;
-  assign vfb_data[14] = \<const0> ;
-  assign vfb_data[13] = \<const0> ;
-  assign vfb_data[12] = \<const0> ;
-  assign vfb_data[11] = \<const0> ;
-  assign vfb_data[10] = \<const0> ;
-  assign vfb_data[9:0] = \^vfb_data [9:0];
-  assign vfb_full = \<const0> ;
-  assign vfb_wc_full = \<const0> ;
-  GND GND
-       (.G(\<const0> ));
-  VCC VCC
-       (.P(\<const1> ));
-  (* AXIS_TDATA_WIDTH = "64" *) 
-  (* AXIS_TDEST_WIDTH = "4" *) 
-  (* AXIS_TUSER_WIDTH = "96" *) 
-  (* C_HS_LINE_RATE = "912" *) 
-  (* DowngradeIPIdentifiedWarnings = "yes" *) 
-  (* VFB_4PXL_W = "40" *) 
-  (* VFB_BYPASS_WC = "0" *) 
-  (* VFB_DATA_TYPE = "43" *) 
-  (* VFB_DCONV_OWIDTH = "16" *) 
-  (* VFB_DCONV_TUW = "24" *) 
-  (* VFB_EN_VCX = "0" *) 
-  (* VFB_FIFO_DEPTH = "2048" *) 
-  (* VFB_FIFO_WIDTH = "64" *) 
-  (* VFB_FILTER_VC = "0" *) 
-  (* VFB_OP_DWIDTH = "16" *) 
-  (* VFB_OP_PIXELS = "1" *) 
-  (* VFB_PXL_W = "10" *) 
-  (* VFB_PXL_W_BB = "16" *) 
-  (* VFB_REQ_BUFFER = "1" *) 
-  (* VFB_REQ_REORDER = "1" *) 
-  (* VFB_TSB0_WIDTH = "32" *) 
-  (* VFB_TSB1_WIDTH = "0" *) 
-  (* VFB_TSB2_WIDTH = "3" *) 
-  (* VFB_TU_WIDTH = "1" *) 
-  (* VFB_VC = "0" *) 
-  bd_d10d_vfb_0_0_core inst
-       (.core_men_ack_vfb(NLW_inst_core_men_ack_vfb_UNCONNECTED),
-        .core_men_vfb(1'b0),
-        .mdt_tr(mdt_tr),
-        .mdt_tv(mdt_tv),
-        .s_axis_aclk(s_axis_aclk),
-        .s_axis_aresetn(s_axis_aresetn),
-        .s_axis_tdata(s_axis_tdata),
-        .s_axis_tdest(s_axis_tdest),
-        .s_axis_tkeep(s_axis_tkeep),
-        .s_axis_tlast(s_axis_tlast),
-        .s_axis_tready(s_axis_tready),
-        .s_axis_tuser({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axis_tuser[69:64],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axis_tuser[1:0]}),
-        .s_axis_tvalid(s_axis_tvalid),
-        .sdt_tr(sdt_tr),
-        .sdt_tv(sdt_tv),
-        .vfb_arstn(vfb_arstn),
-        .vfb_clk(vfb_clk),
-        .vfb_data({NLW_inst_vfb_data_UNCONNECTED[15:10],\^vfb_data }),
-        .vfb_eol(vfb_eol),
-        .vfb_full(NLW_inst_vfb_full_UNCONNECTED),
-        .vfb_ready(vfb_ready),
-        .vfb_sof(vfb_sof),
-        .vfb_tr(vfb_tr),
-        .vfb_tv(vfb_tv),
-        .vfb_valid(vfb_valid),
-        .vfb_vcdt(vfb_vcdt),
-        .vfb_wc_full(NLW_inst_vfb_wc_full_UNCONNECTED));
-endmodule
-
-(* CHECK_LICENSE_TYPE = "bd_d10d_vfb_0_0_axis_converter,axis_dwidth_converter_v1_1_34_axis_dwidth_converter,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axis_dwidth_converter_v1_1_34_axis_dwidth_converter,Vivado 2025.2" *) 
-module bd_d10d_vfb_0_0_axis_converter
-   (aclk,
-    aresetn,
-    s_axis_tvalid,
-    s_axis_tready,
-    s_axis_tdata,
-    s_axis_tkeep,
-    s_axis_tlast,
-    s_axis_tid,
-    s_axis_tuser,
-    m_axis_tvalid,
-    m_axis_tready,
-    m_axis_tdata,
-    m_axis_tkeep,
-    m_axis_tlast,
-    m_axis_tid,
-    m_axis_tuser);
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLKIF CLK" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLKIF, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET aresetn, ASSOCIATED_CLKEN aclken, FREQ_HZ 10000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, INSERT_VIP 0" *) input aclk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RSTIF RST" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RSTIF, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input aresetn;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TVALID" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, LAYERED_METADATA undef, INSERT_VIP 0" *) input s_axis_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TREADY" *) output s_axis_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TDATA" *) input [63:0]s_axis_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TKEEP" *) input [7:0]s_axis_tkeep;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *) input s_axis_tlast;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TID" *) input [31:0]s_axis_tid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TUSER" *) input [23:0]s_axis_tuser;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *) (* X_INTERFACE_MODE = "master" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXIS, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, LAYERED_METADATA undef, INSERT_VIP 0" *) output m_axis_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TREADY" *) input m_axis_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TDATA" *) output [15:0]m_axis_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TKEEP" *) output [1:0]m_axis_tkeep;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *) output m_axis_tlast;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TID" *) output [31:0]m_axis_tid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TUSER" *) output [5:0]m_axis_tuser;
-
-  wire \<const0> ;
-  wire aclk;
-  wire aresetn;
-  wire [9:0]\^m_axis_tdata ;
-  wire [9:0]\^m_axis_tid ;
-  wire m_axis_tlast;
-  wire m_axis_tready;
-  wire [0:0]\^m_axis_tuser ;
-  wire m_axis_tvalid;
-  wire [63:0]s_axis_tdata;
-  wire [31:0]s_axis_tid;
-  wire [7:0]s_axis_tkeep;
-  wire s_axis_tlast;
-  wire s_axis_tready;
-  wire [23:0]s_axis_tuser;
-  wire s_axis_tvalid;
-
-  assign m_axis_tdata[15] = \<const0> ;
-  assign m_axis_tdata[14] = \<const0> ;
-  assign m_axis_tdata[13] = \<const0> ;
-  assign m_axis_tdata[12] = \<const0> ;
-  assign m_axis_tdata[11] = \<const0> ;
-  assign m_axis_tdata[10] = \<const0> ;
-  assign m_axis_tdata[9:0] = \^m_axis_tdata [9:0];
-  assign m_axis_tid[31] = \<const0> ;
-  assign m_axis_tid[30] = \<const0> ;
-  assign m_axis_tid[29] = \<const0> ;
-  assign m_axis_tid[28] = \<const0> ;
-  assign m_axis_tid[27] = \<const0> ;
-  assign m_axis_tid[26] = \<const0> ;
-  assign m_axis_tid[25] = \<const0> ;
-  assign m_axis_tid[24] = \<const0> ;
-  assign m_axis_tid[23] = \<const0> ;
-  assign m_axis_tid[22] = \<const0> ;
-  assign m_axis_tid[21] = \<const0> ;
-  assign m_axis_tid[20] = \<const0> ;
-  assign m_axis_tid[19] = \<const0> ;
-  assign m_axis_tid[18] = \<const0> ;
-  assign m_axis_tid[17] = \<const0> ;
-  assign m_axis_tid[16] = \<const0> ;
-  assign m_axis_tid[15] = \<const0> ;
-  assign m_axis_tid[14] = \<const0> ;
-  assign m_axis_tid[13] = \<const0> ;
-  assign m_axis_tid[12] = \<const0> ;
-  assign m_axis_tid[11] = \<const0> ;
-  assign m_axis_tid[10] = \<const0> ;
-  assign m_axis_tid[9:0] = \^m_axis_tid [9:0];
-  assign m_axis_tkeep[1] = \<const0> ;
-  assign m_axis_tkeep[0] = \<const0> ;
-  assign m_axis_tuser[5] = \<const0> ;
-  assign m_axis_tuser[4] = \<const0> ;
-  assign m_axis_tuser[3] = \<const0> ;
-  assign m_axis_tuser[2] = \<const0> ;
-  assign m_axis_tuser[1] = \<const0> ;
-  assign m_axis_tuser[0] = \^m_axis_tuser [0];
-  GND GND
-       (.G(\<const0> ));
-  bd_d10d_vfb_0_0_axis_dwidth_converter_v1_1_34_axis_dwidth_converter inst
-       (.Q({m_axis_tvalid,s_axis_tready}),
-        .aclk(aclk),
-        .aresetn(aresetn),
-        .m_axis_tdata(\^m_axis_tdata ),
-        .m_axis_tid(\^m_axis_tid ),
-        .m_axis_tlast(m_axis_tlast),
-        .m_axis_tready(m_axis_tready),
-        .m_axis_tuser(\^m_axis_tuser ),
-        .s_axis_tdata({s_axis_tdata[57:48],s_axis_tdata[41:32],s_axis_tdata[25:16],s_axis_tdata[9:0]}),
-        .s_axis_tid(s_axis_tid[9:0]),
-        .s_axis_tkeep(s_axis_tkeep[7]),
-        .s_axis_tlast(s_axis_tlast),
-        .s_axis_tuser(s_axis_tuser[0]),
-        .s_axis_tvalid(s_axis_tvalid));
-endmodule
-
-module bd_d10d_vfb_0_0_axis_dconverter
-   (s_axis_tready,
-    m_axis_tvalid,
-    \r1_data_reg[9] ,
-    m_axis_tuser,
-    D,
-    \state_reg[1] ,
-    \state_reg[1]_0 ,
-    vfb_arstn_0,
-    \state_reg[1]_1 ,
-    vfb_clk,
-    vfb_arstn,
-    s_fifo_tv,
-    \r0_data_reg[57] ,
-    s_axis_tkeep,
-    s_axis_tlast,
-    \r0_id_reg[9] ,
-    s_axis_tuser,
-    mdt_tr,
-    Q,
-    \vfb_vcdt_reg[8] ,
-    \vfb_vcdt_reg[0] );
-  output s_axis_tready;
-  output m_axis_tvalid;
-  output [7:0]\r1_data_reg[9] ;
-  output [0:0]m_axis_tuser;
-  output [9:0]D;
-  output \state_reg[1] ;
-  output \state_reg[1]_0 ;
-  output [1:0]vfb_arstn_0;
-  output \state_reg[1]_1 ;
-  input vfb_clk;
-  input vfb_arstn;
-  input s_fifo_tv;
-  input [39:0]\r0_data_reg[57] ;
-  input [0:0]s_axis_tkeep;
-  input s_axis_tlast;
-  input [9:0]\r0_id_reg[9] ;
-  input [0:0]s_axis_tuser;
-  input mdt_tr;
-  input [9:0]Q;
-  input [8:0]\vfb_vcdt_reg[8] ;
-  input \vfb_vcdt_reg[0] ;
-
-  wire [9:0]D;
-  wire [9:0]Q;
-  wire [1:0]m_axis_tdata;
-  wire [9:0]m_axis_tid;
-  wire m_axis_tlast;
-  wire [0:0]m_axis_tuser;
-  wire m_axis_tvalid;
-  wire mdt_tr;
-  wire [39:0]\r0_data_reg[57] ;
-  wire [9:0]\r0_id_reg[9] ;
-  wire [7:0]\r1_data_reg[9] ;
-  wire [0:0]s_axis_tkeep;
-  wire s_axis_tlast;
-  wire s_axis_tready;
-  wire [0:0]s_axis_tuser;
-  wire s_fifo_tv;
-  wire \state_reg[1] ;
-  wire \state_reg[1]_0 ;
-  wire \state_reg[1]_1 ;
-  wire vfb_arstn;
-  wire [1:0]vfb_arstn_0;
-  wire vfb_clk;
-  wire \vfb_vcdt_reg[0] ;
-  wire [8:0]\vfb_vcdt_reg[8] ;
-  wire [15:10]NLW_axis_conv_inst_m_axis_tdata_UNCONNECTED;
-  wire [31:10]NLW_axis_conv_inst_m_axis_tid_UNCONNECTED;
-  wire [1:0]NLW_axis_conv_inst_m_axis_tkeep_UNCONNECTED;
-  wire [5:1]NLW_axis_conv_inst_m_axis_tuser_UNCONNECTED;
-
-  (* CHECK_LICENSE_TYPE = "bd_d10d_vfb_0_0_axis_converter,axis_dwidth_converter_v1_1_34_axis_dwidth_converter,{}" *) 
-  (* DowngradeIPIdentifiedWarnings = "yes" *) 
-  (* X_CORE_INFO = "axis_dwidth_converter_v1_1_34_axis_dwidth_converter,Vivado 2025.2" *) 
-  bd_d10d_vfb_0_0_axis_converter axis_conv_inst
-       (.aclk(vfb_clk),
-        .aresetn(vfb_arstn),
-        .m_axis_tdata({NLW_axis_conv_inst_m_axis_tdata_UNCONNECTED[15:10],\r1_data_reg[9] ,m_axis_tdata}),
-        .m_axis_tid({NLW_axis_conv_inst_m_axis_tid_UNCONNECTED[31:10],m_axis_tid}),
-        .m_axis_tkeep(NLW_axis_conv_inst_m_axis_tkeep_UNCONNECTED[1:0]),
-        .m_axis_tlast(m_axis_tlast),
-        .m_axis_tready(mdt_tr),
-        .m_axis_tuser({NLW_axis_conv_inst_m_axis_tuser_UNCONNECTED[5:1],m_axis_tuser}),
-        .m_axis_tvalid(m_axis_tvalid),
-        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [39:30],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [29:20],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [19:10],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [9:0]}),
-        .s_axis_tid({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_id_reg[9] }),
-        .s_axis_tkeep({s_axis_tkeep,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .s_axis_tlast(s_axis_tlast),
-        .s_axis_tready(s_axis_tready),
-        .s_axis_tuser({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axis_tuser}),
-        .s_axis_tvalid(s_fifo_tv));
-  (* SOFT_HLUTNM = "soft_lutpair50" *) 
-  LUT3 #(
-    .INIT(8'h80)) 
-    \vfb_data[0]_i_1 
-       (.I0(m_axis_tdata[0]),
-        .I1(vfb_arstn),
-        .I2(m_axis_tvalid),
-        .O(vfb_arstn_0[0]));
-  LUT3 #(
-    .INIT(8'h80)) 
-    \vfb_data[1]_i_1 
-       (.I0(m_axis_tdata[1]),
-        .I1(vfb_arstn),
-        .I2(m_axis_tvalid),
-        .O(vfb_arstn_0[1]));
-  (* SOFT_HLUTNM = "soft_lutpair50" *) 
-  LUT2 #(
-    .INIT(4'h7)) 
-    \vfb_data[9]_i_4 
-       (.I0(m_axis_tvalid),
-        .I1(vfb_arstn),
-        .O(\state_reg[1]_1 ));
-  (* SOFT_HLUTNM = "soft_lutpair49" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    vfb_eol_i_4
-       (.I0(m_axis_tvalid),
-        .I1(m_axis_tlast),
-        .O(\state_reg[1]_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair48" *) 
-  LUT2 #(
-    .INIT(4'hE)) 
-    vfb_valid_i_3
-       (.I0(m_axis_tvalid),
-        .I1(\vfb_vcdt_reg[0] ),
-        .O(\state_reg[1] ));
-  (* SOFT_HLUTNM = "soft_lutpair48" *) 
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[0]_i_1 
-       (.I0(Q[0]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[0]),
-        .I3(\vfb_vcdt_reg[8] [0]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[0]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[1]_i_1 
-       (.I0(Q[1]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[1]),
-        .I3(\vfb_vcdt_reg[8] [1]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[1]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[2]_i_1 
-       (.I0(Q[2]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[2]),
-        .I3(\vfb_vcdt_reg[8] [2]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[2]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[3]_i_1 
-       (.I0(Q[3]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[3]),
-        .I3(\vfb_vcdt_reg[8] [3]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[3]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[4]_i_1 
-       (.I0(Q[4]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[4]),
-        .I3(\vfb_vcdt_reg[8] [4]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[4]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[5]_i_1 
-       (.I0(Q[5]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[5]),
-        .I3(\vfb_vcdt_reg[8] [5]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[5]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[6]_i_1 
-       (.I0(Q[6]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[6]),
-        .I3(\vfb_vcdt_reg[8] [6]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[6]));
-  LUT5 #(
-    .INIT(32'hFFE2C0E2)) 
-    \vfb_vcdt[7]_i_1 
-       (.I0(Q[7]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[7]),
-        .I3(\vfb_vcdt_reg[0] ),
-        .I4(\vfb_vcdt_reg[8] [7]),
-        .O(D[7]));
-  LUT5 #(
-    .INIT(32'hFFC0E2E2)) 
-    \vfb_vcdt[8]_i_1 
-       (.I0(Q[8]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[8]),
-        .I3(\vfb_vcdt_reg[8] [8]),
-        .I4(\vfb_vcdt_reg[0] ),
-        .O(D[8]));
-  (* SOFT_HLUTNM = "soft_lutpair49" *) 
-  LUT4 #(
-    .INIT(16'hFFE2)) 
-    \vfb_vcdt[9]_i_3 
-       (.I0(Q[9]),
-        .I1(m_axis_tvalid),
-        .I2(m_axis_tid[9]),
-        .I3(\vfb_vcdt_reg[0] ),
-        .O(D[9]));
-endmodule
-
-(* ORIG_REF_NAME = "axis_dwidth_converter_v1_1_34_axis_dwidth_converter" *) 
 module bd_d10d_vfb_0_0_axis_dwidth_converter_v1_1_34_axis_dwidth_converter
    (Q,
     m_axis_tuser,
@@ -585,7 +90,6 @@ module bd_d10d_vfb_0_0_axis_dwidth_converter_v1_1_34_axis_dwidth_converter
         .s_axis_tvalid(s_axis_tvalid));
 endmodule
 
-(* ORIG_REF_NAME = "axis_dwidth_converter_v1_1_34_axisc_downsizer" *) 
 module bd_d10d_vfb_0_0_axis_dwidth_converter_v1_1_34_axisc_downsizer
    (Q,
     m_axis_tuser,
@@ -1600,13 +1104,507 @@ endmodule
 (* AXIS_TDATA_WIDTH = "64" *) (* AXIS_TDEST_WIDTH = "4" *) (* AXIS_TUSER_WIDTH = "96" *) 
 (* C_HS_LINE_RATE = "912" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* VFB_4PXL_W = "40" *) 
 (* VFB_BYPASS_WC = "0" *) (* VFB_DATA_TYPE = "43" *) (* VFB_DCONV_OWIDTH = "16" *) 
+(* VFB_EN_VCX = "0" *) (* VFB_FIFO_DEPTH = "2048" *) (* VFB_FIFO_WIDTH = "64" *) 
+(* VFB_FILTER_VC = "0" *) (* VFB_OP_DWIDTH = "16" *) (* VFB_OP_PIXELS = "1" *) 
+(* VFB_PXL_W = "10" *) (* VFB_PXL_W_BB = "16" *) (* VFB_REQ_BUFFER = "1" *) 
+(* VFB_REQ_REORDER = "1" *) (* VFB_TU_WIDTH = "1" *) (* VFB_VC = "0" *) 
+(* NotValidForBitStream *)
+module bd_d10d_vfb_0_0
+   (s_axis_aclk,
+    s_axis_aresetn,
+    s_axis_tready,
+    s_axis_tvalid,
+    s_axis_tlast,
+    s_axis_tdata,
+    s_axis_tkeep,
+    s_axis_tuser,
+    s_axis_tdest,
+    mdt_tv,
+    mdt_tr,
+    sdt_tv,
+    sdt_tr,
+    vfb_tv,
+    vfb_tr,
+    vfb_arstn,
+    vfb_clk,
+    vfb_ready,
+    core_men_vfb,
+    vfb_full,
+    vfb_wc_full,
+    core_men_ack_vfb,
+    vfb_valid,
+    vfb_eol,
+    vfb_sof,
+    vfb_vcdt,
+    vfb_data);
+  input s_axis_aclk;
+  input s_axis_aresetn;
+  output s_axis_tready;
+  input s_axis_tvalid;
+  input s_axis_tlast;
+  input [63:0]s_axis_tdata;
+  input [7:0]s_axis_tkeep;
+  input [95:0]s_axis_tuser;
+  input [3:0]s_axis_tdest;
+  output mdt_tv;
+  output mdt_tr;
+  output sdt_tv;
+  output sdt_tr;
+  output vfb_tv;
+  output vfb_tr;
+  input vfb_arstn;
+  input vfb_clk;
+  input vfb_ready;
+  input core_men_vfb;
+  output vfb_full;
+  output vfb_wc_full;
+  output core_men_ack_vfb;
+  output vfb_valid;
+  output vfb_eol;
+  output [0:0]vfb_sof;
+  output [9:0]vfb_vcdt;
+  output [15:0]vfb_data;
+
+  wire \<const0> ;
+  wire \<const1> ;
+  wire mdt_tr;
+  wire mdt_tv;
+  wire s_axis_aclk;
+  wire s_axis_aresetn;
+  wire [63:0]s_axis_tdata;
+  wire [3:0]s_axis_tdest;
+  wire [7:0]s_axis_tkeep;
+  wire s_axis_tlast;
+  wire s_axis_tready;
+  wire [95:0]s_axis_tuser;
+  wire s_axis_tvalid;
+  wire sdt_tr;
+  wire sdt_tv;
+  wire vfb_arstn;
+  wire vfb_clk;
+  wire [9:0]\^vfb_data ;
+  wire vfb_eol;
+  wire vfb_ready;
+  wire [0:0]vfb_sof;
+  wire vfb_tr;
+  wire vfb_tv;
+  wire vfb_valid;
+  wire [9:0]vfb_vcdt;
+  wire NLW_inst_core_men_ack_vfb_UNCONNECTED;
+  wire NLW_inst_vfb_full_UNCONNECTED;
+  wire NLW_inst_vfb_wc_full_UNCONNECTED;
+  wire [15:10]NLW_inst_vfb_data_UNCONNECTED;
+
+  assign core_men_ack_vfb = \<const1> ;
+  assign vfb_data[15] = \<const0> ;
+  assign vfb_data[14] = \<const0> ;
+  assign vfb_data[13] = \<const0> ;
+  assign vfb_data[12] = \<const0> ;
+  assign vfb_data[11] = \<const0> ;
+  assign vfb_data[10] = \<const0> ;
+  assign vfb_data[9:0] = \^vfb_data [9:0];
+  assign vfb_full = \<const0> ;
+  assign vfb_wc_full = \<const0> ;
+  GND GND
+       (.G(\<const0> ));
+  VCC VCC
+       (.P(\<const1> ));
+  (* AXIS_TDATA_WIDTH = "64" *) 
+  (* AXIS_TDEST_WIDTH = "4" *) 
+  (* AXIS_TUSER_WIDTH = "96" *) 
+  (* C_HS_LINE_RATE = "912" *) 
+  (* DowngradeIPIdentifiedWarnings = "yes" *) 
+  (* VFB_4PXL_W = "40" *) 
+  (* VFB_BYPASS_WC = "0" *) 
+  (* VFB_DATA_TYPE = "43" *) 
+  (* VFB_DCONV_OWIDTH = "16" *) 
+  (* VFB_DCONV_TUW = "24" *) 
+  (* VFB_EN_VCX = "0" *) 
+  (* VFB_FIFO_DEPTH = "2048" *) 
+  (* VFB_FIFO_WIDTH = "64" *) 
+  (* VFB_FILTER_VC = "0" *) 
+  (* VFB_OP_DWIDTH = "16" *) 
+  (* VFB_OP_PIXELS = "1" *) 
+  (* VFB_PXL_W = "10" *) 
+  (* VFB_PXL_W_BB = "16" *) 
+  (* VFB_REQ_BUFFER = "1" *) 
+  (* VFB_REQ_REORDER = "1" *) 
+  (* VFB_TSB0_WIDTH = "32" *) 
+  (* VFB_TSB1_WIDTH = "0" *) 
+  (* VFB_TSB2_WIDTH = "3" *) 
+  (* VFB_TU_WIDTH = "1" *) 
+  (* VFB_VC = "0" *) 
+  bd_d10d_vfb_0_0_bd_d10d_vfb_0_0_core inst
+       (.core_men_ack_vfb(NLW_inst_core_men_ack_vfb_UNCONNECTED),
+        .core_men_vfb(1'b0),
+        .mdt_tr(mdt_tr),
+        .mdt_tv(mdt_tv),
+        .s_axis_aclk(s_axis_aclk),
+        .s_axis_aresetn(s_axis_aresetn),
+        .s_axis_tdata(s_axis_tdata),
+        .s_axis_tdest(s_axis_tdest),
+        .s_axis_tkeep(s_axis_tkeep),
+        .s_axis_tlast(s_axis_tlast),
+        .s_axis_tready(s_axis_tready),
+        .s_axis_tuser({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axis_tuser[69:64],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axis_tuser[1:0]}),
+        .s_axis_tvalid(s_axis_tvalid),
+        .sdt_tr(sdt_tr),
+        .sdt_tv(sdt_tv),
+        .vfb_arstn(vfb_arstn),
+        .vfb_clk(vfb_clk),
+        .vfb_data({NLW_inst_vfb_data_UNCONNECTED[15:10],\^vfb_data }),
+        .vfb_eol(vfb_eol),
+        .vfb_full(NLW_inst_vfb_full_UNCONNECTED),
+        .vfb_ready(vfb_ready),
+        .vfb_sof(vfb_sof),
+        .vfb_tr(vfb_tr),
+        .vfb_tv(vfb_tv),
+        .vfb_valid(vfb_valid),
+        .vfb_vcdt(vfb_vcdt),
+        .vfb_wc_full(NLW_inst_vfb_wc_full_UNCONNECTED));
+endmodule
+
+(* CHECK_LICENSE_TYPE = "bd_d10d_vfb_0_0_axis_converter,axis_dwidth_converter_v1_1_34_axis_dwidth_converter,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axis_dwidth_converter_v1_1_34_axis_dwidth_converter,Vivado 2025.2" *) 
+module bd_d10d_vfb_0_0_bd_d10d_vfb_0_0_axis_converter
+   (aclk,
+    aresetn,
+    s_axis_tvalid,
+    s_axis_tready,
+    s_axis_tdata,
+    s_axis_tkeep,
+    s_axis_tlast,
+    s_axis_tid,
+    s_axis_tuser,
+    m_axis_tvalid,
+    m_axis_tready,
+    m_axis_tdata,
+    m_axis_tkeep,
+    m_axis_tlast,
+    m_axis_tid,
+    m_axis_tuser);
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLKIF CLK" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLKIF, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET aresetn, ASSOCIATED_CLKEN aclken, FREQ_HZ 10000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, INSERT_VIP 0" *) input aclk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RSTIF RST" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RSTIF, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input aresetn;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TVALID" *) (* X_INTERFACE_MODE = "slave" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, LAYERED_METADATA undef, INSERT_VIP 0" *) input s_axis_tvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TREADY" *) output s_axis_tready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TDATA" *) input [63:0]s_axis_tdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TKEEP" *) input [7:0]s_axis_tkeep;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *) input s_axis_tlast;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TID" *) input [31:0]s_axis_tid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TUSER" *) input [23:0]s_axis_tuser;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *) (* X_INTERFACE_MODE = "master" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXIS, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.0, LAYERED_METADATA undef, INSERT_VIP 0" *) output m_axis_tvalid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TREADY" *) input m_axis_tready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TDATA" *) output [15:0]m_axis_tdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TKEEP" *) output [1:0]m_axis_tkeep;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *) output m_axis_tlast;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TID" *) output [31:0]m_axis_tid;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TUSER" *) output [5:0]m_axis_tuser;
+
+  wire \<const0> ;
+  wire aclk;
+  wire aresetn;
+  wire [9:0]\^m_axis_tdata ;
+  wire [9:0]\^m_axis_tid ;
+  wire m_axis_tlast;
+  wire m_axis_tready;
+  wire [0:0]\^m_axis_tuser ;
+  wire m_axis_tvalid;
+  wire [63:0]s_axis_tdata;
+  wire [31:0]s_axis_tid;
+  wire [7:0]s_axis_tkeep;
+  wire s_axis_tlast;
+  wire s_axis_tready;
+  wire [23:0]s_axis_tuser;
+  wire s_axis_tvalid;
+
+  assign m_axis_tdata[15] = \<const0> ;
+  assign m_axis_tdata[14] = \<const0> ;
+  assign m_axis_tdata[13] = \<const0> ;
+  assign m_axis_tdata[12] = \<const0> ;
+  assign m_axis_tdata[11] = \<const0> ;
+  assign m_axis_tdata[10] = \<const0> ;
+  assign m_axis_tdata[9:0] = \^m_axis_tdata [9:0];
+  assign m_axis_tid[31] = \<const0> ;
+  assign m_axis_tid[30] = \<const0> ;
+  assign m_axis_tid[29] = \<const0> ;
+  assign m_axis_tid[28] = \<const0> ;
+  assign m_axis_tid[27] = \<const0> ;
+  assign m_axis_tid[26] = \<const0> ;
+  assign m_axis_tid[25] = \<const0> ;
+  assign m_axis_tid[24] = \<const0> ;
+  assign m_axis_tid[23] = \<const0> ;
+  assign m_axis_tid[22] = \<const0> ;
+  assign m_axis_tid[21] = \<const0> ;
+  assign m_axis_tid[20] = \<const0> ;
+  assign m_axis_tid[19] = \<const0> ;
+  assign m_axis_tid[18] = \<const0> ;
+  assign m_axis_tid[17] = \<const0> ;
+  assign m_axis_tid[16] = \<const0> ;
+  assign m_axis_tid[15] = \<const0> ;
+  assign m_axis_tid[14] = \<const0> ;
+  assign m_axis_tid[13] = \<const0> ;
+  assign m_axis_tid[12] = \<const0> ;
+  assign m_axis_tid[11] = \<const0> ;
+  assign m_axis_tid[10] = \<const0> ;
+  assign m_axis_tid[9:0] = \^m_axis_tid [9:0];
+  assign m_axis_tkeep[1] = \<const0> ;
+  assign m_axis_tkeep[0] = \<const0> ;
+  assign m_axis_tuser[5] = \<const0> ;
+  assign m_axis_tuser[4] = \<const0> ;
+  assign m_axis_tuser[3] = \<const0> ;
+  assign m_axis_tuser[2] = \<const0> ;
+  assign m_axis_tuser[1] = \<const0> ;
+  assign m_axis_tuser[0] = \^m_axis_tuser [0];
+  GND GND
+       (.G(\<const0> ));
+  bd_d10d_vfb_0_0_axis_dwidth_converter_v1_1_34_axis_dwidth_converter inst
+       (.Q({m_axis_tvalid,s_axis_tready}),
+        .aclk(aclk),
+        .aresetn(aresetn),
+        .m_axis_tdata(\^m_axis_tdata ),
+        .m_axis_tid(\^m_axis_tid ),
+        .m_axis_tlast(m_axis_tlast),
+        .m_axis_tready(m_axis_tready),
+        .m_axis_tuser(\^m_axis_tuser ),
+        .s_axis_tdata({s_axis_tdata[57:48],s_axis_tdata[41:32],s_axis_tdata[25:16],s_axis_tdata[9:0]}),
+        .s_axis_tid(s_axis_tid[9:0]),
+        .s_axis_tkeep(s_axis_tkeep[7]),
+        .s_axis_tlast(s_axis_tlast),
+        .s_axis_tuser(s_axis_tuser[0]),
+        .s_axis_tvalid(s_axis_tvalid));
+endmodule
+
+module bd_d10d_vfb_0_0_bd_d10d_vfb_0_0_axis_dconverter
+   (s_axis_tready,
+    m_axis_tvalid,
+    \r1_data_reg[9] ,
+    m_axis_tuser,
+    D,
+    \state_reg[1] ,
+    \state_reg[1]_0 ,
+    vfb_arstn_0,
+    \state_reg[1]_1 ,
+    vfb_clk,
+    vfb_arstn,
+    s_fifo_tv,
+    \r0_data_reg[57] ,
+    s_axis_tkeep,
+    s_axis_tlast,
+    \r0_id_reg[9] ,
+    s_axis_tuser,
+    mdt_tr,
+    Q,
+    \vfb_vcdt_reg[8] ,
+    \vfb_vcdt_reg[0] );
+  output s_axis_tready;
+  output m_axis_tvalid;
+  output [7:0]\r1_data_reg[9] ;
+  output [0:0]m_axis_tuser;
+  output [9:0]D;
+  output \state_reg[1] ;
+  output \state_reg[1]_0 ;
+  output [1:0]vfb_arstn_0;
+  output \state_reg[1]_1 ;
+  input vfb_clk;
+  input vfb_arstn;
+  input s_fifo_tv;
+  input [39:0]\r0_data_reg[57] ;
+  input [0:0]s_axis_tkeep;
+  input s_axis_tlast;
+  input [9:0]\r0_id_reg[9] ;
+  input [0:0]s_axis_tuser;
+  input mdt_tr;
+  input [9:0]Q;
+  input [8:0]\vfb_vcdt_reg[8] ;
+  input \vfb_vcdt_reg[0] ;
+
+  wire [9:0]D;
+  wire [9:0]Q;
+  wire [1:0]m_axis_tdata;
+  wire [9:0]m_axis_tid;
+  wire m_axis_tlast;
+  wire [0:0]m_axis_tuser;
+  wire m_axis_tvalid;
+  wire mdt_tr;
+  wire [39:0]\r0_data_reg[57] ;
+  wire [9:0]\r0_id_reg[9] ;
+  wire [7:0]\r1_data_reg[9] ;
+  wire [0:0]s_axis_tkeep;
+  wire s_axis_tlast;
+  wire s_axis_tready;
+  wire [0:0]s_axis_tuser;
+  wire s_fifo_tv;
+  wire \state_reg[1] ;
+  wire \state_reg[1]_0 ;
+  wire \state_reg[1]_1 ;
+  wire vfb_arstn;
+  wire [1:0]vfb_arstn_0;
+  wire vfb_clk;
+  wire \vfb_vcdt_reg[0] ;
+  wire [8:0]\vfb_vcdt_reg[8] ;
+  wire [15:10]NLW_axis_conv_inst_m_axis_tdata_UNCONNECTED;
+  wire [31:10]NLW_axis_conv_inst_m_axis_tid_UNCONNECTED;
+  wire [1:0]NLW_axis_conv_inst_m_axis_tkeep_UNCONNECTED;
+  wire [5:1]NLW_axis_conv_inst_m_axis_tuser_UNCONNECTED;
+
+  (* CHECK_LICENSE_TYPE = "bd_d10d_vfb_0_0_axis_converter,axis_dwidth_converter_v1_1_34_axis_dwidth_converter,{}" *) 
+  (* DowngradeIPIdentifiedWarnings = "yes" *) 
+  (* X_CORE_INFO = "axis_dwidth_converter_v1_1_34_axis_dwidth_converter,Vivado 2025.2" *) 
+  bd_d10d_vfb_0_0_bd_d10d_vfb_0_0_axis_converter axis_conv_inst
+       (.aclk(vfb_clk),
+        .aresetn(vfb_arstn),
+        .m_axis_tdata({NLW_axis_conv_inst_m_axis_tdata_UNCONNECTED[15:10],\r1_data_reg[9] ,m_axis_tdata}),
+        .m_axis_tid({NLW_axis_conv_inst_m_axis_tid_UNCONNECTED[31:10],m_axis_tid}),
+        .m_axis_tkeep(NLW_axis_conv_inst_m_axis_tkeep_UNCONNECTED[1:0]),
+        .m_axis_tlast(m_axis_tlast),
+        .m_axis_tready(mdt_tr),
+        .m_axis_tuser({NLW_axis_conv_inst_m_axis_tuser_UNCONNECTED[5:1],m_axis_tuser}),
+        .m_axis_tvalid(m_axis_tvalid),
+        .s_axis_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [39:30],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [29:20],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [19:10],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_data_reg[57] [9:0]}),
+        .s_axis_tid({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,\r0_id_reg[9] }),
+        .s_axis_tkeep({s_axis_tkeep,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .s_axis_tlast(s_axis_tlast),
+        .s_axis_tready(s_axis_tready),
+        .s_axis_tuser({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,s_axis_tuser}),
+        .s_axis_tvalid(s_fifo_tv));
+  (* SOFT_HLUTNM = "soft_lutpair50" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \vfb_data[0]_i_1 
+       (.I0(m_axis_tdata[0]),
+        .I1(vfb_arstn),
+        .I2(m_axis_tvalid),
+        .O(vfb_arstn_0[0]));
+  LUT3 #(
+    .INIT(8'h80)) 
+    \vfb_data[1]_i_1 
+       (.I0(m_axis_tdata[1]),
+        .I1(vfb_arstn),
+        .I2(m_axis_tvalid),
+        .O(vfb_arstn_0[1]));
+  (* SOFT_HLUTNM = "soft_lutpair50" *) 
+  LUT2 #(
+    .INIT(4'h7)) 
+    \vfb_data[9]_i_4 
+       (.I0(m_axis_tvalid),
+        .I1(vfb_arstn),
+        .O(\state_reg[1]_1 ));
+  (* SOFT_HLUTNM = "soft_lutpair49" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    vfb_eol_i_4
+       (.I0(m_axis_tvalid),
+        .I1(m_axis_tlast),
+        .O(\state_reg[1]_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair48" *) 
+  LUT2 #(
+    .INIT(4'hE)) 
+    vfb_valid_i_3
+       (.I0(m_axis_tvalid),
+        .I1(\vfb_vcdt_reg[0] ),
+        .O(\state_reg[1] ));
+  (* SOFT_HLUTNM = "soft_lutpair48" *) 
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[0]_i_1 
+       (.I0(Q[0]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[0]),
+        .I3(\vfb_vcdt_reg[8] [0]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[0]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[1]_i_1 
+       (.I0(Q[1]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[1]),
+        .I3(\vfb_vcdt_reg[8] [1]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[1]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[2]_i_1 
+       (.I0(Q[2]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[2]),
+        .I3(\vfb_vcdt_reg[8] [2]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[2]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[3]_i_1 
+       (.I0(Q[3]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[3]),
+        .I3(\vfb_vcdt_reg[8] [3]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[3]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[4]_i_1 
+       (.I0(Q[4]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[4]),
+        .I3(\vfb_vcdt_reg[8] [4]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[4]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[5]_i_1 
+       (.I0(Q[5]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[5]),
+        .I3(\vfb_vcdt_reg[8] [5]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[5]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[6]_i_1 
+       (.I0(Q[6]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[6]),
+        .I3(\vfb_vcdt_reg[8] [6]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[6]));
+  LUT5 #(
+    .INIT(32'hFFE2C0E2)) 
+    \vfb_vcdt[7]_i_1 
+       (.I0(Q[7]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[7]),
+        .I3(\vfb_vcdt_reg[0] ),
+        .I4(\vfb_vcdt_reg[8] [7]),
+        .O(D[7]));
+  LUT5 #(
+    .INIT(32'hFFC0E2E2)) 
+    \vfb_vcdt[8]_i_1 
+       (.I0(Q[8]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[8]),
+        .I3(\vfb_vcdt_reg[8] [8]),
+        .I4(\vfb_vcdt_reg[0] ),
+        .O(D[8]));
+  (* SOFT_HLUTNM = "soft_lutpair49" *) 
+  LUT4 #(
+    .INIT(16'hFFE2)) 
+    \vfb_vcdt[9]_i_3 
+       (.I0(Q[9]),
+        .I1(m_axis_tvalid),
+        .I2(m_axis_tid[9]),
+        .I3(\vfb_vcdt_reg[0] ),
+        .O(D[9]));
+endmodule
+
+(* AXIS_TDATA_WIDTH = "64" *) (* AXIS_TDEST_WIDTH = "4" *) (* AXIS_TUSER_WIDTH = "96" *) 
+(* C_HS_LINE_RATE = "912" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* VFB_4PXL_W = "40" *) 
+(* VFB_BYPASS_WC = "0" *) (* VFB_DATA_TYPE = "43" *) (* VFB_DCONV_OWIDTH = "16" *) 
 (* VFB_DCONV_TUW = "24" *) (* VFB_EN_VCX = "0" *) (* VFB_FIFO_DEPTH = "2048" *) 
 (* VFB_FIFO_WIDTH = "64" *) (* VFB_FILTER_VC = "0" *) (* VFB_OP_DWIDTH = "16" *) 
 (* VFB_OP_PIXELS = "1" *) (* VFB_PXL_W = "10" *) (* VFB_PXL_W_BB = "16" *) 
 (* VFB_REQ_BUFFER = "1" *) (* VFB_REQ_REORDER = "1" *) (* VFB_TSB0_WIDTH = "32" *) 
 (* VFB_TSB1_WIDTH = "0" *) (* VFB_TSB2_WIDTH = "3" *) (* VFB_TU_WIDTH = "1" *) 
 (* VFB_VC = "0" *) 
-module bd_d10d_vfb_0_0_core
+module bd_d10d_vfb_0_0_bd_d10d_vfb_0_0_core
    (s_axis_aclk,
     s_axis_aresetn,
     s_axis_tready,
@@ -1846,7 +1844,7 @@ module bd_d10d_vfb_0_0_core
         .\vfb_data_reg[9] (op_inf_n_4),
         .vfb_eol_reg(axis_dconverter_n_22),
         .vfb_ready(vfb_ready));
-  bd_d10d_vfb_0_0_axis_dconverter axis_dconverter
+  bd_d10d_vfb_0_0_bd_d10d_vfb_0_0_axis_dconverter axis_dconverter
        (.D({axis_dconverter_n_11,axis_dconverter_n_12,axis_dconverter_n_13,axis_dconverter_n_14,axis_dconverter_n_15,axis_dconverter_n_16,axis_dconverter_n_17,axis_dconverter_n_18,axis_dconverter_n_19,axis_dconverter_n_20}),
         .Q(sband_ts_r),
         .m_axis_tuser(m_axis_tuser),
@@ -1901,7 +1899,6 @@ module bd_d10d_vfb_0_0_core
         .\vfb_vcdt_reg[9]_0 ({axis_dconverter_n_11,axis_dconverter_n_12,axis_dconverter_n_13,axis_dconverter_n_14,axis_dconverter_n_15,axis_dconverter_n_16,axis_dconverter_n_17,axis_dconverter_n_18,axis_dconverter_n_19,axis_dconverter_n_20}));
 endmodule
 
-(* ORIG_REF_NAME = "vfb_v1_0_29_op_inf" *) 
 module bd_d10d_vfb_0_0_vfb_v1_0_29_op_inf
    (vfb_eol_reg_0,
     vfb_valid_reg_0,
@@ -2867,7 +2864,6 @@ module bd_d10d_vfb_0_0_vfb_v1_0_29_op_inf
         .R(\vfb_vcdt[9]_i_1_n_0 ));
 endmodule
 
-(* ORIG_REF_NAME = "vfb_v1_0_29_reorder" *) 
 module bd_d10d_vfb_0_0_vfb_v1_0_29_reorder
    (s_axis_tkeep,
     s_axis_tuser,

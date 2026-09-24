@@ -48,28 +48,51 @@ foreach pair {
 clear_intf mipi_csi2_rx_subsyst_0/video_out
 clear_intf v_demosaic_0/s_axis_video
 clear_intf axi_vdma_0/S_AXIS_S2MM
+if {![llength [get_bd_cells -quiet capture_fifo]]} {
+  create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 capture_fifo
+}
+set_property -dict [list \
+  CONFIG.TDATA_NUM_BYTES {2} \
+  CONFIG.TUSER_WIDTH {1} \
+  CONFIG.HAS_TLAST {1} \
+  CONFIG.IS_ACLK_ASYNC {1} \
+  CONFIG.FIFO_DEPTH {4096} \
+] [get_bd_cells capture_fifo]
+clear_intf capture_fifo/S_AXIS
+clear_intf capture_fifo/M_AXIS
 connect_bd_intf_net [get_bd_intf_pins mipi_csi2_rx_subsyst_0/video_out] \
+                    [get_bd_intf_pins capture_fifo/S_AXIS]
+connect_bd_intf_net [get_bd_intf_pins capture_fifo/M_AXIS] \
                     [get_bd_intf_pins axis_raw_to_gbr_0/S_AXIS]
 connect_bd_intf_net [get_bd_intf_pins axis_raw_to_gbr_0/M_AXIS] \
                     [get_bd_intf_pins axi_vdma_0/S_AXIS_S2MM]
+# RAW10 over two 456 Mbps lanes is at most 91.2 Mpixel/s.  A 100 MHz stream
+# clock is sufficient; the FIFO absorbs downstream DDR/backpressure bursts.
+reconnect_pin processing_system7_0/FCLK_CLK1 mipi_csi2_rx_subsyst_0/video_aclk
+reconnect_pin processing_system7_0/FCLK_CLK1 capture_fifo/s_axis_aclk
+reconnect_pin processing_system7_0/FCLK_CLK1 capture_fifo/m_axis_aclk
 reconnect_pin processing_system7_0/FCLK_CLK1 axis_raw_to_gbr_0/aclk
+reconnect_pin processing_system7_0/FCLK_CLK1 axi_vdma_0/s_axis_s2mm_aclk
+reconnect_pin proc_sys_reset_0/peripheral_aresetn mipi_csi2_rx_subsyst_0/video_aresetn
+reconnect_pin proc_sys_reset_0/peripheral_aresetn capture_fifo/s_axis_aresetn
 reconnect_pin proc_sys_reset_0/peripheral_aresetn axis_raw_to_gbr_0/aresetn
 # Software picks 0=RGGB 1=GRBG 2=GBRG 3=BGGR via DEMOSAIC_BAYER_PHASE.
 if {![llength [get_bd_cells -quiet bayer_phase_gpio]]} {
   create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 bayer_phase_gpio
 }
-set_property -dict [list CONFIG.C_GPIO_WIDTH {2} CONFIG.C_ALL_OUTPUTS {1} CONFIG.C_DOUT_DEFAULT {0x00000002}] [get_bd_cells bayer_phase_gpio]
+set_property -dict [list CONFIG.C_GPIO_WIDTH {2} CONFIG.C_ALL_OUTPUTS {1} CONFIG.C_DOUT_DEFAULT {0x00000000}] [get_bd_cells bayer_phase_gpio]
 set gp [get_bd_pins bayer_phase_gpio/gpio_io_o]
 set bp [get_bd_pins axis_raw_to_gbr_0/bayer_phase]
 set oldbp [get_bd_nets -quiet -of_objects $bp]
 if {[llength $oldbp]} {disconnect_bd_net $oldbp $bp}
 connect_bd_net $gp $bp
-if {![llength [get_bd_intf_nets -quiet -of_objects [get_bd_intf_pins bayer_phase_gpio/S_AXI]]]} {
-  apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config [list Master /processing_system7_0/M_AXI_GP0 Clk Auto] [get_bd_intf_pins bayer_phase_gpio/S_AXI]
-}
+# Bayer phase is fixed by the GPIO reset value; no AXI control port is needed.
+# Leaving this peripheral off GP0 avoids a stale SmartConnect M06 port and
+# makes the reset phase available before software starts.
+clear_intf bayer_phase_gpio/S_AXI
 set smc [get_bd_cells -quiet axi_smc]
 if {[llength $smc]} {
-  set_property CONFIG.NUM_MI {7} $smc
+  set_property CONFIG.NUM_MI {6} $smc
 }
 foreach p {axis_isp_0/aclk raw_switch/aclk raw_switch/s_axi_ctrl_aclk raw_vdma/s_axi_lite_aclk raw_vdma/m_axi_mm2s_aclk raw_vdma/m_axis_mm2s_aclk} {
   reconnect_pin processing_system7_0/FCLK_CLK1 $p
@@ -89,6 +112,3 @@ assign_bd_address
 # Fixed control addresses are part of the software/hardware contract.
 set_property offset 0x43010000 [get_bd_addr_segs processing_system7_0/Data/SEG_raw_vdma_Reg]
 set_property offset 0x43C30000 [get_bd_addr_segs processing_system7_0/Data/SEG_raw_switch_Reg]
-foreach seg [get_bd_addr_segs -quiet processing_system7_0/Data/SEG_bayer_phase_gpio*] {
-  set_property offset 0x43C40000 $seg
-}

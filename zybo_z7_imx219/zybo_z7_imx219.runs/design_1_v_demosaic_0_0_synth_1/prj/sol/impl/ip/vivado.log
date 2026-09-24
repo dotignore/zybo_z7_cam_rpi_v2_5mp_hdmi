@@ -3,12 +3,12 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Mon Sep 21 19:19:30 2026
-# Process ID         : 7104
-# Current directory  : C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip
+# Start of session at: Wed Sep 23 22:09:56 2026
+# Process ID         : 11204
+# Current directory  : V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip
 # Command line       : vivado.exe -notrace -mode batch -source run_ippack.tcl
-# Log file           : C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/vivado.log
-# Journal file       : C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip\vivado.jou
+# Log file           : V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/vivado.log
+# Journal file       : V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip\vivado.jou
 # Running On         : DESKTOP-6M954OF
 # Platform           : Windows Server 2016 or Windows 10
 # Operating System   : 26200
@@ -19,16 +19,16 @@
 # Host memory        : 33916 MB
 # Swap memory        : 5100 MB
 # Total Virtual      : 39017 MB
-# Available Virtual  : 14626 MB
+# Available Virtual  : 18009 MB
 #-----------------------------------------------------------
 source run_ippack.tcl -notrace
-INFO: calling package_hls_ip ip_types=vitis sysgen json_file=C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/sol_data.json outdir=C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip srcdir=C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol ippack_options_dict=subcore_use_xci_files false ippack_options_dict=subcore_use_xci_files false
-INFO: Copied 1 ipmisc file(s) to C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/misc
-INFO: Copied 48 verilog file(s) to C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/hdl/verilog
-INFO: Copied 40 vhdl file(s) to C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/hdl/vhdl
-INFO: Copied 10 swdriver file(s) to C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/drivers
-ipx::create_core: Time (s): cpu = 00:00:14 ; elapsed = 00:00:09 . Memory (MB): peak = 532.301 ; gain = 214.172
-INFO: Import ports from HDL: C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/hdl/vhdl/design_1_v_demosaic_0_0_v_demosaic.vhd (design_1_v_demosaic_0_0_v_demosaic)
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/sol_data.json outdir=V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip srcdir=V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol ippack_options_dict=subcore_use_xci_files false ippack_options_dict=subcore_use_xci_files false
+INFO: Copied 1 ipmisc file(s) to V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/misc
+INFO: Copied 48 verilog file(s) to V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/hdl/verilog
+INFO: Copied 40 vhdl file(s) to V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/hdl/vhdl
+INFO: Copied 10 swdriver file(s) to V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/drivers
+ipx::create_core: Time (s): cpu = 00:00:20 ; elapsed = 00:00:13 . Memory (MB): peak = 532.078 ; gain = 213.418
+INFO: Import ports from HDL: V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/hdl/vhdl/design_1_v_demosaic_0_0_v_demosaic.vhd (design_1_v_demosaic_0_0_v_demosaic)
 INFO: Add axi4lite interface s_axi_CTRL
 INFO: Add clock interface ap_clk
 INFO: Add reset interface ap_rst_n
@@ -41,6 +41,6 @@ INFO: Add axi4stream interface m_axis_video
 INFO: Calling post_process_vitis to specialize IP
 INFO: Calling post_process_sysgen to specialize IP
 Generating sysgen info xml from json file
-INFO: Created IP C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/component.xml
-INFO: Created IP archive C:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/xilinx_com_ip_v_demosaic_1_1.zip
-INFO: [Common 17-206] Exiting Vivado at Mon Sep 21 19:19:49 2026...
+INFO: Created IP V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/component.xml
+INFO: Created IP archive V:/zybo_z7_imx219/zybo_z7_imx219.runs/design_1_v_demosaic_0_0_synth_1/prj/sol/impl/ip/xilinx_com_ip_v_demosaic_1_1.zip
+INFO: [Common 17-206] Exiting Vivado at Wed Sep 23 22:10:20 2026...

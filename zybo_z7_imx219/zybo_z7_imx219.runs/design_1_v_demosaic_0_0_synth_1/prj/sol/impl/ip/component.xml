@@ -2512,8 +2512,8 @@
       </xilinx:taxonomies>
       <xilinx:displayName>V_demosaic</xilinx:displayName>
       <xilinx:definitionSource>HLS</xilinx:definitionSource>
-      <xilinx:coreRevision>2114796019</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2026-09-21T16:19:47Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>2114799069</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2026-09-23T19:10:17Z</xilinx:coreCreationDateTime>
       <xilinx:sdxKernelAttributes>
         <xilinx:sdx_kernel>true</xilinx:sdx_kernel>
         <xilinx:sdx_kernel_type>hls</xilinx:sdx_kernel_type>

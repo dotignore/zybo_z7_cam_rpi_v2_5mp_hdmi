@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
--- Date        : Mon Sep 21 19:17:56 2026
+-- Date        : Wed Sep 23 22:08:09 2026
 -- Host        : DESKTOP-6M954OF running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
---               c:/github/zybo_z7_cam_rpi_v2_5mp_hdmi/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/ip/design_1_axis_raw_to_gbr_0_0/design_1_axis_raw_to_gbr_0_0_sim_netlist.vhdl
+--               v:/zybo_z7_imx219/zybo_z7_imx219.gen/sources_1/bd/design_1/ip/design_1_axis_raw_to_gbr_0_0/design_1_axis_raw_to_gbr_0_0_sim_netlist.vhdl
 -- Design      : design_1_axis_raw_to_gbr_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -22,34 +22,28 @@ entity design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
     m_axis_tuser : out STD_LOGIC;
     m_axis_tlast : out STD_LOGIC;
     s_axis_tready : out STD_LOGIC;
-    s_axis_tuser : in STD_LOGIC;
     aclk : in STD_LOGIC;
     s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    s_axis_tuser : in STD_LOGIC;
     aresetn : in STD_LOGIC;
     m_axis_tready : in STD_LOGIC;
     s_axis_tvalid : in STD_LOGIC;
-    s_axis_tlast : in STD_LOGIC
+    s_axis_tlast : in STD_LOGIC;
+    bayer_phase : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr : entity is "axis_raw_to_gbr";
 end design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr;
 
 architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
-  signal col : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal have_prev_row_i_1_n_0 : STD_LOGIC;
   signal have_prev_row_reg_n_0 : STD_LOGIC;
   signal left_pixel : STD_LOGIC_VECTOR ( 9 downto 2 );
   signal \m_axis_tdata[10]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[10]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[11]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[11]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[12]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[12]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[13]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[13]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[14]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[14]_i_3_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[15]_i_10_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[15]_i_2_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[15]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[15]_i_4_n_0\ : STD_LOGIC;
@@ -57,38 +51,34 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
   signal \m_axis_tdata[15]_i_6_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[15]_i_7_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[15]_i_8_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[15]_i_9_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[16]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[16]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[17]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[17]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[18]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[18]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[19]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[19]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[20]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[20]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[21]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[21]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[22]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[22]_i_3_n_0\ : STD_LOGIC;
+  signal \m_axis_tdata[23]_i_10_n_0\ : STD_LOGIC;
+  signal \m_axis_tdata[23]_i_11_n_0\ : STD_LOGIC;
+  signal \m_axis_tdata[23]_i_12_n_0\ : STD_LOGIC;
+  signal \m_axis_tdata[23]_i_13_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[23]_i_2_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[23]_i_4_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[23]_i_5_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[23]_i_6_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[23]_i_7_n_0\ : STD_LOGIC;
+  signal \m_axis_tdata[23]_i_8_n_0\ : STD_LOGIC;
+  signal \m_axis_tdata[23]_i_9_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[7]_i_2_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[7]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[7]_i_4_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[8]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[8]_i_3_n_0\ : STD_LOGIC;
   signal \m_axis_tdata[9]_i_2_n_0\ : STD_LOGIC;
-  signal \m_axis_tdata[9]_i_3_n_0\ : STD_LOGIC;
   signal m_axis_tvalid_i_1_n_0 : STD_LOGIC;
   signal \^m_axis_tvalid_reg_0\ : STD_LOGIC;
   signal p_0_in : STD_LOGIC;
-  signal p_1_out : STD_LOGIC_VECTOR ( 23 downto 0 );
-  signal p_2_in : STD_LOGIC_VECTOR ( 10 downto 0 );
+  signal p_2_in : STD_LOGIC_VECTOR ( 10 downto 1 );
+  signal p_3_out : STD_LOGIC_VECTOR ( 23 downto 0 );
   signal \prev_row_reg_0_127_0_0__1_i_1_n_0\ : STD_LOGIC;
   signal \prev_row_reg_0_127_0_0__1_i_2_n_0\ : STD_LOGIC;
   signal \prev_row_reg_0_127_0_0__1_n_0\ : STD_LOGIC;
@@ -100,6 +90,14 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
   signal \prev_row_reg_0_127_0_0__7_n_0\ : STD_LOGIC;
   signal \prev_row_reg_0_127_0_0__8_n_0\ : STD_LOGIC;
   signal prev_row_reg_0_255_2_2_i_1_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_2_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_3_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_4_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_5_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_6_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_7_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_8_n_0 : STD_LOGIC;
+  signal prev_row_reg_0_255_2_2_i_9_n_0 : STD_LOGIC;
   signal prev_row_reg_0_255_2_2_n_0 : STD_LOGIC;
   signal prev_row_reg_0_255_3_3_n_0 : STD_LOGIC;
   signal prev_row_reg_0_255_4_4_n_0 : STD_LOGIC;
@@ -162,6 +160,7 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
   signal prev_row_reg_768_1023_7_7_n_0 : STD_LOGIC;
   signal prev_row_reg_768_1023_8_8_n_0 : STD_LOGIC;
   signal prev_row_reg_768_1023_9_9_n_0 : STD_LOGIC;
+  signal site_color3 : STD_LOGIC;
   signal up : STD_LOGIC_VECTOR ( 9 downto 2 );
   signal up_left_pixel : STD_LOGIC_VECTOR ( 9 downto 2 );
   signal \up_left_pixel[2]_i_2_n_0\ : STD_LOGIC;
@@ -215,32 +214,33 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
   signal x : STD_LOGIC_VECTOR ( 10 downto 0 );
   signal \x[10]_i_1_n_0\ : STD_LOGIC;
   signal \x[10]_i_3_n_0\ : STD_LOGIC;
-  signal \x[1]_i_1_n_0\ : STD_LOGIC;
+  signal \x[5]_i_2_n_0\ : STD_LOGIC;
   signal \x[6]_i_2_n_0\ : STD_LOGIC;
+  signal \x[9]_i_2_n_0\ : STD_LOGIC;
   signal y_odd : STD_LOGIC;
   signal y_odd_i_1_n_0 : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \m_axis_tdata[15]_i_8\ : label is "soft_lutpair7";
-  attribute SOFT_HLUTNM of \m_axis_tdata[16]_i_2\ : label is "soft_lutpair10";
-  attribute SOFT_HLUTNM of \m_axis_tdata[16]_i_3\ : label is "soft_lutpair2";
-  attribute SOFT_HLUTNM of \m_axis_tdata[17]_i_2\ : label is "soft_lutpair10";
-  attribute SOFT_HLUTNM of \m_axis_tdata[17]_i_3\ : label is "soft_lutpair3";
-  attribute SOFT_HLUTNM of \m_axis_tdata[18]_i_2\ : label is "soft_lutpair11";
-  attribute SOFT_HLUTNM of \m_axis_tdata[18]_i_3\ : label is "soft_lutpair4";
-  attribute SOFT_HLUTNM of \m_axis_tdata[19]_i_2\ : label is "soft_lutpair11";
-  attribute SOFT_HLUTNM of \m_axis_tdata[19]_i_3\ : label is "soft_lutpair5";
-  attribute SOFT_HLUTNM of \m_axis_tdata[20]_i_2\ : label is "soft_lutpair12";
-  attribute SOFT_HLUTNM of \m_axis_tdata[20]_i_3\ : label is "soft_lutpair6";
-  attribute SOFT_HLUTNM of \m_axis_tdata[21]_i_2\ : label is "soft_lutpair12";
-  attribute SOFT_HLUTNM of \m_axis_tdata[21]_i_3\ : label is "soft_lutpair7";
-  attribute SOFT_HLUTNM of \m_axis_tdata[22]_i_2\ : label is "soft_lutpair13";
-  attribute SOFT_HLUTNM of \m_axis_tdata[22]_i_3\ : label is "soft_lutpair8";
-  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_4\ : label is "soft_lutpair4";
-  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_5\ : label is "soft_lutpair13";
-  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_7\ : label is "soft_lutpair3";
-  attribute SOFT_HLUTNM of \m_axis_tdata[7]_i_2\ : label is "soft_lutpair2";
-  attribute SOFT_HLUTNM of \m_axis_tdata[7]_i_3\ : label is "soft_lutpair6";
-  attribute SOFT_HLUTNM of \m_axis_tdata[7]_i_4\ : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of \m_axis_tdata[10]_i_1\ : label is "soft_lutpair9";
+  attribute SOFT_HLUTNM of \m_axis_tdata[11]_i_1\ : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of \m_axis_tdata[12]_i_1\ : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of \m_axis_tdata[13]_i_1\ : label is "soft_lutpair12";
+  attribute SOFT_HLUTNM of \m_axis_tdata[14]_i_1\ : label is "soft_lutpair13";
+  attribute SOFT_HLUTNM of \m_axis_tdata[15]_i_1\ : label is "soft_lutpair14";
+  attribute SOFT_HLUTNM of \m_axis_tdata[15]_i_8\ : label is "soft_lutpair15";
+  attribute SOFT_HLUTNM of \m_axis_tdata[16]_i_1\ : label is "soft_lutpair7";
+  attribute SOFT_HLUTNM of \m_axis_tdata[17]_i_1\ : label is "soft_lutpair8";
+  attribute SOFT_HLUTNM of \m_axis_tdata[18]_i_1\ : label is "soft_lutpair9";
+  attribute SOFT_HLUTNM of \m_axis_tdata[19]_i_1\ : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of \m_axis_tdata[20]_i_1\ : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of \m_axis_tdata[21]_i_1\ : label is "soft_lutpair12";
+  attribute SOFT_HLUTNM of \m_axis_tdata[22]_i_1\ : label is "soft_lutpair13";
+  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_12\ : label is "soft_lutpair16";
+  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_13\ : label is "soft_lutpair4";
+  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_3\ : label is "soft_lutpair14";
+  attribute SOFT_HLUTNM of \m_axis_tdata[23]_i_7\ : label is "soft_lutpair16";
+  attribute SOFT_HLUTNM of \m_axis_tdata[7]_i_4\ : label is "soft_lutpair4";
+  attribute SOFT_HLUTNM of \m_axis_tdata[8]_i_1\ : label is "soft_lutpair7";
+  attribute SOFT_HLUTNM of \m_axis_tdata[9]_i_1\ : label is "soft_lutpair8";
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of \m_axis_tdata_reg[0]\ : label is "xilinx.com:interface:axis:1.0 M_AXIS TDATA";
   attribute X_INTERFACE_INFO of \m_axis_tdata_reg[10]\ : label is "xilinx.com:interface:axis:1.0 M_AXIS TDATA";
@@ -268,7 +268,7 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
   attribute X_INTERFACE_INFO of \m_axis_tdata_reg[9]\ : label is "xilinx.com:interface:axis:1.0 M_AXIS TDATA";
   attribute X_INTERFACE_INFO of m_axis_tlast_reg : label is "xilinx.com:interface:axis:1.0 M_AXIS TLAST";
   attribute X_INTERFACE_INFO of m_axis_tuser_reg : label is "xilinx.com:interface:axis:1.0 M_AXIS TUSER";
-  attribute SOFT_HLUTNM of m_axis_tvalid_i_1 : label is "soft_lutpair14";
+  attribute SOFT_HLUTNM of m_axis_tvalid_i_1 : label is "soft_lutpair6";
   attribute X_INTERFACE_INFO of m_axis_tvalid_reg : label is "xilinx.com:interface:axis:1.0 M_AXIS TVALID";
   attribute RTL_RAM_BITS : integer;
   attribute RTL_RAM_BITS of \prev_row_reg_0_127_0_0__1\ : label is 19200;
@@ -912,16 +912,18 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr is
   attribute ram_offset of prev_row_reg_768_1023_9_9 : label is 0;
   attribute ram_slice_begin of prev_row_reg_768_1023_9_9 : label is 9;
   attribute ram_slice_end of prev_row_reg_768_1023_9_9 : label is 9;
-  attribute SOFT_HLUTNM of s_axis_tready_INST_0 : label is "soft_lutpair14";
-  attribute SOFT_HLUTNM of \x[0]_i_1\ : label is "soft_lutpair8";
-  attribute SOFT_HLUTNM of \x[10]_i_3\ : label is "soft_lutpair9";
-  attribute SOFT_HLUTNM of \x[1]_i_1\ : label is "soft_lutpair15";
-  attribute SOFT_HLUTNM of \x[2]_i_1\ : label is "soft_lutpair1";
-  attribute SOFT_HLUTNM of \x[3]_i_1\ : label is "soft_lutpair1";
-  attribute SOFT_HLUTNM of \x[6]_i_1\ : label is "soft_lutpair9";
-  attribute SOFT_HLUTNM of \x[7]_i_1\ : label is "soft_lutpair15";
-  attribute SOFT_HLUTNM of \x[8]_i_1\ : label is "soft_lutpair0";
-  attribute SOFT_HLUTNM of \x[9]_i_1\ : label is "soft_lutpair0";
+  attribute SOFT_HLUTNM of s_axis_tready_INST_0 : label is "soft_lutpair6";
+  attribute SOFT_HLUTNM of \x[0]_i_1\ : label is "soft_lutpair0";
+  attribute SOFT_HLUTNM of \x[10]_i_2\ : label is "soft_lutpair0";
+  attribute SOFT_HLUTNM of \x[1]_i_1\ : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of \x[2]_i_1\ : label is "soft_lutpair2";
+  attribute SOFT_HLUTNM of \x[3]_i_1\ : label is "soft_lutpair2";
+  attribute SOFT_HLUTNM of \x[5]_i_2\ : label is "soft_lutpair3";
+  attribute SOFT_HLUTNM of \x[6]_i_1\ : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of \x[6]_i_2\ : label is "soft_lutpair3";
+  attribute SOFT_HLUTNM of \x[7]_i_1\ : label is "soft_lutpair1";
+  attribute SOFT_HLUTNM of \x[8]_i_1\ : label is "soft_lutpair1";
+  attribute SOFT_HLUTNM of y_odd_i_1 : label is "soft_lutpair15";
 begin
   m_axis_tvalid_reg_0 <= \^m_axis_tvalid_reg_0\;
 have_prev_row_i_1: unisim.vcomponents.LUT5
@@ -1008,323 +1010,424 @@ have_prev_row_reg: unisim.vcomponents.FDRE
       Q => left_pixel(9),
       R => p_0_in
     );
-\m_axis_tdata[0]_i_1\: unisim.vcomponents.LUT6
+\m_axis_tdata[0]_i_1\: unisim.vcomponents.LUT4
     generic map(
-      INIT => X"FFFFF888F888F888"
+      INIT => X"F888"
     )
         port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(2),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(2),
-      I4 => s_axis_tdata(0),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(0)
+      I0 => s_axis_tdata(0),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(2),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(0)
     );
-\m_axis_tdata[10]_i_1\: unisim.vcomponents.LUT6
+\m_axis_tdata[10]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(2),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[10]_i_2_n_0\,
-      I3 => \m_axis_tdata[10]_i_3_n_0\,
-      I4 => up(4),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(10)
+      O => p_3_out(10)
     );
 \m_axis_tdata[10]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(4),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(4),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(4),
+      I4 => left_pixel(4),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[10]_i_2_n_0\
     );
-\m_axis_tdata[10]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[11]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(4),
-      O => \m_axis_tdata[10]_i_3_n_0\
-    );
-\m_axis_tdata[11]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(3),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[11]_i_2_n_0\,
-      I3 => \m_axis_tdata[11]_i_3_n_0\,
-      I4 => up(5),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(11)
+      O => p_3_out(11)
     );
 \m_axis_tdata[11]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(5),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(5),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(5),
+      I4 => left_pixel(5),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[11]_i_2_n_0\
     );
-\m_axis_tdata[11]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[12]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(5),
-      O => \m_axis_tdata[11]_i_3_n_0\
-    );
-\m_axis_tdata[12]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(4),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[12]_i_2_n_0\,
-      I3 => \m_axis_tdata[12]_i_3_n_0\,
-      I4 => up(6),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(12)
+      O => p_3_out(12)
     );
 \m_axis_tdata[12]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(6),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(6),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(6),
+      I4 => left_pixel(6),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[12]_i_2_n_0\
     );
-\m_axis_tdata[12]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[13]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(6),
-      O => \m_axis_tdata[12]_i_3_n_0\
-    );
-\m_axis_tdata[13]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(5),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[13]_i_2_n_0\,
-      I3 => \m_axis_tdata[13]_i_3_n_0\,
-      I4 => up(7),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(13)
+      O => p_3_out(13)
     );
 \m_axis_tdata[13]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(7),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(7),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(7),
+      I4 => left_pixel(7),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[13]_i_2_n_0\
     );
-\m_axis_tdata[13]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[14]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(7),
-      O => \m_axis_tdata[13]_i_3_n_0\
-    );
-\m_axis_tdata[14]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(6),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[14]_i_2_n_0\,
-      I3 => \m_axis_tdata[14]_i_3_n_0\,
-      I4 => up(8),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(14)
+      O => p_3_out(14)
     );
 \m_axis_tdata[14]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(8),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(8),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(8),
+      I4 => left_pixel(8),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[14]_i_2_n_0\
     );
-\m_axis_tdata[14]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[15]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(8),
-      O => \m_axis_tdata[14]_i_3_n_0\
-    );
-\m_axis_tdata[15]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(7),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[15]_i_3_n_0\,
-      I3 => \m_axis_tdata[15]_i_4_n_0\,
-      I4 => up(9),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(15)
-    );
-\m_axis_tdata[15]_i_10\: unisim.vcomponents.LUT2
-    generic map(
-      INIT => X"E"
-    )
-        port map (
-      I0 => x(5),
-      I1 => x(6),
-      O => \m_axis_tdata[15]_i_10_n_0\
+      O => p_3_out(15)
     );
 \m_axis_tdata[15]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"FFFFFFFF00EAFFEA"
+      INIT => X"FFFFFFFF11D1DDD1"
     )
         port map (
-      I0 => x(0),
-      I1 => \m_axis_tdata[15]_i_6_n_0\,
-      I2 => \m_axis_tdata[15]_i_7_n_0\,
-      I3 => y_odd,
-      I4 => have_prev_row_reg_n_0,
+      I0 => have_prev_row_reg_n_0,
+      I1 => \m_axis_tdata[23]_i_7_n_0\,
+      I2 => \m_axis_tdata[15]_i_4_n_0\,
+      I3 => x(0),
+      I4 => bayer_phase(0),
       I5 => s_axis_tuser,
       O => \m_axis_tdata[15]_i_2_n_0\
     );
 \m_axis_tdata[15]_i_3\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(9),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(9),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(9),
+      I4 => left_pixel(9),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[15]_i_3_n_0\
     );
 \m_axis_tdata[15]_i_4\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"AAAAAAAAAAAAAAAB"
     )
         port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(9),
+      I0 => bayer_phase(0),
+      I1 => x(4),
+      I2 => x(3),
+      I3 => x(6),
+      I4 => x(5),
+      I5 => \m_axis_tdata[23]_i_11_n_0\,
       O => \m_axis_tdata[15]_i_4_n_0\
     );
 \m_axis_tdata[15]_i_5\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"0000000088888000"
+      INIT => X"0082008200820080"
     )
         port map (
-      I0 => y_odd,
-      I1 => have_prev_row_reg_n_0,
-      I2 => \m_axis_tdata[15]_i_7_n_0\,
-      I3 => \m_axis_tdata[15]_i_6_n_0\,
-      I4 => x(0),
-      I5 => s_axis_tuser,
+      I0 => \m_axis_tdata[15]_i_8_n_0\,
+      I1 => bayer_phase(0),
+      I2 => x(0),
+      I3 => s_axis_tuser,
+      I4 => \m_axis_tdata[23]_i_11_n_0\,
+      I5 => \m_axis_tdata[23]_i_13_n_0\,
       O => \m_axis_tdata[15]_i_5_n_0\
     );
 \m_axis_tdata[15]_i_6\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"0000000000000001"
+      INIT => X"020802080208020A"
     )
         port map (
-      I0 => x(5),
-      I1 => x(6),
-      I2 => x(7),
-      I3 => x(8),
-      I4 => x(10),
-      I5 => x(9),
+      I0 => \m_axis_tdata[15]_i_8_n_0\,
+      I1 => x(0),
+      I2 => s_axis_tuser,
+      I3 => bayer_phase(0),
+      I4 => \m_axis_tdata[23]_i_11_n_0\,
+      I5 => \m_axis_tdata[23]_i_13_n_0\,
       O => \m_axis_tdata[15]_i_6_n_0\
     );
-\m_axis_tdata[15]_i_7\: unisim.vcomponents.LUT4
+\m_axis_tdata[15]_i_7\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"0001"
+      INIT => X"0909090800000000"
     )
         port map (
-      I0 => x(2),
-      I1 => x(1),
-      I2 => x(4),
-      I3 => x(3),
+      I0 => bayer_phase(0),
+      I1 => x(0),
+      I2 => s_axis_tuser,
+      I3 => \m_axis_tdata[23]_i_11_n_0\,
+      I4 => \m_axis_tdata[23]_i_13_n_0\,
+      I5 => \m_axis_tdata[23]_i_7_n_0\,
       O => \m_axis_tdata[15]_i_7_n_0\
     );
 \m_axis_tdata[15]_i_8\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"01"
+      INIT => X"82"
     )
         port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
+      I0 => have_prev_row_reg_n_0,
+      I1 => y_odd,
+      I2 => bayer_phase(1),
       O => \m_axis_tdata[15]_i_8_n_0\
     );
-\m_axis_tdata[15]_i_9\: unisim.vcomponents.LUT6
+\m_axis_tdata[16]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(0),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[16]_i_2_n_0\,
+      O => p_3_out(16)
+    );
+\m_axis_tdata[16]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(2),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(2),
+      I4 => left_pixel(2),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[16]_i_2_n_0\
+    );
+\m_axis_tdata[17]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(1),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[17]_i_2_n_0\,
+      O => p_3_out(17)
+    );
+\m_axis_tdata[17]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(3),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(3),
+      I4 => left_pixel(3),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[17]_i_2_n_0\
+    );
+\m_axis_tdata[18]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(2),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[18]_i_2_n_0\,
+      O => p_3_out(18)
+    );
+\m_axis_tdata[18]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(4),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(4),
+      I4 => left_pixel(4),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[18]_i_2_n_0\
+    );
+\m_axis_tdata[19]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(3),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[19]_i_2_n_0\,
+      O => p_3_out(19)
+    );
+\m_axis_tdata[19]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(5),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(5),
+      I4 => left_pixel(5),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[19]_i_2_n_0\
+    );
+\m_axis_tdata[1]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(1),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(3),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(1)
+    );
+\m_axis_tdata[20]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(4),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[20]_i_2_n_0\,
+      O => p_3_out(20)
+    );
+\m_axis_tdata[20]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(6),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(6),
+      I4 => left_pixel(6),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[20]_i_2_n_0\
+    );
+\m_axis_tdata[21]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(5),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[21]_i_2_n_0\,
+      O => p_3_out(21)
+    );
+\m_axis_tdata[21]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(7),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(7),
+      I4 => left_pixel(7),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[21]_i_2_n_0\
+    );
+\m_axis_tdata[22]_i_1\: unisim.vcomponents.LUT3
+    generic map(
+      INIT => X"F8"
+    )
+        port map (
+      I0 => s_axis_tdata(6),
+      I1 => \m_axis_tdata[23]_i_4_n_0\,
+      I2 => \m_axis_tdata[22]_i_2_n_0\,
+      O => p_3_out(22)
+    );
+\m_axis_tdata[22]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFF888F888F888"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(8),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(8),
+      I4 => left_pixel(8),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
+      O => \m_axis_tdata[22]_i_2_n_0\
+    );
+\m_axis_tdata[23]_i_1\: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"1"
+    )
+        port map (
+      I0 => aresetn,
+      O => p_0_in
+    );
+\m_axis_tdata[23]_i_10\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"0000000012121202"
+    )
+        port map (
+      I0 => x(0),
+      I1 => s_axis_tuser,
+      I2 => bayer_phase(0),
+      I3 => \m_axis_tdata[23]_i_11_n_0\,
+      I4 => \m_axis_tdata[23]_i_13_n_0\,
+      I5 => \m_axis_tdata[23]_i_7_n_0\,
+      O => \m_axis_tdata[23]_i_10_n_0\
+    );
+\m_axis_tdata[23]_i_11\: unisim.vcomponents.LUT6
     generic map(
       INIT => X"FFFFFFFFFFFFFFFE"
     )
@@ -1335,280 +1438,28 @@ have_prev_row_reg: unisim.vcomponents.FDRE
       I3 => x(8),
       I4 => x(2),
       I5 => x(1),
-      O => \m_axis_tdata[15]_i_9_n_0\
+      O => \m_axis_tdata[23]_i_11_n_0\
     );
-\m_axis_tdata[16]_i_1\: unisim.vcomponents.LUT6
+\m_axis_tdata[23]_i_12\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"60"
     )
         port map (
-      I0 => s_axis_tdata(0),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[16]_i_2_n_0\,
-      I3 => \m_axis_tdata[16]_i_3_n_0\,
-      I4 => up(2),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(16)
+      I0 => y_odd,
+      I1 => bayer_phase(1),
+      I2 => have_prev_row_reg_n_0,
+      O => \m_axis_tdata[23]_i_12_n_0\
     );
-\m_axis_tdata[16]_i_2\: unisim.vcomponents.LUT4
+\m_axis_tdata[23]_i_13\: unisim.vcomponents.LUT4
     generic map(
-      INIT => X"4000"
+      INIT => X"FFFE"
     )
         port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(2),
-      O => \m_axis_tdata[16]_i_2_n_0\
-    );
-\m_axis_tdata[16]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(2),
-      O => \m_axis_tdata[16]_i_3_n_0\
-    );
-\m_axis_tdata[17]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
-    )
-        port map (
-      I0 => s_axis_tdata(1),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[17]_i_2_n_0\,
-      I3 => \m_axis_tdata[17]_i_3_n_0\,
-      I4 => up(3),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(17)
-    );
-\m_axis_tdata[17]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"4000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(3),
-      O => \m_axis_tdata[17]_i_2_n_0\
-    );
-\m_axis_tdata[17]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(3),
-      O => \m_axis_tdata[17]_i_3_n_0\
-    );
-\m_axis_tdata[18]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
-    )
-        port map (
-      I0 => s_axis_tdata(2),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[18]_i_2_n_0\,
-      I3 => \m_axis_tdata[18]_i_3_n_0\,
-      I4 => up(4),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(18)
-    );
-\m_axis_tdata[18]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"4000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(4),
-      O => \m_axis_tdata[18]_i_2_n_0\
-    );
-\m_axis_tdata[18]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(4),
-      O => \m_axis_tdata[18]_i_3_n_0\
-    );
-\m_axis_tdata[19]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
-    )
-        port map (
-      I0 => s_axis_tdata(3),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[19]_i_2_n_0\,
-      I3 => \m_axis_tdata[19]_i_3_n_0\,
-      I4 => up(5),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(19)
-    );
-\m_axis_tdata[19]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"4000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(5),
-      O => \m_axis_tdata[19]_i_2_n_0\
-    );
-\m_axis_tdata[19]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(5),
-      O => \m_axis_tdata[19]_i_3_n_0\
-    );
-\m_axis_tdata[1]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(3),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(3),
-      I4 => s_axis_tdata(1),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(1)
-    );
-\m_axis_tdata[20]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
-    )
-        port map (
-      I0 => s_axis_tdata(4),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[20]_i_2_n_0\,
-      I3 => \m_axis_tdata[20]_i_3_n_0\,
-      I4 => up(6),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(20)
-    );
-\m_axis_tdata[20]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"4000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(6),
-      O => \m_axis_tdata[20]_i_2_n_0\
-    );
-\m_axis_tdata[20]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(6),
-      O => \m_axis_tdata[20]_i_3_n_0\
-    );
-\m_axis_tdata[21]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
-    )
-        port map (
-      I0 => s_axis_tdata(5),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[21]_i_2_n_0\,
-      I3 => \m_axis_tdata[21]_i_3_n_0\,
-      I4 => up(7),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(21)
-    );
-\m_axis_tdata[21]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"4000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(7),
-      O => \m_axis_tdata[21]_i_2_n_0\
-    );
-\m_axis_tdata[21]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(7),
-      O => \m_axis_tdata[21]_i_3_n_0\
-    );
-\m_axis_tdata[22]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
-    )
-        port map (
-      I0 => s_axis_tdata(6),
-      I1 => \m_axis_tdata[23]_i_4_n_0\,
-      I2 => \m_axis_tdata[22]_i_2_n_0\,
-      I3 => \m_axis_tdata[22]_i_3_n_0\,
-      I4 => up(8),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(22)
-    );
-\m_axis_tdata[22]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"4000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(8),
-      O => \m_axis_tdata[22]_i_2_n_0\
-    );
-\m_axis_tdata[22]_i_3\: unisim.vcomponents.LUT5
-    generic map(
-      INIT => X"00080000"
-    )
-        port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(8),
-      O => \m_axis_tdata[22]_i_3_n_0\
-    );
-\m_axis_tdata[23]_i_1\: unisim.vcomponents.LUT1
-    generic map(
-      INIT => X"1"
-    )
-        port map (
-      I0 => aresetn,
-      O => p_0_in
+      I0 => x(4),
+      I1 => x(3),
+      I2 => x(6),
+      I3 => x(5),
+      O => \m_axis_tdata[23]_i_13_n_0\
     );
 \m_axis_tdata[23]_i_2\: unisim.vcomponents.LUT3
     generic map(
@@ -1620,257 +1471,245 @@ have_prev_row_reg: unisim.vcomponents.FDRE
       I2 => s_axis_tvalid,
       O => \m_axis_tdata[23]_i_2_n_0\
     );
-\m_axis_tdata[23]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[23]_i_3\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(7),
       I1 => \m_axis_tdata[23]_i_4_n_0\,
       I2 => \m_axis_tdata[23]_i_5_n_0\,
-      I3 => \m_axis_tdata[23]_i_6_n_0\,
-      I4 => up(9),
-      I5 => \m_axis_tdata[23]_i_7_n_0\,
-      O => p_1_out(23)
+      O => p_3_out(23)
     );
-\m_axis_tdata[23]_i_4\: unisim.vcomponents.LUT4
+\m_axis_tdata[23]_i_4\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"FF1D"
+      INIT => X"FFFFFFFF00E2FFE2"
     )
         port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => y_odd,
-      I2 => x(0),
-      I3 => s_axis_tuser,
+      I0 => \m_axis_tdata[23]_i_6_n_0\,
+      I1 => x(0),
+      I2 => bayer_phase(0),
+      I3 => \m_axis_tdata[23]_i_7_n_0\,
+      I4 => have_prev_row_reg_n_0,
+      I5 => s_axis_tuser,
       O => \m_axis_tdata[23]_i_4_n_0\
     );
-\m_axis_tdata[23]_i_5\: unisim.vcomponents.LUT4
+\m_axis_tdata[23]_i_5\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"4000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => y_odd,
-      I3 => left_pixel(9),
+      I0 => \m_axis_tdata[23]_i_8_n_0\,
+      I1 => up_left_pixel(9),
+      I2 => \m_axis_tdata[23]_i_9_n_0\,
+      I3 => up(9),
+      I4 => left_pixel(9),
+      I5 => \m_axis_tdata[23]_i_10_n_0\,
       O => \m_axis_tdata[23]_i_5_n_0\
     );
-\m_axis_tdata[23]_i_6\: unisim.vcomponents.LUT5
+\m_axis_tdata[23]_i_6\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"00080000"
+      INIT => X"00000001FFFFFFFF"
     )
         port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => y_odd,
-      I4 => up_left_pixel(9),
+      I0 => x(4),
+      I1 => x(3),
+      I2 => x(6),
+      I3 => x(5),
+      I4 => \m_axis_tdata[23]_i_11_n_0\,
+      I5 => bayer_phase(0),
       O => \m_axis_tdata[23]_i_6_n_0\
     );
-\m_axis_tdata[23]_i_7\: unisim.vcomponents.LUT4
+\m_axis_tdata[23]_i_7\: unisim.vcomponents.LUT2
     generic map(
-      INIT => X"0100"
+      INIT => X"6"
+    )
+        port map (
+      I0 => bayer_phase(1),
+      I1 => y_odd,
+      O => \m_axis_tdata[23]_i_7_n_0\
+    );
+\m_axis_tdata[23]_i_8\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"0208020802080008"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_12_n_0\,
+      I1 => x(0),
+      I2 => s_axis_tuser,
+      I3 => bayer_phase(0),
+      I4 => \m_axis_tdata[23]_i_11_n_0\,
+      I5 => \m_axis_tdata[23]_i_13_n_0\,
+      O => \m_axis_tdata[23]_i_8_n_0\
+    );
+\m_axis_tdata[23]_i_9\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"008200820082008A"
+    )
+        port map (
+      I0 => \m_axis_tdata[23]_i_12_n_0\,
+      I1 => bayer_phase(0),
+      I2 => x(0),
+      I3 => s_axis_tuser,
+      I4 => \m_axis_tdata[23]_i_11_n_0\,
+      I5 => \m_axis_tdata[23]_i_13_n_0\,
+      O => \m_axis_tdata[23]_i_9_n_0\
+    );
+\m_axis_tdata[2]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(2),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(4),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(2)
+    );
+\m_axis_tdata[3]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(3),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(5),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(3)
+    );
+\m_axis_tdata[4]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(4),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(6),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(4)
+    );
+\m_axis_tdata[5]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(5),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(7),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(5)
+    );
+\m_axis_tdata[6]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(6),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(8),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(6)
+    );
+\m_axis_tdata[7]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"F888"
+    )
+        port map (
+      I0 => s_axis_tdata(7),
+      I1 => \m_axis_tdata[7]_i_2_n_0\,
+      I2 => left_pixel(9),
+      I3 => \m_axis_tdata[7]_i_3_n_0\,
+      O => p_3_out(7)
+    );
+\m_axis_tdata[7]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFFFFF696996FF"
     )
         port map (
       I0 => y_odd,
-      I1 => x(0),
-      I2 => s_axis_tuser,
-      I3 => have_prev_row_reg_n_0,
-      O => \m_axis_tdata[23]_i_7_n_0\
-    );
-\m_axis_tdata[2]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(4),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(4),
-      I4 => s_axis_tdata(2),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(2)
-    );
-\m_axis_tdata[3]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(5),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(5),
-      I4 => s_axis_tdata(3),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(3)
-    );
-\m_axis_tdata[4]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(6),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(6),
-      I4 => s_axis_tdata(4),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(4)
-    );
-\m_axis_tdata[5]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(7),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(7),
-      I4 => s_axis_tdata(5),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(5)
-    );
-\m_axis_tdata[6]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(8),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(8),
-      I4 => s_axis_tdata(6),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(6)
-    );
-\m_axis_tdata[7]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFF888F888F888"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => up(9),
-      I2 => \m_axis_tdata[7]_i_3_n_0\,
-      I3 => left_pixel(9),
-      I4 => s_axis_tdata(7),
-      I5 => \m_axis_tdata[7]_i_4_n_0\,
-      O => p_1_out(7)
-    );
-\m_axis_tdata[7]_i_2\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"1000"
-    )
-        port map (
-      I0 => s_axis_tuser,
-      I1 => x(0),
-      I2 => have_prev_row_reg_n_0,
-      I3 => y_odd,
+      I1 => bayer_phase(1),
+      I2 => bayer_phase(0),
+      I3 => \m_axis_tdata[7]_i_4_n_0\,
+      I4 => x(0),
+      I5 => s_axis_tuser,
       O => \m_axis_tdata[7]_i_2_n_0\
     );
-\m_axis_tdata[7]_i_3\: unisim.vcomponents.LUT3
+\m_axis_tdata[7]_i_3\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"02"
+      INIT => X"0000C33C00002882"
     )
         port map (
-      I0 => x(0),
-      I1 => s_axis_tuser,
-      I2 => y_odd,
+      I0 => \m_axis_tdata[7]_i_4_n_0\,
+      I1 => y_odd,
+      I2 => bayer_phase(1),
+      I3 => bayer_phase(0),
+      I4 => s_axis_tuser,
+      I5 => x(0),
       O => \m_axis_tdata[7]_i_3_n_0\
     );
-\m_axis_tdata[7]_i_4\: unisim.vcomponents.LUT4
+\m_axis_tdata[7]_i_4\: unisim.vcomponents.LUT5
     generic map(
-      INIT => X"FFC7"
+      INIT => X"FFFFFFFE"
     )
         port map (
-      I0 => have_prev_row_reg_n_0,
-      I1 => y_odd,
-      I2 => x(0),
-      I3 => s_axis_tuser,
+      I0 => \m_axis_tdata[23]_i_11_n_0\,
+      I1 => x(5),
+      I2 => x(6),
+      I3 => x(3),
+      I4 => x(4),
       O => \m_axis_tdata[7]_i_4_n_0\
     );
-\m_axis_tdata[8]_i_1\: unisim.vcomponents.LUT6
+\m_axis_tdata[8]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(0),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[8]_i_2_n_0\,
-      I3 => \m_axis_tdata[8]_i_3_n_0\,
-      I4 => up(2),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(8)
+      O => p_3_out(8)
     );
 \m_axis_tdata[8]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(2),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(2),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(2),
+      I4 => left_pixel(2),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[8]_i_2_n_0\
     );
-\m_axis_tdata[8]_i_3\: unisim.vcomponents.LUT6
+\m_axis_tdata[9]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(2),
-      O => \m_axis_tdata[8]_i_3_n_0\
-    );
-\m_axis_tdata[9]_i_1\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"FFFFFFF8FFF8FFF8"
+      INIT => X"F8"
     )
         port map (
       I0 => s_axis_tdata(1),
       I1 => \m_axis_tdata[15]_i_2_n_0\,
       I2 => \m_axis_tdata[9]_i_2_n_0\,
-      I3 => \m_axis_tdata[9]_i_3_n_0\,
-      I4 => up(3),
-      I5 => \m_axis_tdata[15]_i_5_n_0\,
-      O => p_1_out(9)
+      O => p_3_out(9)
     );
 \m_axis_tdata[9]_i_2\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"AAAAAAA800000000"
+      INIT => X"FFFFF888F888F888"
     )
         port map (
-      I0 => \m_axis_tdata[15]_i_8_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => left_pixel(3),
+      I0 => \m_axis_tdata[15]_i_5_n_0\,
+      I1 => up_left_pixel(3),
+      I2 => \m_axis_tdata[15]_i_6_n_0\,
+      I3 => up(3),
+      I4 => left_pixel(3),
+      I5 => \m_axis_tdata[15]_i_7_n_0\,
       O => \m_axis_tdata[9]_i_2_n_0\
-    );
-\m_axis_tdata[9]_i_3\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"AAAAAAA800000000"
-    )
-        port map (
-      I0 => \m_axis_tdata[7]_i_2_n_0\,
-      I1 => \m_axis_tdata[15]_i_9_n_0\,
-      I2 => \m_axis_tdata[15]_i_10_n_0\,
-      I3 => x(3),
-      I4 => x(4),
-      I5 => up_left_pixel(3),
-      O => \m_axis_tdata[9]_i_3_n_0\
     );
 \m_axis_tdata_reg[0]\: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(0),
+      D => p_3_out(0),
       Q => m_axis_tdata(0),
       R => p_0_in
     );
@@ -1878,7 +1717,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(10),
+      D => p_3_out(10),
       Q => m_axis_tdata(10),
       R => p_0_in
     );
@@ -1886,7 +1725,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(11),
+      D => p_3_out(11),
       Q => m_axis_tdata(11),
       R => p_0_in
     );
@@ -1894,7 +1733,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(12),
+      D => p_3_out(12),
       Q => m_axis_tdata(12),
       R => p_0_in
     );
@@ -1902,7 +1741,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(13),
+      D => p_3_out(13),
       Q => m_axis_tdata(13),
       R => p_0_in
     );
@@ -1910,7 +1749,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(14),
+      D => p_3_out(14),
       Q => m_axis_tdata(14),
       R => p_0_in
     );
@@ -1918,7 +1757,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(15),
+      D => p_3_out(15),
       Q => m_axis_tdata(15),
       R => p_0_in
     );
@@ -1926,7 +1765,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(16),
+      D => p_3_out(16),
       Q => m_axis_tdata(16),
       R => p_0_in
     );
@@ -1934,7 +1773,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(17),
+      D => p_3_out(17),
       Q => m_axis_tdata(17),
       R => p_0_in
     );
@@ -1942,7 +1781,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(18),
+      D => p_3_out(18),
       Q => m_axis_tdata(18),
       R => p_0_in
     );
@@ -1950,7 +1789,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(19),
+      D => p_3_out(19),
       Q => m_axis_tdata(19),
       R => p_0_in
     );
@@ -1958,7 +1797,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(1),
+      D => p_3_out(1),
       Q => m_axis_tdata(1),
       R => p_0_in
     );
@@ -1966,7 +1805,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(20),
+      D => p_3_out(20),
       Q => m_axis_tdata(20),
       R => p_0_in
     );
@@ -1974,7 +1813,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(21),
+      D => p_3_out(21),
       Q => m_axis_tdata(21),
       R => p_0_in
     );
@@ -1982,7 +1821,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(22),
+      D => p_3_out(22),
       Q => m_axis_tdata(22),
       R => p_0_in
     );
@@ -1990,7 +1829,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(23),
+      D => p_3_out(23),
       Q => m_axis_tdata(23),
       R => p_0_in
     );
@@ -1998,7 +1837,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(2),
+      D => p_3_out(2),
       Q => m_axis_tdata(2),
       R => p_0_in
     );
@@ -2006,7 +1845,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(3),
+      D => p_3_out(3),
       Q => m_axis_tdata(3),
       R => p_0_in
     );
@@ -2014,7 +1853,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(4),
+      D => p_3_out(4),
       Q => m_axis_tdata(4),
       R => p_0_in
     );
@@ -2022,7 +1861,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(5),
+      D => p_3_out(5),
       Q => m_axis_tdata(5),
       R => p_0_in
     );
@@ -2030,7 +1869,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(6),
+      D => p_3_out(6),
       Q => m_axis_tdata(6),
       R => p_0_in
     );
@@ -2038,7 +1877,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(7),
+      D => p_3_out(7),
       Q => m_axis_tdata(7),
       R => p_0_in
     );
@@ -2046,7 +1885,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(8),
+      D => p_3_out(8),
       Q => m_axis_tdata(8),
       R => p_0_in
     );
@@ -2054,7 +1893,7 @@ have_prev_row_reg: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_1_out(9),
+      D => p_3_out(9),
       Q => m_axis_tdata(9),
       R => p_0_in
     );
@@ -2095,13 +1934,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__1\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(0),
       O => \prev_row_reg_0_127_0_0__1_n_0\,
       WCLK => aclk,
@@ -2133,13 +1972,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__2\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(1),
       O => \prev_row_reg_0_127_0_0__2_n_0\,
       WCLK => aclk,
@@ -2147,13 +1986,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__3\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(2),
       O => \prev_row_reg_0_127_0_0__3_n_0\,
       WCLK => aclk,
@@ -2161,13 +2000,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__4\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(3),
       O => \prev_row_reg_0_127_0_0__4_n_0\,
       WCLK => aclk,
@@ -2175,13 +2014,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__5\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(4),
       O => \prev_row_reg_0_127_0_0__5_n_0\,
       WCLK => aclk,
@@ -2189,13 +2028,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__6\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(5),
       O => \prev_row_reg_0_127_0_0__6_n_0\,
       WCLK => aclk,
@@ -2203,13 +2042,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__7\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(6),
       O => \prev_row_reg_0_127_0_0__7_n_0\,
       WCLK => aclk,
@@ -2217,13 +2056,13 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 \prev_row_reg_0_127_0_0__8\: unisim.vcomponents.RAM128X1S
      port map (
-      A0 => col(0),
-      A1 => col(1),
-      A2 => col(2),
-      A3 => col(3),
-      A4 => col(4),
-      A5 => col(5),
-      A6 => col(6),
+      A0 => prev_row_reg_0_255_2_2_i_9_n_0,
+      A1 => prev_row_reg_0_255_2_2_i_8_n_0,
+      A2 => prev_row_reg_0_255_2_2_i_7_n_0,
+      A3 => prev_row_reg_0_255_2_2_i_6_n_0,
+      A4 => prev_row_reg_0_255_2_2_i_5_n_0,
+      A5 => prev_row_reg_0_255_2_2_i_4_n_0,
+      A6 => prev_row_reg_0_255_2_2_i_3_n_0,
       D => s_axis_tdata(7),
       O => \prev_row_reg_0_127_0_0__8_n_0\,
       WCLK => aclk,
@@ -2231,7 +2070,14 @@ m_axis_tvalid_reg: unisim.vcomponents.FDRE
     );
 prev_row_reg_0_255_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_0_255_2_2_n_0,
       WCLK => aclk,
@@ -2257,7 +2103,7 @@ prev_row_reg_0_255_2_2_i_2: unisim.vcomponents.LUT2
         port map (
       I0 => x(7),
       I1 => s_axis_tuser,
-      O => col(7)
+      O => prev_row_reg_0_255_2_2_i_2_n_0
     );
 prev_row_reg_0_255_2_2_i_3: unisim.vcomponents.LUT2
     generic map(
@@ -2266,7 +2112,7 @@ prev_row_reg_0_255_2_2_i_3: unisim.vcomponents.LUT2
         port map (
       I0 => x(6),
       I1 => s_axis_tuser,
-      O => col(6)
+      O => prev_row_reg_0_255_2_2_i_3_n_0
     );
 prev_row_reg_0_255_2_2_i_4: unisim.vcomponents.LUT2
     generic map(
@@ -2275,7 +2121,7 @@ prev_row_reg_0_255_2_2_i_4: unisim.vcomponents.LUT2
         port map (
       I0 => x(5),
       I1 => s_axis_tuser,
-      O => col(5)
+      O => prev_row_reg_0_255_2_2_i_4_n_0
     );
 prev_row_reg_0_255_2_2_i_5: unisim.vcomponents.LUT2
     generic map(
@@ -2284,7 +2130,7 @@ prev_row_reg_0_255_2_2_i_5: unisim.vcomponents.LUT2
         port map (
       I0 => x(4),
       I1 => s_axis_tuser,
-      O => col(4)
+      O => prev_row_reg_0_255_2_2_i_5_n_0
     );
 prev_row_reg_0_255_2_2_i_6: unisim.vcomponents.LUT2
     generic map(
@@ -2293,7 +2139,7 @@ prev_row_reg_0_255_2_2_i_6: unisim.vcomponents.LUT2
         port map (
       I0 => x(3),
       I1 => s_axis_tuser,
-      O => col(3)
+      O => prev_row_reg_0_255_2_2_i_6_n_0
     );
 prev_row_reg_0_255_2_2_i_7: unisim.vcomponents.LUT2
     generic map(
@@ -2302,7 +2148,7 @@ prev_row_reg_0_255_2_2_i_7: unisim.vcomponents.LUT2
         port map (
       I0 => x(2),
       I1 => s_axis_tuser,
-      O => col(2)
+      O => prev_row_reg_0_255_2_2_i_7_n_0
     );
 prev_row_reg_0_255_2_2_i_8: unisim.vcomponents.LUT2
     generic map(
@@ -2311,7 +2157,7 @@ prev_row_reg_0_255_2_2_i_8: unisim.vcomponents.LUT2
         port map (
       I0 => x(1),
       I1 => s_axis_tuser,
-      O => col(1)
+      O => prev_row_reg_0_255_2_2_i_8_n_0
     );
 prev_row_reg_0_255_2_2_i_9: unisim.vcomponents.LUT2
     generic map(
@@ -2320,11 +2166,18 @@ prev_row_reg_0_255_2_2_i_9: unisim.vcomponents.LUT2
         port map (
       I0 => x(0),
       I1 => s_axis_tuser,
-      O => col(0)
+      O => prev_row_reg_0_255_2_2_i_9_n_0
     );
 prev_row_reg_0_255_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_0_255_3_3_n_0,
       WCLK => aclk,
@@ -2332,7 +2185,14 @@ prev_row_reg_0_255_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_0_255_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_0_255_4_4_n_0,
       WCLK => aclk,
@@ -2340,7 +2200,14 @@ prev_row_reg_0_255_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_0_255_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_0_255_5_5_n_0,
       WCLK => aclk,
@@ -2348,7 +2215,14 @@ prev_row_reg_0_255_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_0_255_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_0_255_6_6_n_0,
       WCLK => aclk,
@@ -2356,7 +2230,14 @@ prev_row_reg_0_255_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_0_255_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_0_255_7_7_n_0,
       WCLK => aclk,
@@ -2364,7 +2245,14 @@ prev_row_reg_0_255_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_0_255_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_0_255_8_8_n_0,
       WCLK => aclk,
@@ -2372,7 +2260,14 @@ prev_row_reg_0_255_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_0_255_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_0_255_9_9_n_0,
       WCLK => aclk,
@@ -2380,7 +2275,14 @@ prev_row_reg_0_255_9_9: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_1024_1279_2_2_n_0,
       WCLK => aclk,
@@ -2401,7 +2303,14 @@ prev_row_reg_1024_1279_2_2_i_1: unisim.vcomponents.LUT6
     );
 prev_row_reg_1024_1279_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_1024_1279_3_3_n_0,
       WCLK => aclk,
@@ -2409,7 +2318,14 @@ prev_row_reg_1024_1279_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_1024_1279_4_4_n_0,
       WCLK => aclk,
@@ -2417,7 +2333,14 @@ prev_row_reg_1024_1279_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_1024_1279_5_5_n_0,
       WCLK => aclk,
@@ -2425,7 +2348,14 @@ prev_row_reg_1024_1279_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_1024_1279_6_6_n_0,
       WCLK => aclk,
@@ -2433,7 +2363,14 @@ prev_row_reg_1024_1279_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_1024_1279_7_7_n_0,
       WCLK => aclk,
@@ -2441,7 +2378,14 @@ prev_row_reg_1024_1279_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_1024_1279_8_8_n_0,
       WCLK => aclk,
@@ -2449,7 +2393,14 @@ prev_row_reg_1024_1279_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1024_1279_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_1024_1279_9_9_n_0,
       WCLK => aclk,
@@ -2457,7 +2408,14 @@ prev_row_reg_1024_1279_9_9: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_1280_1535_2_2_n_0,
       WCLK => aclk,
@@ -2478,7 +2436,14 @@ prev_row_reg_1280_1535_2_2_i_1: unisim.vcomponents.LUT6
     );
 prev_row_reg_1280_1535_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_1280_1535_3_3_n_0,
       WCLK => aclk,
@@ -2486,7 +2451,14 @@ prev_row_reg_1280_1535_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_1280_1535_4_4_n_0,
       WCLK => aclk,
@@ -2494,7 +2466,14 @@ prev_row_reg_1280_1535_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_1280_1535_5_5_n_0,
       WCLK => aclk,
@@ -2502,7 +2481,14 @@ prev_row_reg_1280_1535_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_1280_1535_6_6_n_0,
       WCLK => aclk,
@@ -2510,7 +2496,14 @@ prev_row_reg_1280_1535_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_1280_1535_7_7_n_0,
       WCLK => aclk,
@@ -2518,7 +2511,14 @@ prev_row_reg_1280_1535_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_1280_1535_8_8_n_0,
       WCLK => aclk,
@@ -2526,7 +2526,14 @@ prev_row_reg_1280_1535_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1280_1535_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_1280_1535_9_9_n_0,
       WCLK => aclk,
@@ -2534,7 +2541,14 @@ prev_row_reg_1280_1535_9_9: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_1536_1791_2_2_n_0,
       WCLK => aclk,
@@ -2555,7 +2569,14 @@ prev_row_reg_1536_1791_2_2_i_1: unisim.vcomponents.LUT6
     );
 prev_row_reg_1536_1791_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_1536_1791_3_3_n_0,
       WCLK => aclk,
@@ -2563,7 +2584,14 @@ prev_row_reg_1536_1791_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_1536_1791_4_4_n_0,
       WCLK => aclk,
@@ -2571,7 +2599,14 @@ prev_row_reg_1536_1791_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_1536_1791_5_5_n_0,
       WCLK => aclk,
@@ -2579,7 +2614,14 @@ prev_row_reg_1536_1791_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_1536_1791_6_6_n_0,
       WCLK => aclk,
@@ -2587,7 +2629,14 @@ prev_row_reg_1536_1791_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_1536_1791_7_7_n_0,
       WCLK => aclk,
@@ -2595,7 +2644,14 @@ prev_row_reg_1536_1791_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_1536_1791_8_8_n_0,
       WCLK => aclk,
@@ -2603,7 +2659,14 @@ prev_row_reg_1536_1791_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_1536_1791_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_1536_1791_9_9_n_0,
       WCLK => aclk,
@@ -2611,7 +2674,14 @@ prev_row_reg_1536_1791_9_9: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_256_511_2_2_n_0,
       WCLK => aclk,
@@ -2632,7 +2702,14 @@ prev_row_reg_256_511_2_2_i_1: unisim.vcomponents.LUT6
     );
 prev_row_reg_256_511_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_256_511_3_3_n_0,
       WCLK => aclk,
@@ -2640,7 +2717,14 @@ prev_row_reg_256_511_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_256_511_4_4_n_0,
       WCLK => aclk,
@@ -2648,7 +2732,14 @@ prev_row_reg_256_511_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_256_511_5_5_n_0,
       WCLK => aclk,
@@ -2656,7 +2747,14 @@ prev_row_reg_256_511_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_256_511_6_6_n_0,
       WCLK => aclk,
@@ -2664,7 +2762,14 @@ prev_row_reg_256_511_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_256_511_7_7_n_0,
       WCLK => aclk,
@@ -2672,7 +2777,14 @@ prev_row_reg_256_511_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_256_511_8_8_n_0,
       WCLK => aclk,
@@ -2680,7 +2792,14 @@ prev_row_reg_256_511_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_256_511_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_256_511_9_9_n_0,
       WCLK => aclk,
@@ -2688,7 +2807,14 @@ prev_row_reg_256_511_9_9: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_512_767_2_2_n_0,
       WCLK => aclk,
@@ -2709,7 +2835,14 @@ prev_row_reg_512_767_2_2_i_1: unisim.vcomponents.LUT6
     );
 prev_row_reg_512_767_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_512_767_3_3_n_0,
       WCLK => aclk,
@@ -2717,7 +2850,14 @@ prev_row_reg_512_767_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_512_767_4_4_n_0,
       WCLK => aclk,
@@ -2725,7 +2865,14 @@ prev_row_reg_512_767_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_512_767_5_5_n_0,
       WCLK => aclk,
@@ -2733,7 +2880,14 @@ prev_row_reg_512_767_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_512_767_6_6_n_0,
       WCLK => aclk,
@@ -2741,7 +2895,14 @@ prev_row_reg_512_767_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_512_767_7_7_n_0,
       WCLK => aclk,
@@ -2749,7 +2910,14 @@ prev_row_reg_512_767_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_512_767_8_8_n_0,
       WCLK => aclk,
@@ -2757,7 +2925,14 @@ prev_row_reg_512_767_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_512_767_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_512_767_9_9_n_0,
       WCLK => aclk,
@@ -2765,7 +2940,14 @@ prev_row_reg_512_767_9_9: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_2_2: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(0),
       O => prev_row_reg_768_1023_2_2_n_0,
       WCLK => aclk,
@@ -2786,7 +2968,14 @@ prev_row_reg_768_1023_2_2_i_1: unisim.vcomponents.LUT6
     );
 prev_row_reg_768_1023_3_3: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(1),
       O => prev_row_reg_768_1023_3_3_n_0,
       WCLK => aclk,
@@ -2794,7 +2983,14 @@ prev_row_reg_768_1023_3_3: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_4_4: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(2),
       O => prev_row_reg_768_1023_4_4_n_0,
       WCLK => aclk,
@@ -2802,7 +2998,14 @@ prev_row_reg_768_1023_4_4: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_5_5: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(3),
       O => prev_row_reg_768_1023_5_5_n_0,
       WCLK => aclk,
@@ -2810,7 +3013,14 @@ prev_row_reg_768_1023_5_5: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_6_6: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(4),
       O => prev_row_reg_768_1023_6_6_n_0,
       WCLK => aclk,
@@ -2818,7 +3028,14 @@ prev_row_reg_768_1023_6_6: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_7_7: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(5),
       O => prev_row_reg_768_1023_7_7_n_0,
       WCLK => aclk,
@@ -2826,7 +3043,14 @@ prev_row_reg_768_1023_7_7: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_8_8: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(6),
       O => prev_row_reg_768_1023_8_8_n_0,
       WCLK => aclk,
@@ -2834,7 +3058,14 @@ prev_row_reg_768_1023_8_8: unisim.vcomponents.RAM256X1S
     );
 prev_row_reg_768_1023_9_9: unisim.vcomponents.RAM256X1S
      port map (
-      A(7 downto 0) => col(7 downto 0),
+      A(7) => prev_row_reg_0_255_2_2_i_2_n_0,
+      A(6) => prev_row_reg_0_255_2_2_i_3_n_0,
+      A(5) => prev_row_reg_0_255_2_2_i_4_n_0,
+      A(4) => prev_row_reg_0_255_2_2_i_5_n_0,
+      A(3) => prev_row_reg_0_255_2_2_i_6_n_0,
+      A(2) => prev_row_reg_0_255_2_2_i_7_n_0,
+      A(1) => prev_row_reg_0_255_2_2_i_8_n_0,
+      A(0) => prev_row_reg_0_255_2_2_i_9_n_0,
       D => s_axis_tdata(7),
       O => prev_row_reg_768_1023_9_9_n_0,
       WCLK => aclk,
@@ -3624,7 +3855,7 @@ s_axis_tready_INST_0: unisim.vcomponents.LUT2
         port map (
       I0 => s_axis_tuser,
       I1 => x(0),
-      O => p_2_in(0)
+      O => site_color3
     );
 \x[10]_i_1\: unisim.vcomponents.LUT5
     generic map(
@@ -3638,150 +3869,173 @@ s_axis_tready_INST_0: unisim.vcomponents.LUT2
       I4 => aresetn,
       O => \x[10]_i_1_n_0\
     );
-\x[10]_i_2\: unisim.vcomponents.LUT6
+\x[10]_i_2\: unisim.vcomponents.LUT5
     generic map(
-      INIT => X"80007FFF80008000"
+      INIT => X"00C600CC"
     )
         port map (
-      I0 => \x[10]_i_3_n_0\,
-      I1 => x(9),
-      I2 => x(8),
-      I3 => x(7),
-      I4 => s_axis_tuser,
-      I5 => x(10),
+      I0 => x(9),
+      I1 => x(10),
+      I2 => \x[10]_i_3_n_0\,
+      I3 => s_axis_tuser,
+      I4 => x(0),
       O => p_2_in(10)
     );
 \x[10]_i_3\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"80"
+      INIT => X"DF"
     )
         port map (
-      I0 => x(5),
-      I1 => \x[6]_i_2_n_0\,
-      I2 => x(6),
+      I0 => x(7),
+      I1 => \x[9]_i_2_n_0\,
+      I2 => x(8),
       O => \x[10]_i_3_n_0\
     );
 \x[1]_i_1\: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"12"
+      INIT => X"06"
     )
         port map (
-      I0 => x(0),
-      I1 => s_axis_tuser,
-      I2 => x(1),
-      O => \x[1]_i_1_n_0\
+      I0 => x(1),
+      I1 => x(0),
+      I2 => s_axis_tuser,
+      O => p_2_in(1)
     );
 \x[2]_i_1\: unisim.vcomponents.LUT4
     generic map(
-      INIT => X"0708"
+      INIT => X"006C"
     )
         port map (
-      I0 => x(0),
-      I1 => x(1),
-      I2 => s_axis_tuser,
-      I3 => x(2),
+      I0 => x(1),
+      I1 => x(2),
+      I2 => x(0),
+      I3 => s_axis_tuser,
       O => p_2_in(2)
     );
 \x[3]_i_1\: unisim.vcomponents.LUT5
     generic map(
-      INIT => X"007F0080"
+      INIT => X"000078F0"
     )
         port map (
       I0 => x(2),
       I1 => x(1),
-      I2 => x(0),
-      I3 => s_axis_tuser,
-      I4 => x(3),
+      I2 => x(3),
+      I3 => x(0),
+      I4 => s_axis_tuser,
       O => p_2_in(3)
     );
 \x[4]_i_1\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"00007FFF00008000"
+      INIT => X"000000007F80FF00"
     )
         port map (
       I0 => x(3),
-      I1 => x(0),
-      I2 => x(1),
-      I3 => x(2),
-      I4 => s_axis_tuser,
-      I5 => x(4),
+      I1 => x(1),
+      I2 => x(2),
+      I3 => x(4),
+      I4 => x(0),
+      I5 => s_axis_tuser,
       O => p_2_in(4)
     );
-\x[5]_i_1\: unisim.vcomponents.LUT6
+\x[5]_i_1\: unisim.vcomponents.LUT4
     generic map(
-      INIT => X"FF7FFFFF00800000"
+      INIT => X"009C"
+    )
+        port map (
+      I0 => \x[5]_i_2_n_0\,
+      I1 => x(5),
+      I2 => x(0),
+      I3 => s_axis_tuser,
+      O => p_2_in(5)
+    );
+\x[5]_i_2\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"7FFF"
+    )
+        port map (
+      I0 => x(3),
+      I1 => x(1),
+      I2 => x(2),
+      I3 => x(4),
+      O => \x[5]_i_2_n_0\
+    );
+\x[6]_i_1\: unisim.vcomponents.LUT4
+    generic map(
+      INIT => X"009C"
+    )
+        port map (
+      I0 => \x[6]_i_2_n_0\,
+      I1 => x(6),
+      I2 => x(0),
+      I3 => s_axis_tuser,
+      O => p_2_in(6)
+    );
+\x[6]_i_2\: unisim.vcomponents.LUT5
+    generic map(
+      INIT => X"7FFFFFFF"
     )
         port map (
       I0 => x(4),
       I1 => x(2),
       I2 => x(1),
-      I3 => p_2_in(0),
-      I4 => x(3),
-      I5 => col(5),
-      O => p_2_in(5)
-    );
-\x[6]_i_1\: unisim.vcomponents.LUT4
-    generic map(
-      INIT => X"8788"
-    )
-        port map (
-      I0 => x(5),
-      I1 => \x[6]_i_2_n_0\,
-      I2 => s_axis_tuser,
-      I3 => x(6),
-      O => p_2_in(6)
-    );
-\x[6]_i_2\: unisim.vcomponents.LUT6
-    generic map(
-      INIT => X"2000000000000000"
-    )
-        port map (
-      I0 => x(3),
-      I1 => s_axis_tuser,
-      I2 => x(0),
-      I3 => x(1),
-      I4 => x(2),
-      I5 => x(4),
+      I3 => x(3),
+      I4 => x(5),
       O => \x[6]_i_2_n_0\
     );
-\x[7]_i_1\: unisim.vcomponents.LUT3
+\x[7]_i_1\: unisim.vcomponents.LUT4
     generic map(
-      INIT => X"9A"
+      INIT => X"009C"
     )
         port map (
-      I0 => \x[10]_i_3_n_0\,
-      I1 => s_axis_tuser,
-      I2 => x(7),
+      I0 => \x[9]_i_2_n_0\,
+      I1 => x(7),
+      I2 => x(0),
+      I3 => s_axis_tuser,
       O => p_2_in(7)
     );
-\x[8]_i_1\: unisim.vcomponents.LUT4
+\x[8]_i_1\: unisim.vcomponents.LUT5
     generic map(
-      INIT => X"8788"
+      INIT => X"0000D2F0"
     )
         port map (
       I0 => x(7),
-      I1 => \x[10]_i_3_n_0\,
-      I2 => s_axis_tuser,
-      I3 => x(8),
+      I1 => \x[9]_i_2_n_0\,
+      I2 => x(8),
+      I3 => x(0),
+      I4 => s_axis_tuser,
       O => p_2_in(8)
     );
-\x[9]_i_1\: unisim.vcomponents.LUT5
+\x[9]_i_1\: unisim.vcomponents.LUT6
     generic map(
-      INIT => X"807F8080"
+      INIT => X"0000DFFF00002000"
     )
         port map (
-      I0 => \x[10]_i_3_n_0\,
-      I1 => x(7),
+      I0 => x(7),
+      I1 => \x[9]_i_2_n_0\,
       I2 => x(8),
-      I3 => s_axis_tuser,
-      I4 => x(9),
+      I3 => x(0),
+      I4 => s_axis_tuser,
+      I5 => x(9),
       O => p_2_in(9)
+    );
+\x[9]_i_2\: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"7FFFFFFFFFFFFFFF"
+    )
+        port map (
+      I0 => x(5),
+      I1 => x(3),
+      I2 => x(1),
+      I3 => x(2),
+      I4 => x(4),
+      I5 => x(6),
+      O => \x[9]_i_2_n_0\
     );
 \x_reg[0]\: unisim.vcomponents.FDRE
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => p_2_in(0),
+      D => site_color3,
       Q => x(0),
       R => \x[10]_i_1_n_0\
     );
@@ -3797,7 +4051,7 @@ s_axis_tready_INST_0: unisim.vcomponents.LUT2
      port map (
       C => aclk,
       CE => \m_axis_tdata[23]_i_2_n_0\,
-      D => \x[1]_i_1_n_0\,
+      D => p_2_in(1),
       Q => x(1),
       R => \x[10]_i_1_n_0\
     );
@@ -3867,12 +4121,12 @@ s_axis_tready_INST_0: unisim.vcomponents.LUT2
     );
 y_odd_i_1: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"9A"
+      INIT => X"B4"
     )
         port map (
-      I0 => s_axis_tlast,
-      I1 => s_axis_tuser,
-      I2 => y_odd,
+      I0 => s_axis_tuser,
+      I1 => y_odd,
+      I2 => s_axis_tlast,
       O => y_odd_i_1_n_0
     );
 y_odd_reg: unisim.vcomponents.FDRE
@@ -3901,7 +4155,8 @@ entity design_1_axis_raw_to_gbr_0_0 is
     m_axis_tvalid : out STD_LOGIC;
     m_axis_tready : in STD_LOGIC;
     m_axis_tuser : out STD_LOGIC;
-    m_axis_tlast : out STD_LOGIC
+    m_axis_tlast : out STD_LOGIC;
+    bayer_phase : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of design_1_axis_raw_to_gbr_0_0 : entity is true;
@@ -3933,6 +4188,9 @@ architecture STRUCTURE of design_1_axis_raw_to_gbr_0_0 is
   attribute X_INTERFACE_INFO of s_axis_tready : signal is "xilinx.com:interface:axis:1.0 S_AXIS TREADY";
   attribute X_INTERFACE_INFO of s_axis_tuser : signal is "xilinx.com:interface:axis:1.0 S_AXIS TUSER";
   attribute X_INTERFACE_INFO of s_axis_tvalid : signal is "xilinx.com:interface:axis:1.0 S_AXIS TVALID";
+  attribute X_INTERFACE_INFO of bayer_phase : signal is "xilinx.com:signal:data:1.0 bayer_phase DATA";
+  attribute X_INTERFACE_MODE of bayer_phase : signal is "slave";
+  attribute X_INTERFACE_PARAMETER of bayer_phase : signal is "XIL_INTERFACENAME bayer_phase, LAYERED_METADATA undef";
   attribute X_INTERFACE_INFO of m_axis_tdata : signal is "xilinx.com:interface:axis:1.0 M_AXIS TDATA";
   attribute X_INTERFACE_MODE of m_axis_tdata : signal is "master";
   attribute X_INTERFACE_PARAMETER of m_axis_tdata : signal is "XIL_INTERFACENAME M_AXIS, TDATA_NUM_BYTES 3, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 1, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, LAYERED_METADATA undef, INSERT_VIP 0";
@@ -3944,6 +4202,7 @@ inst: entity work.design_1_axis_raw_to_gbr_0_0_axis_raw_to_gbr
      port map (
       aclk => aclk,
       aresetn => aresetn,
+      bayer_phase(1 downto 0) => bayer_phase(1 downto 0),
       m_axis_tdata(23 downto 0) => m_axis_tdata(23 downto 0),
       m_axis_tlast => m_axis_tlast,
       m_axis_tready => m_axis_tready,

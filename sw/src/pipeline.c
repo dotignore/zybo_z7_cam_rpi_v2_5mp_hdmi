@@ -545,7 +545,13 @@ int Pipeline_Start(void)
 {
 	xil_printf("[DEMOSAIC] Bayer phase=%u (0=RGGB 1=GRBG 2=GBRG 3=BGGR)\r\n",
 		   DEMOSAIC_BAYER_PHASE);
-	Xil_Out32(BAYER_PHASE_GPIO_BASE, DEMOSAIC_BAYER_PHASE);
+	/* The AXI GPIO reset value is zero, which is the configured RGGB phase.
+	 * Avoid touching its currently unreachable AXI address: that access raises
+	 * a Cortex-A9 data abort before VTC and VDMA can be started. */
+#if DEMOSAIC_BAYER_PHASE != DEMOSAIC_BAYER_RGGB
+#error Non-zero Bayer phase requires a reachable bayer_phase_gpio AXI mapping
+#endif
+	xil_printf("[DEMOSAIC] using GPIO reset phase 0 (no AXI write)\r\n");
 
 	FillTestFrame();
 	xil_printf("[P02] MMU off (main); PL AXI probes\r\n");
