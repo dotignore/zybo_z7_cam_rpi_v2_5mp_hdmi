@@ -53,6 +53,12 @@ static int FsFromPkt = 0;
 static int FeFromPkt = 0;
 static u32 FsData = 0;
 static u32 FeData = 0;
+static XTime FpsWindowStart = 0;
+static u32 FpsWindowFrames = 0;
+static u32 FpsTenths = 300;
+static u32 DropFrameCount = 0;
+static u32 DropWindowCount = 0;
+static XTime DropWindowStart = 0;
 
 /* MIPI CSI-2 short-packet DTs (datasheet p.47): FS=0x00, FE=0x01. */
 #define CSI_DT_FS  0x00U
@@ -428,6 +434,141 @@ static void DumpRgb888Every50(u32 done)
     xil_printf("\r\n");
 }
 
+/* Small opaque overlay for the live HDMI framebuffer.  The framebuffer is
+ * GBR888, while the displayed text is intentionally white on black. */
+static u8 FpsGlyphRow(char c, u32 row)
+{
+	static const u8 digits[10][7] = {
+		{14,17,19,21,25,17,14}, {4,12,4,4,4,4,14},
+		{14,17,1,2,4,8,31}, {30,1,1,14,1,1,30},
+		{2,6,10,18,31,2,2}, {31,16,16,30,1,1,30},
+		{6,8,16,30,17,17,14}, {31,1,2,4,8,8,8},
+		{14,17,17,14,17,17,14}, {14,17,17,15,1,2,12}
+	};
+	static const u8 lower_f[7] = {6,8,8,30,8,8,8};
+	static const u8 lower_p[7] = {30,17,17,30,16,16,16};
+	static const u8 lower_s[7] = {15,16,16,14,1,1,30};
+	static const u8 lower_l[7] = {8,8,8,8,8,8,6};
+	static const u8 lower_a[7] = {0,14,1,15,17,17,15};
+	static const u8 lower_t[7] = {8,8,30,8,8,9,6};
+	static const u8 lower_e[7] = {0,14,17,31,16,17,14};
+	static const u8 lower_c[7] = {0,14,16,16,16,17,14};
+	static const u8 lower_d[7] = {1,1,1,15,17,17,15};
+	static const u8 lower_o[7] = {0,14,17,17,17,17,14};
+	static const u8 lower_r[7] = {0,22,25,16,16,16,16};
+	static const u8 lower_m[7] = {0,26,21,21,17,17,17};
+	static const u8 left_bracket[7] = {14,8,8,8,8,8,14};
+	static const u8 right_bracket[7] = {14,2,2,2,2,2,14};
+	if (row >= 7U) return 0;
+	if (c >= '0' && c <= '9') return digits[(u32)(c - '0')][row];
+	if (c == 'f') return lower_f[row];
+	if (c == 'p') return lower_p[row];
+	if (c == 's') return lower_s[row];
+	if (c == 'l') return lower_l[row];
+	if (c == 'a') return lower_a[row];
+	if (c == 't') return lower_t[row];
+	if (c == 'e') return lower_e[row];
+	if (c == 'c') return lower_c[row];
+	if (c == 'd') return lower_d[row];
+	if (c == 'o') return lower_o[row];
+	if (c == 'r') return lower_r[row];
+	if (c == 'm') return lower_m[row];
+	if (c == '[') return left_bracket[row];
+	if (c == ']') return right_bracket[row];
+	if (c == '.') return row == 6U ? 4U : 0U;
+	return 0;
+}
+
+static void DrawLabel(u8 *base, const char *shown, u32 x0, u32 y0)
+{
+	u32 i, row, col;
+	const u32 scale = 4U;
+	u32 text_width = 0;
+	u8 *p;
+	while (shown[text_width] != '\0') text_width++;
+	text_width = text_width * 24U + 16U;
+
+	for (row = 0; row < 40U; ++row) {
+		for (col = 0; col < text_width; ++col) {
+			p = base + (y0 - 8U + row) * VIDEO_STRIDE + (x0 - 8U + col) * 3U;
+			p[PIXEL_G_OFF] = 0; p[PIXEL_B_OFF] = 0; p[PIXEL_R_OFF] = 0;
+		}
+	}
+	for (i = 0; shown[i] != '\0'; ++i) {
+		for (row = 0; row < 7U; ++row) {
+			for (col = 0; col < 5U; ++col) {
+				if (FpsGlyphRow(shown[i], row) & (1U << (4U - col))) {
+					u32 sy, sx;
+					for (sy = 0; sy < scale; ++sy) {
+						for (sx = 0; sx < scale; ++sx) {
+							p = base + (y0 + row*scale + sy) * VIDEO_STRIDE +
+								(x0 + i*24U + col*scale + sx) * 3U;
+							p[PIXEL_G_OFF] = 255; p[PIXEL_B_OFF] = 255; p[PIXEL_R_OFF] = 255;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+static void DrawFpsOverlay(u8 *base, u32 fps_tenths)
+{
+	char text[9] = "00.0 fps";
+	u32 integer = fps_tenths / 10U;
+	text[0] = (char)('0' + ((integer / 10U) % 10U));
+	text[1] = (char)('0' + (integer % 10U));
+	text[3] = (char)('0' + (fps_tenths % 10U));
+	DrawLabel(base, text, 24U, 24U);
+}
+
+static void DrawDropOverlay(u8 *base)
+{
+	char text[40] = "drop frame [";
+	u32 value = DropFrameCount;
+	u32 n = 0, i;
+	char digits[11];
+	while (value != 0U) {
+		digits[n++] = (char)('0' + (value % 10U));
+		value /= 10U;
+	}
+	if (n == 0U) digits[n++] = '0';
+	for (i = 0; i < n; ++i) text[12U + i] = digits[n - i - 1U];
+	i = 12U + n;
+	text[i++] = ']'; text[i++] = ' '; text[i++] = 'l'; text[i++] = 'a';
+	text[i++] = 's'; text[i++] = 't'; text[i++] = ' '; text[i++] = '6';
+	text[i++] = '0'; text[i++] = ' '; text[i++] = 's'; text[i++] = 'e';
+	text[i++] = 'c'; text[i] = '\0';
+	DrawLabel(base, text, 24U, VIDEO_ROWS - 56U);
+}
+
+static void UpdateFps(void)
+{
+	XTime now, elapsed;
+	XTime_GetTime(&now);
+	if (FpsWindowStart == 0) FpsWindowStart = now;
+	FpsWindowFrames++;
+	elapsed = now - FpsWindowStart;
+	if (elapsed >= COUNTS_PER_SECOND) {
+		FpsTenths = (u32)(((u64)FpsWindowFrames * 10U * COUNTS_PER_SECOND + elapsed/2U) / elapsed);
+		if (FpsTenths > 999U) FpsTenths = 999U;
+		FpsWindowFrames = 0;
+		FpsWindowStart = now;
+	}
+}
+
+static void UpdateDropWindow(void)
+{
+	XTime now;
+	XTime_GetTime(&now);
+	if (DropWindowStart == 0) DropWindowStart = now;
+	if (now - DropWindowStart >= (XTime)60U * COUNTS_PER_SECOND) {
+		DropFrameCount = 0;
+		DropWindowCount = 0;
+		DropWindowStart = now;
+	}
+}
+
 void Pipeline_Service(void)
 {
 	u32 wr;
@@ -458,21 +599,34 @@ void Pipeline_Service(void)
 	if (!LiveDisplay) {
 		if (XAxiVdma_DmaSetBufferAddr(&Vdma, XAXIVDMA_READ, FrameAddr)
 		    != XST_SUCCESS) return;
-		if (XAxiVdma_StartParking(&Vdma, (int)done, XAXIVDMA_READ)
-		    != XST_SUCCESS) return;
-		Xil_Out32(VDMA_BASE + 0x50U, VIDEO_ROWS);
 		LiveDisplay=1;
-		xil_printf("[HDMI] first complete camera frame -> live\r\n");
 	}
 
 	AutoBright((const u8 *)FrameAddr[done]);
-
+	UpdateFps();
+	UpdateDropWindow();
+	DrawFpsOverlay((u8 *)FrameAddr[done], FpsTenths);
+	DrawDropOverlay((u8 *)FrameAddr[done]);
 
 	if (XAxiVdma_StartParking(&Vdma, (int)done, XAXIVDMA_READ)
 	    != XST_SUCCESS) return;
+	Xil_Out32(VDMA_BASE + 0x50U, VIDEO_ROWS);
+	if (DisplayUpdates == 0U)
+		xil_printf("[HDMI] first complete camera frame -> live\r\n");
 
 	DisplayUpdates++;
 	FrameCount++;
+	{
+		u32 csi = Xil_In32(CSI_BASE + XCSI_ISR_OFFSET);
+		u32 vdma = Xil_In32(VDMA_BASE + 0x34U) | Xil_In32(VDMA_BASE + 4U);
+		u32 bad = XCSI_ISR_VC0FSYNCERR_MASK | XCSI_ISR_VC0FLVLERR_MASK |
+			XCSI_ISR_CRCERR_MASK | XCSI_ISR_ECC2BERR_MASK | XCSI_ISR_SLBF_MASK;
+		if ((csi & bad) || (vdma & XAXIVDMA_SR_ERR_ALL_MASK)) {
+			DropFrameCount++;
+			DropWindowCount++;
+		}
+		Xil_Out32(CSI_BASE + XCSI_ISR_OFFSET, csi);
+	}
 
 	if ((FrameCount % 150U) == 0U) {
 		DumpRgb888Every50(done);
